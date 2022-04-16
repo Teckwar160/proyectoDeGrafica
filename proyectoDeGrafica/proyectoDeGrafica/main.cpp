@@ -46,7 +46,10 @@ Camera camera;
 Texture plainTexture;
 Texture pisoTexture;
 
-Model thousandSunny;
+Model laboon;
+Model sanji;
+Model brook;
+Model zoro_bo, zoro_l, zoro_r;
 
 
 Skybox skybox;
@@ -197,20 +200,27 @@ int main()
 	pisoTexture = Texture("Textures/mar.tga");
 	pisoTexture.LoadTextureA();
 
+	//Modelos
+	laboon = Model();
+	laboon.LoadModel("Models/laboon.obj");
 
+	sanji = Model();
+	sanji.LoadModel("Models/Sanji.obj");
 
-	thousandSunny = Model();
-	thousandSunny.LoadModel("Models/thousand sunny.obj");
+	brook = Model();
+	brook.LoadModel("Models/Brook.obj");
+
+	zoro_bo = Model();
+	zoro_bo.LoadModel("Models/Zoro_bo.obj");
+
+	zoro_l = Model();
+	zoro_l.LoadModel("Models/Zoro_L.obj");
+
+	zoro_r = Model();
+	zoro_r.LoadModel("Models/Zoro_R.obj");
 
 	std::vector<std::string> skyboxFaces;
-	/*
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_rt.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_lf.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_dn.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_up.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_bk.tga");
-	skyboxFaces.push_back("Textures/Skybox/cupertin-lake-night_ft.tga");
-	*/
+
 	skyboxFaces.push_back("Textures/Skybox/land_right.tga");
 	skyboxFaces.push_back("Textures/Skybox/land_left.tga");
 	skyboxFaces.push_back("Textures/Skybox/land_bottom.tga");
@@ -246,7 +256,8 @@ int main()
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
-	
+	float ang = 0.0f;
+
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
@@ -293,6 +304,7 @@ int main()
 
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
+		glm::mat4 aux(1.0);
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 
 		// Piso
@@ -305,14 +317,56 @@ int main()
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
 
-		//Barco
+		//Laboon
 		model = glm::mat4(1.0);
-		//model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
+		//model = glm::translate(model, glm::vec3(10.0f, 0.0f, 10.0f));
+		modelaux = model;
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		laboon.RenderModel();
+
+		//Sanji
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.0f, 12.5f, 0.0f));
 		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sanji.RenderModel();
 
-		thousandSunny.RenderModel();
+		//Brook
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-1.5f, 12.5f, 0.0f));
+		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		brook.RenderModel();
+		
+		// Zoro
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-3.0f, 12.5f, 0.0f));
+		aux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		zoro_bo.RenderModel();
+
+		ang > 360.0f ? ang = 0.0f : ang += 0.05f;
+
+		// Zoro brazo izquierdo
+		model = aux;
+		model = glm::translate(model, glm::vec3(0.0f, 1.6f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		zoro_l.RenderModel();
+
+		// Zoro brazo derecho
+		model = aux;
+		model = glm::translate(model, glm::vec3(0.0f, 1.6f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		zoro_r.RenderModel();
 
 		glUseProgram(0);
 		mainWindow.swapBuffers();
