@@ -50,6 +50,7 @@ Model laboon;
 Model sanji;
 Model brook;
 Model zoro_bo, zoro_l, zoro_r;
+Model thousandSunny;
 
 
 Skybox skybox;
@@ -219,6 +220,10 @@ int main()
 	zoro_r = Model();
 	zoro_r.LoadModel("Models/Zoro_R.obj");
 
+	thousandSunny = Model();
+	thousandSunny.LoadModel("Models/Thousand Sunny.obj");
+
+
 	std::vector<std::string> skyboxFaces;
 
 	skyboxFaces.push_back("Textures/Skybox/land_right.tga");
@@ -319,16 +324,24 @@ int main()
 
 		//Laboon
 		model = glm::mat4(1.0);
-		//model = glm::translate(model, glm::vec3(10.0f, 0.0f, 10.0f));
-		modelaux = model;
+		model = glm::translate(model, glm::vec3(30.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
 
+		//Thousand Sunny
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, -8.0f, 0.0f));
+		modelaux = model;
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		thousandSunny.RenderModel();
+
 		//Sanji
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, 12.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 25.0f, 8.0f));
 		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -336,7 +349,7 @@ int main()
 
 		//Brook
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-1.5f, 12.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(-1.5f, 25.0f, 8.0f));
 		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -344,7 +357,7 @@ int main()
 		
 		// Zoro
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-3.0f, 12.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(-3.0f, 25.0f, 8.0f));
 		aux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
