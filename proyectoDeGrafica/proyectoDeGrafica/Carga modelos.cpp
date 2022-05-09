@@ -8,6 +8,7 @@ Model brook;
 Model zoro_bo, zoro_l, zoro_r;
 Model thousandSunny;
 Model thousandSunnyDestruido;
+Model littleGarden;
 
 
 
@@ -35,6 +36,9 @@ void cargaModelos() {
 
 	thousandSunnyDestruido = Model();
 	thousandSunnyDestruido.LoadModel("Models/Thousand Sunny Destruido.obj");
+
+	littleGarden = Model();
+	littleGarden.LoadModel("Models/Little Garden.obj");
 }
 
 void CreateFloor()
@@ -45,10 +49,10 @@ void CreateFloor()
 	};
 
 	GLfloat floorVertices[] = {
-		-10.0f, 0.0f, -10.0f,	0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, -10.0f,	10.0f, 0.0f,	0.0f, -1.0f, 0.0f,
-		-10.0f, 0.0f, 10.0f,	0.0f, 10.0f,	0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, 10.0f,		10.0f, 10.0f,	0.0f, -1.0f, 0.0f
+		-10.0f, 0.0f, -10.0f,	0.0f, 0.0f,	0.0f, -1.0f, 0.0f,
+		10.0f, 0.0f, -10.0f,	0.0f, 0.9f,	0.0f, -1.0f, 0.0f,
+		-10.0f, 0.0f, 10.0f,	0.9f, 0.0f,	0.0f, -1.0f, 0.0f,
+		10.0f, 0.0f, 10.0f,		0.9f, 0.9f,	0.0f, -1.0f, 0.0f
 	};
 
 	Mesh* floor = new Mesh();

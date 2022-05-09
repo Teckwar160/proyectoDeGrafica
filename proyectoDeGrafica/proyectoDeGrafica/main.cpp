@@ -182,7 +182,7 @@ int main()
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 2000.0f);
 	float ang = 0.0f;
 
 	////Loop mientras no se cierra la ventana
@@ -238,7 +238,7 @@ int main()
 
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
-		
+
 		//Movimiento de textura de mar
 		glm::vec2 toffset = glm::vec2(0.0f, 0.0f);
 
@@ -248,7 +248,7 @@ int main()
 
 		//Laboon
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(30.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(20.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -264,7 +264,7 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunny.RenderModel();
 
-		//Thousand Sunny
+		//Thousand Sunny Destruido
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(50.0f, -8.0f, 0.0f));
 		modelaux = model;
@@ -295,7 +295,7 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		brook.RenderModel();
-		
+
 		// Zoro
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-3.0f, 25.0f, 8.0f));
@@ -399,9 +399,19 @@ int main()
 		//luffyTexture.UseTexture();
 		meshList[10]->RenderMesh();
 
-		toffsetv += 0.00005;
-		if (toffsetv > 1.0) {
-			toffsetv = 0.0f;
+
+		//Little Garden
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(400.0f, -2.0f, 200.0f));
+		model = glm::scale(model, glm::vec3(70.0f, 70.0f, 70.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		littleGarden.RenderModel();
+
+
+		toffsetu += 0.00005;
+		if (toffsetu > 1.0) {
+			toffsetu = 0.0f;
 		}
 
 		toffset = glm::vec2(toffsetu, toffsetv);
@@ -409,7 +419,7 @@ int main()
 		// Piso
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		model = glm::scale(model, glm::vec3(200.0f, 1.0f, 200.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));

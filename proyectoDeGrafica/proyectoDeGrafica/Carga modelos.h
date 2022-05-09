@@ -13,6 +13,7 @@ extern Model brook;
 extern Model zoro_bo, zoro_l, zoro_r;
 extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
+extern Model littleGarden;
 extern std::vector<Mesh*> meshList;
 /**
 * @brief Funci�n encargada de cargar los modelos
