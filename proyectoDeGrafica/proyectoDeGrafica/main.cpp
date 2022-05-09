@@ -185,6 +185,12 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
+//Movimiento de texturas
+GLuint uniformTextureOffset = 0;
+float toffsetu = 0.0f;
+float toffsetv = 0.0f;
+
+
 int main()
 {
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
@@ -286,6 +292,7 @@ int main()
 		uniformView = shaderList[0].GetViewLocation();
 		uniformEyePosition = shaderList[0].GetEyePositionLocation();
 		uniformColor = shaderList[0].getColorLocation();
+		uniformTextureOffset = shaderList[0].getOffsetLocation();
 
 		//informaci�n en el shader de intensidad especular y brillo
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
@@ -303,29 +310,42 @@ int main()
 		//informaci�n al shader de fuentes de iluminaci�n
 		shaderList[0].SetDirectionalLight(&mainLight);
 		shaderList[0].SetPointLights(pointLights, pointLightCount);
-
-		//Apagamos la luz trasera del carro
-		shaderList[0].SetSpotLights(spotLights, spotLightCount-1);
+		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
 		glm::mat4 aux(1.0);
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
+		
+		//Movimiento de textura de mar
+		glm::vec2 toffset = glm::vec2(0.0f, 0.0f);
+
+		toffsetv += 0.00005;
+		if (toffsetv > 1.0) {
+			toffsetv = 0.0f;
+		}
+
+		toffset = glm::vec2(toffsetu, toffsetv);
 
 		// Piso
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
 
+		//Reinicio de movimiento de textura
+		toffset = glm::vec2(0.0f, 0.0f);
+
 		//Laboon
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(30.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
