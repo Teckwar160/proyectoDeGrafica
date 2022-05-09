@@ -21,7 +21,7 @@ Animación Simple
 //#include<assimp/Importer.hpp>
 
 #include "Window.h"
-#include "Mesh.h"
+//#include "Mesh.h"
 #include "Shader_light.h"
 #include "Camera.h"
 #include "Texture.h"
@@ -39,13 +39,15 @@ Animación Simple
 const float toRadians = 3.14159265f / 180.0f;
 
 Window mainWindow;
-std::vector<Mesh*> meshList;
+//std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 
 Camera camera;
 
 Texture plainTexture;
 Texture pisoTexture;
+Texture treasureTexture;
+Texture luffyTexture;
 
 Skybox skybox;
 
@@ -102,75 +104,6 @@ void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat
 }
 
 
-void CreateObjects()
-{
-	unsigned int indices[] = {
-		0, 3, 1,
-		1, 3, 2,
-		2, 3, 0,
-		0, 1, 2
-	};
-
-	GLfloat vertices[] = {
-		//	x      y      z			u	  v			nx	  ny    nz
-			-1.0f, -1.0f, -0.6f,	0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-			0.0f, -1.0f, 1.0f,		0.5f, 0.0f,		0.0f, 0.0f, 0.0f,
-			1.0f, -1.0f, -0.6f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-			0.0f, 1.0f, 0.0f,		0.5f, 1.0f,		0.0f, 0.0f, 0.0f
-	};
-
-	unsigned int floorIndices[] = {
-		0, 2, 1,
-		1, 2, 3
-	};
-
-	GLfloat floorVertices[] = {
-		-10.0f, 0.0f, -10.0f,	0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, -10.0f,	1.0f, 0.0f,	0.0f, -1.0f, 0.0f,
-		-10.0f, 0.0f, 10.0f,	0.0f, 1.0f,	0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, 10.0f,		1.0f, 1.0f,	0.0f, -1.0f, 0.0f
-	};
-	unsigned int vegetacionIndices[] = {
-	   0, 1, 2,
-	   0, 2, 3,
-	   4,5,6,
-	   4,6,7
-	};
-
-	GLfloat vegetacionVertices[] = {
-		-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, 0.5f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-
-		0.0f, -0.5f, -0.5f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, -0.5f, 0.5f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, 0.5f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, -0.5f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-
-
-	};
-	
-	Mesh *obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 32, 12);
-	meshList.push_back(obj1);
-
-	Mesh *obj2 = new Mesh();
-	obj2->CreateMesh(vertices, indices, 32, 12);
-	meshList.push_back(obj2);
-
-	Mesh *obj3 = new Mesh();
-	obj3->CreateMesh(floorVertices, floorIndices, 32, 6);
-	meshList.push_back(obj3);
-
-	calcAverageNormals(vegetacionIndices, 12, vegetacionVertices, 64, 8, 5);
-
-	Mesh* obj4 = new Mesh();
-	obj4->CreateMesh(vegetacionVertices, vegetacionIndices, 64, 12);
-	meshList.push_back(obj4);
-
-}
-
 
 void CreateShaders()
 {
@@ -190,7 +123,10 @@ int main()
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
 	mainWindow.Initialise();
 
-	CreateObjects();
+	CreateFloor();		// 0
+	CreateChest();		// 1
+	CreateLuffy();		// 2 - 10
+
 	CreateShaders();
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
@@ -201,6 +137,11 @@ int main()
 	pisoTexture = Texture("Textures/mar.tga");
 	pisoTexture.LoadTextureA();
 
+	treasureTexture = Texture("Textures/treasure_chest.tga");
+	treasureTexture.LoadTextureA();
+
+	luffyTexture = Texture("Textures/LuffyA.tga");
+	luffyTexture.LoadTextureA();
 
 	//Cargamos los modelos
 	cargaModelos();
@@ -290,28 +231,17 @@ int main()
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
 		glm::mat4 aux(1.0);
+		// Matrices auxiliares para Luffy
+		glm::mat4 cabezaAux(1.0);
+		glm::mat4 cuerpoAux(1.0);
+		glm::mat4 brazoRAux(1.0);
+
+		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 		
 		//Movimiento de textura de mar
 		glm::vec2 toffset = glm::vec2(0.0f, 0.0f);
 
-		toffsetv += 0.00005;
-		if (toffsetv > 1.0) {
-			toffsetv = 0.0f;
-		}
-
-		toffset = glm::vec2(toffsetu, toffsetv);
-
-		// Piso
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
-		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		pisoTexture.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[2]->RenderMesh();
 
 		//Reinicio de movimiento de textura
 		toffset = glm::vec2(0.0f, 0.0f);
@@ -342,6 +272,13 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunnyDestruido.RenderModel();
+
+		// Cofre del tesoro
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-1.5f, 25.5f, 9.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		treasureTexture.UseTexture();
+		meshList[1]->RenderMesh();
 
 		//Sanji
 		model = modelaux;
@@ -384,6 +321,101 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		zoro_r.RenderModel();
+
+		// Cuerpo Luffy
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-4.5f, 26.25f, 8.0f));
+		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
+		cuerpoAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		luffyTexture.UseTexture();
+		meshList[2]->RenderMesh();
+
+		// Cabeza Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(0.0f, 0.16f, 0.0f));
+		cabezaAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[3]->RenderMesh();
+
+		// Sombrero Luffy
+		model = cabezaAux;
+		model = glm::translate(model, glm::vec3(0.0f, 0.24f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		//ang < 180 ? ang += 0.1 : ang = 0;
+
+		// Brazo L Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(0.18f, 0.1f, 0.0f));
+		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[5]->RenderMesh();
+
+		// Brazo R1 Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(-0.18f, 0.1f, 0.0f));
+		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		brazoRAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[8]->RenderMesh();
+
+		//esc < 5.0f ? esc += 0.01f : esc = 1.0f;
+
+		// Brazo R2 Luffy
+		model = brazoRAux;
+		model = glm::translate(model, glm::vec3(0.0f, -0.14f, 0.0f));
+		//model = glm::scale(model, glm::vec3(1.0f, esc, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[9]->RenderMesh();
+
+		// Pierna L Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(0.08f, -0.2f, 0.0f));
+		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[6]->RenderMesh();
+
+		// Pierna R Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(-0.08f, -0.2f, 0.0f));
+		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[7]->RenderMesh();
+
+		// Entre pierna Luffy
+		model = cuerpoAux;
+		model = glm::translate(model, glm::vec3(0.0f, -0.2f, 0.0f));
+		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//luffyTexture.UseTexture();
+		meshList[10]->RenderMesh();
+
+		toffsetv += 0.00005;
+		if (toffsetv > 1.0) {
+			toffsetv = 0.0f;
+		}
+
+		toffset = glm::vec2(toffsetu, toffsetv);
+
+		// Piso
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		pisoTexture.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[0]->RenderMesh();
 
 		glUseProgram(0);
 		mainWindow.swapBuffers();

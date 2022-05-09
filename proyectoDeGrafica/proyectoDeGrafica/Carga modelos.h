@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Model.h"
+#include "Mesh.h"
 
 
 /**
-* @brief Declaració nde modelos
+* @brief Declaraciï¿½ nde modelos
 */
 extern Model laboon;
 extern Model sanji;
@@ -12,8 +13,11 @@ extern Model brook;
 extern Model zoro_bo, zoro_l, zoro_r;
 extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
-
+extern std::vector<Mesh*> meshList;
 /**
-* @brief Función encargada de cargar los modelos
+* @brief Funciï¿½n encargada de cargar los modelos
 */
 void cargaModelos();
+void CreateFloor();
+void CreateChest();
+void CreateLuffy();
