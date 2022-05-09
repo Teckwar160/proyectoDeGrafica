@@ -26,7 +26,8 @@ Animación Simple
 #include "Camera.h"
 #include "Texture.h"
 #include "Sphere.h"
-#include"Model.h"
+//#include"Model.h"
+#include "Carga modelos.h"
 #include "Skybox.h"
 
 //para iluminaci�n
@@ -45,13 +46,6 @@ Camera camera;
 
 Texture plainTexture;
 Texture pisoTexture;
-
-Model laboon;
-Model sanji;
-Model brook;
-Model zoro_bo, zoro_l, zoro_r;
-Model thousandSunny;
-
 
 Skybox skybox;
 
@@ -207,28 +201,9 @@ int main()
 	pisoTexture = Texture("Textures/mar.tga");
 	pisoTexture.LoadTextureA();
 
-	//Modelos
-	laboon = Model();
-	laboon.LoadModel("Models/laboon.obj");
 
-	sanji = Model();
-	sanji.LoadModel("Models/Sanji.obj");
-
-	brook = Model();
-	brook.LoadModel("Models/Brook.obj");
-
-	zoro_bo = Model();
-	zoro_bo.LoadModel("Models/Zoro_bo.obj");
-
-	zoro_l = Model();
-	zoro_l.LoadModel("Models/Zoro_L.obj");
-
-	zoro_r = Model();
-	zoro_r.LoadModel("Models/Zoro_R.obj");
-
-	thousandSunny = Model();
-	thousandSunny.LoadModel("Models/Thousand Sunny.obj");
-
+	//Cargamos los modelos
+	cargaModelos();
 
 	std::vector<std::string> skyboxFaces;
 
@@ -358,6 +333,15 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunny.RenderModel();
+
+		//Thousand Sunny
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(50.0f, -8.0f, 0.0f));
+		modelaux = model;
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		thousandSunnyDestruido.RenderModel();
 
 		//Sanji
 		model = modelaux;
