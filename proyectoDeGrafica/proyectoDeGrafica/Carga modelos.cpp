@@ -9,6 +9,7 @@ Model zoro_bo, zoro_l, zoro_r;
 Model thousandSunny;
 Model thousandSunnyDestruido;
 Model littleGarden;
+Model reverseMountain;
 
 
 
@@ -39,6 +40,9 @@ void cargaModelos() {
 
 	littleGarden = Model();
 	littleGarden.LoadModel("Models/Little Garden.obj");
+
+	reverseMountain = Model();
+	reverseMountain.LoadModel("Models/ReverseMountain.obj");
 }
 
 void CreateFloor()

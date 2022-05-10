@@ -408,6 +408,15 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		littleGarden.RenderModel();
 
+		// Reverse Mountain
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-400.0f, -2.5f, -400.0f));
+		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		reverseMountain.RenderModel();
+
 
 		toffsetu += 0.00005;
 		if (toffsetu > 1.0) {
