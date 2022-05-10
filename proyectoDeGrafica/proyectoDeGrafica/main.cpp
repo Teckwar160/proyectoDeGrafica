@@ -299,6 +299,24 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		brook.RenderModel();
 
+		// Nami
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-11.0f, 25.0f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Nami.RenderModel();
+
+		// Robin
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-13.0f, 25.0f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Robin.RenderModel();
+
+		// Usopp
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-8.0f, 25.0f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Usopp.RenderModel();
+
 		// Cuerpo Luffy
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-4.5f, 26.25f, 8.0f));
@@ -376,17 +394,6 @@ int main()
 		//luffyTexture.UseTexture();
 		meshList[10]->RenderMesh();
 
-		// Nami
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-11.0f, 25.0f, 5.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Nami.RenderModel();
-
-		// Robin
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-13.0f, 25.0f, 5.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Robin.RenderModel();
 
 		// Franky
 		model = modelaux;

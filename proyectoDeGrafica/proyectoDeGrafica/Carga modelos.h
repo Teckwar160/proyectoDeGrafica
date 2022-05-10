@@ -12,6 +12,7 @@ extern Model sanji;
 extern Model brook;
 extern Model Robin;
 extern Model Nami;
+extern Model Usopp;
 extern Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 extern Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 extern Model thousandSunny;

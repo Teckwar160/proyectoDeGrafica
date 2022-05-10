@@ -7,6 +7,7 @@ Model sanji;
 Model brook;
 Model Robin;
 Model Nami;
+Model Usopp;
 Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 Model thousandSunny;
@@ -31,6 +32,9 @@ void cargaModelos() {
 
 	Robin = Model();
 	Robin.LoadModel("Models/Robin.obj");
+
+	Usopp = Model();
+	Usopp.LoadModel("Models/Usopp.obj");
 
 	// Zoro
 	Zoro = Model();
