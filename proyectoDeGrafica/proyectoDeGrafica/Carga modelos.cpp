@@ -5,7 +5,10 @@ std::vector<Mesh*> meshList;
 Model laboon;
 Model sanji;
 Model brook;
-Model zoro_bo, zoro_l, zoro_r;
+Model Robin;
+Model Nami;
+Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
+Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 Model thousandSunny;
 Model thousandSunnyDestruido;
 Model littleGarden;
@@ -23,14 +26,43 @@ void cargaModelos() {
 	brook = Model();
 	brook.LoadModel("Models/Brook.obj");
 
-	zoro_bo = Model();
-	zoro_bo.LoadModel("Models/Zoro_bo.obj");
+	Nami = Model();
+	Nami.LoadModel("Models/Nami.obj");
 
-	zoro_l = Model();
-	zoro_l.LoadModel("Models/Zoro_L.obj");
+	Robin = Model();
+	Robin.LoadModel("Models/Robin.obj");
 
-	zoro_r = Model();
-	zoro_r.LoadModel("Models/Zoro_R.obj");
+	// Zoro
+	Zoro = Model();
+	Zoro.LoadModel("Models/Zoro_Bo.obj");
+
+	Zoro_BR = Model();
+	Zoro_BR.LoadModel("Models/Zoro_BR.obj");
+
+	Zoro_BL = Model();
+	Zoro_BL.LoadModel("Models/Zoro_BL.obj");
+
+	Zoro_PR = Model();
+	Zoro_PR.LoadModel("Models/Zoro_PR.obj");
+
+	Zoro_PL = Model();
+	Zoro_PL.LoadModel("Models/Zoro_PL.obj");
+
+	// Franky
+	Franky = Model();
+	Franky.LoadModel("Models/Franky_Bo.obj");
+
+	Franky_BR = Model();
+	Franky_BR.LoadModel("Models/Franky_BR.obj");
+
+	Franky_BL = Model();
+	Franky_BL.LoadModel("Models/Franky_BL.obj");
+
+	Franky_PR = Model();
+	Franky_PR.LoadModel("Models/Franky_PR.obj");
+
+	Franky_PL = Model();
+	Franky_PL.LoadModel("Models/Franky_PL.obj");
 
 	thousandSunny = Model();
 	thousandSunny.LoadModel("Models/Thousand Sunny.obj");

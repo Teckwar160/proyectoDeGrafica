@@ -10,11 +10,15 @@
 extern Model laboon;
 extern Model sanji;
 extern Model brook;
-extern Model zoro_bo, zoro_l, zoro_r;
+extern Model Robin;
+extern Model Nami;
+extern Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
+extern Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
 extern Model littleGarden;
 extern Model reverseMountain;
+
 
 extern std::vector<Mesh*> meshList;
 /**

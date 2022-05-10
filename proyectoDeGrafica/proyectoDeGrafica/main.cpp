@@ -235,6 +235,9 @@ int main()
 		glm::mat4 cabezaAux(1.0);
 		glm::mat4 cuerpoAux(1.0);
 		glm::mat4 brazoRAux(1.0);
+		
+		glm::mat4 frankyAux(1.0);
+		glm::mat4 zoroAux(1.0);
 
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -295,32 +298,6 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		brook.RenderModel();
-
-		// Zoro
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-3.0f, 25.0f, 8.0f));
-		aux = model;
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		zoro_bo.RenderModel();
-
-		ang > 360.0f ? ang = 0.0f : ang += 0.05f;
-
-		// Zoro brazo izquierdo
-		model = aux;
-		model = glm::translate(model, glm::vec3(0.0f, 1.6f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		zoro_l.RenderModel();
-
-		// Zoro brazo derecho
-		model = aux;
-		model = glm::translate(model, glm::vec3(0.0f, 1.6f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		zoro_r.RenderModel();
 
 		// Cuerpo Luffy
 		model = modelaux;
@@ -399,6 +376,88 @@ int main()
 		//luffyTexture.UseTexture();
 		meshList[10]->RenderMesh();
 
+		// Nami
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-11.0f, 25.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Nami.RenderModel();
+
+		// Robin
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-13.0f, 25.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Robin.RenderModel();
+
+		// Franky
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-16.0f, 28.0f, 5.0f));
+		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
+		frankyAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Franky.RenderModel();
+
+		// Franky Brazo izq
+		model = frankyAux;
+		model = glm::translate(model, glm::vec3(0.7f, 0.6f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Franky_BL.RenderModel();
+
+		// Franky Brazo der
+		model = frankyAux;
+		model = glm::translate(model, glm::vec3(-0.6f, 0.6f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Franky_BR.RenderModel();
+
+		// Franky Pierna izq
+		model = frankyAux;
+		model = glm::translate(model, glm::vec3(0.2f, 0.0f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Franky_PL.RenderModel();
+
+		// Franky Pierna der
+		model = frankyAux;
+		model = glm::translate(model, glm::vec3(-0.1f, 0.0f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Franky_PR.RenderModel();
+
+		// Zoro
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-19.0f, 28.0f, 5.0f));
+		zoroAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Zoro.RenderModel();
+
+		// Zoro Brazo izq
+		model = zoroAux;
+		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Zoro_BL.RenderModel();
+
+		// Zoro Brazo der
+		model = zoroAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Zoro_BR.RenderModel();
+
+		// Zoro Pierna izq
+		model = zoroAux;
+		model = glm::translate(model, glm::vec3(0.2f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Zoro_PL.RenderModel();
+
+		// Zoro Pierna der
+		model = zoroAux;
+		model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Zoro_PR.RenderModel();
 
 		//Little Garden
 		model = glm::mat4(1.0);
