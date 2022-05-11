@@ -17,6 +17,7 @@ extern Model Usopp;
 extern Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 extern Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 extern Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
+extern Model Dorry, Dorry_BR, Dorry_BL, Dorry_PR, Dorry_PL;
 extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
 extern Model littleGarden;

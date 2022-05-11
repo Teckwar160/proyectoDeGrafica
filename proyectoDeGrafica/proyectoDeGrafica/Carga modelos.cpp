@@ -11,6 +11,7 @@ Model Usopp;
 Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
+Model Dorry, Dorry_BR, Dorry_BL, Dorry_PR, Dorry_PL;
 Model thousandSunny;
 Model thousandSunnyDestruido;
 Model littleGarden;
@@ -83,6 +84,22 @@ void cargaModelos() {
 
 	Brogy_PL = Model();
 	Brogy_PL.LoadModel("Models/Brogy_PL.obj");
+
+	// Dorry
+	Dorry = Model();
+	Dorry.LoadModel("Models/Dorry_Bo.obj");
+
+	Dorry_BR = Model();
+	Dorry_BR.LoadModel("Models/Dorry_BR.obj");
+
+	Dorry_BL = Model();
+	Dorry_BL.LoadModel("Models/Dorry_BL.obj");
+
+	Dorry_PR = Model();
+	Dorry_PR.LoadModel("Models/Dorry_PR.obj");
+
+	Dorry_PL = Model();
+	Dorry_PL.LoadModel("Models/Dorry_PL.obj");
 
 	thousandSunny = Model();
 	thousandSunny.LoadModel("Models/Thousand Sunny.obj");

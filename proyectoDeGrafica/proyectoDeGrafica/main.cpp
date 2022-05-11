@@ -151,7 +151,7 @@ int main()
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.5f, 2000.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 2000.0f);
 	float ang = 0.0f;
 
 	////Loop mientras no se cierra la ventana
@@ -208,6 +208,7 @@ int main()
 		glm::mat4 frankyAux(1.0);
 		glm::mat4 zoroAux(1.0);
 		glm::mat4 brogyAux(1.0);
+		glm::mat4 dorryAux(1.0);
 
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -221,8 +222,8 @@ int main()
 
 		//Laboon
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(20.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		model = glm::translate(model, glm::vec3(-150.0f, -10.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(50.0f, 50.0f, 50.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -472,6 +473,42 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_PR.RenderModel();
 
+		// Dorry
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(220.0f, -2.0f, 300.0f));
+		model = glm::scale(model, glm::vec3(60.0f, 60.0f, 60.0f));
+		dorryAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Dorry.RenderModel();
+
+		// Dorry Brazo izq
+		model = dorryAux;
+		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Dorry_BL.RenderModel();
+
+		// Dorry Brazo der
+		model = dorryAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Dorry_BR.RenderModel();
+
+		// Dorry Pierna izq
+		model = dorryAux;
+		model = glm::translate(model, glm::vec3(0.2f, -0.5f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Dorry_PL.RenderModel();
+
+		// Dorry Pierna der
+		model = dorryAux;
+		model = glm::translate(model, glm::vec3(-0.1f, -0.5f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Dorry_PR.RenderModel();
+
 		//Little Garden
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(400.0f, -2.0f, 200.0f));
@@ -482,7 +519,7 @@ int main()
 
 		// Reverse Mountain
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-400.0f, -2.5f, -400.0f));
+		model = glm::translate(model, glm::vec3(-400.0f, -20.0f, -400.0f));
 		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
