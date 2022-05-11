@@ -182,7 +182,7 @@ int main()
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 2000.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.5f, 2000.0f);
 	float ang = 0.0f;
 
 	////Loop mientras no se cierra la ventana
@@ -482,6 +482,13 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		reverseMountain.RenderModel();
+
+		// Meta Knight
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-22.0f, 28.0f, 5.0f));
+		zoroAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		metaKnight.RenderModel();
 
 
 		toffsetu += 0.00005;

@@ -14,6 +14,7 @@ Model thousandSunny;
 Model thousandSunnyDestruido;
 Model littleGarden;
 Model reverseMountain;
+Model metaKnight;
 
 
 
@@ -79,6 +80,10 @@ void cargaModelos() {
 
 	reverseMountain = Model();
 	reverseMountain.LoadModel("Models/ReverseMountain.obj");
+
+	metaKnight = Model();
+	metaKnight.LoadModel("Models/meta knight.obj");
+
 }
 
 void CreateFloor()

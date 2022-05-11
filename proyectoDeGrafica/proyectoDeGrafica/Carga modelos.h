@@ -19,6 +19,7 @@ extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
 extern Model littleGarden;
 extern Model reverseMountain;
+extern Model metaKnight;
 
 
 extern std::vector<Mesh*> meshList;
