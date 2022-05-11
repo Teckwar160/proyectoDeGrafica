@@ -207,6 +207,7 @@ int main()
 		
 		glm::mat4 frankyAux(1.0);
 		glm::mat4 zoroAux(1.0);
+		glm::mat4 brogyAux(1.0);
 
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -434,6 +435,42 @@ int main()
 		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_PR.RenderModel();
+
+		// Brogy
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(220.0f, -2.0f, 200.0f));
+		model = glm::scale(model, glm::vec3(60.0f, 60.0f, 60.0f));
+		brogyAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Brogy.RenderModel();
+
+		// Brogy Brazo izq
+		model = brogyAux;
+		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Brogy_BL.RenderModel();
+
+		// Brogy Brazo der
+		model = brogyAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Brogy_BR.RenderModel();
+
+		// Brogy Pierna izq
+		model = brogyAux;
+		model = glm::translate(model, glm::vec3(0.2f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Brogy_PL.RenderModel();
+
+		// Brogy Pierna der
+		model = brogyAux;
+		model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Brogy_PR.RenderModel();
 
 		//Little Garden
 		model = glm::mat4(1.0);

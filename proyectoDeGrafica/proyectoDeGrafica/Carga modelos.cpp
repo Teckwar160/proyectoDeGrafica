@@ -10,6 +10,7 @@ Model Nami;
 Model Usopp;
 Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
+Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
 Model thousandSunny;
 Model thousandSunnyDestruido;
 Model littleGarden;
@@ -66,6 +67,22 @@ void cargaModelos() {
 
 	Franky_PL = Model();
 	Franky_PL.LoadModel("Models/Franky_PL.obj");
+
+	// Brogy
+	Brogy = Model();
+	Brogy.LoadModel("Models/Brogy_Bo.obj");
+
+	Brogy_BR = Model();
+	Brogy_BR.LoadModel("Models/Brogy_BR.obj");
+
+	Brogy_BL = Model();
+	Brogy_BL.LoadModel("Models/Brogy_BL.obj");
+
+	Brogy_PR = Model();
+	Brogy_PR.LoadModel("Models/Brogy_PR.obj");
+
+	Brogy_PL = Model();
+	Brogy_PL.LoadModel("Models/Brogy_PL.obj");
 
 	thousandSunny = Model();
 	thousandSunny.LoadModel("Models/Thousand Sunny.obj");
