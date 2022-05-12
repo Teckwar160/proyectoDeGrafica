@@ -9,9 +9,10 @@
 #include <math.h>
 
 #include <glew.h>
-#include <glfw3.h>
+//#include <glfw3.h>
+#include "Animaciones.h"
 
-#include <glm.hpp>
+//#include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
 #include <gtc\type_ptr.hpp>
 //para probar el importer
@@ -69,7 +70,6 @@ static const char* vShader = "shaders/shader_light.vert";
 
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
-
 
 
 void CreateShaders()
@@ -171,10 +171,14 @@ int main()
 		deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
 
+
 		//Recibir eventos del usuario
 		glfwPollEvents();
 		camera.keyControl(mainWindow.getsKeys(), deltaTime);
 		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+
+		//Teclas prueba
+		controlDeTeclas(mainWindow.getsKeys(),deltaTime);
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -248,22 +252,31 @@ int main()
 
 		//Laboon
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-150.0f, -10.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(50.0f, 50.0f, 50.0f));
+		model = glm::translate(model, glm::vec3(-300.0f, -10.0f, 300.0f));
+		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
 
 		//Thousand Sunny
+
+		//Animación
+		animaThousand(deltaTime);
+
+
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, -8.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(thousandX, -12.0f, thousandZ));
+		model = glm::rotate(model, glm::radians(giroThousand-180), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
 		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunny.RenderModel();
 
+		//printf("\nZ:%f\n", thousandZ);
+		//printf("\nX:%f\n", thousandX);
+/*
 		//Thousand Sunny Destruido
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(50.0f, -8.0f, 0.0f));
@@ -272,10 +285,26 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunnyDestruido.RenderModel();
+*/
+		//Barco 1 de la marina
+		model = modelaux;//glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-50.0f, 0.0f, -150.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		marina.RenderModel();
 
-		//Barco de la marina
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-50.0f, -8.0f, 0.0f));
+		//Barco 2 de la marina
+		model = modelaux;//glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -150.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		marina.RenderModel();
+
+		//Barco 3 de la marina
+		model = modelaux;// glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(50.0f, 0.0f, -150.0f));
 		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -569,7 +598,7 @@ int main()
 		//Little Garden
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(400.0f, -2.0f, 200.0f));
-		model = glm::scale(model, glm::vec3(70.0f, 70.0f, 70.0f));
+		model = glm::scale(model, glm::vec3(65.0f, 65.0f, 65.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		littleGarden.RenderModel();
@@ -615,3 +644,4 @@ int main()
 
 	return 0;
 }
+
