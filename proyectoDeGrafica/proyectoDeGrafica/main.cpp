@@ -233,6 +233,7 @@ int main()
 		glm::mat4 zoroAux(1.0);
 		glm::mat4 brogyAux(1.0);
 		glm::mat4 dorryAux(1.0);
+		glm::mat4 carueAux(1.0);
 
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -243,6 +244,7 @@ int main()
 
 		//Reinicio de movimiento de textura
 		toffset = glm::vec2(0.0f, 0.0f);
+
 
 		//Laboon
 		model = glm::mat4(1.0);
@@ -277,6 +279,29 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		treasureTexture.UseTexture();
 		meshList[1]->RenderMesh();
+
+		// Carue
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.0f, 30.0f, 8.0f));
+		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		carueAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue.RenderModel();
+
+		// Carue pie derecho
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
+
+		// Carue pie izquierdo
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(0.3f, -0.4f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
 
 		//Sanji
 		model = modelaux;

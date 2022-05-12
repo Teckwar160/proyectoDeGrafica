@@ -14,6 +14,7 @@ extern Model brook;
 extern Model Robin;
 extern Model Nami;
 extern Model Usopp;
+extern Model Carue, Carue_ft;
 extern Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 extern Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
 extern Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
