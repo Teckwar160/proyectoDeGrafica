@@ -133,7 +133,7 @@ void Model::LoadMaterials(const aiScene * scene)
 				TextureList[i] = new Texture(texPath.c_str());
 				if (existetga != std::string::npos || existepng != std::string::npos)
 				{
-					if (!TextureList[i]->LoadTextureA())
+					if (TextureList[i]->LoadTextureA())
 					{
 						printf("Falló en cargar la Textura :%s\n", texPath);
 						delete TextureList[i];
@@ -142,7 +142,7 @@ void Model::LoadMaterials(const aiScene * scene)
 				}
 				else
 				{
-					if (!TextureList[i]->LoadTexture())
+					if (TextureList[i]->LoadTexture())
 					{
 						printf("Falló en cargar la Textura :%s\n", texPath);
 						delete TextureList[i];
@@ -153,7 +153,7 @@ void Model::LoadMaterials(const aiScene * scene)
 		}
 		if (!TextureList[i])
 		{
-			TextureList[i] = new Texture("Textures/plain.png"); //textura que se aplicará a los modelos si no tienen textura o la textura no se puede cargar
+			TextureList[i] = new Texture("Textures/default.png"); //textura que se aplicará a los modelos si no tienen textura o la textura no se puede cargar
 			TextureList[i]->LoadTextureA();
 		}
 

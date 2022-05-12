@@ -8,6 +8,7 @@ Model brook;
 Model Robin;
 Model Nami;
 Model Usopp;
+Model Vivi, Vivi_BR;
 Model Carue, Carue_ft;
 Model Zoro, Zoro_BR, Zoro_BL, Zoro_PR, Zoro_PL;
 Model Franky, Franky_BR, Franky_BL, Franky_PR, Franky_PL;
@@ -48,6 +49,13 @@ void cargaModelos() {
 
 	Carue_ft = Model();
 	Carue_ft.LoadModel("Models/Carue_Feet.obj");
+
+	// Vivi
+	Vivi = Model();
+	Vivi.LoadModel("Models/Vivi_Bo.obj");
+
+	Vivi_BR = Model();
+	Vivi_BR.LoadModel("Models/Vivi_BR.obj");
 
 
 	// Zoro

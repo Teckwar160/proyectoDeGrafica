@@ -237,6 +237,7 @@ int main()
 		glm::mat4 zoroAux(1.0);
 		glm::mat4 brogyAux(1.0);
 		glm::mat4 dorryAux(1.0);
+		glm::mat4 viviAux(1.0);
 		glm::mat4 carueAux(1.0);
 
 		// Color base
@@ -316,6 +317,20 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		treasureTexture.UseTexture();
 		meshList[1]->RenderMesh();
+
+		// Vivi
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-5.0f, 30.0f, 8.0f));
+		viviAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi.RenderModel();
+
+		// Vivi brazo derecho
+		model = viviAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.6f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi_BR.RenderModel();
 
 		// Carue
 		model = modelaux;
