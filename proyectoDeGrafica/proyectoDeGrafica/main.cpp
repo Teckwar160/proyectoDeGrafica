@@ -1,7 +1,4 @@
-/*
-Semestre 2022-2
-Animación Simple 
-*/
+
 //para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -49,7 +46,8 @@ Texture pisoTexture;
 Texture treasureTexture;
 Texture luffyTexture;
 
-Skybox skybox;
+Skybox skybox_day;
+Skybox skybox_night;
 
 //materiales
 Material Material_brillante;
@@ -115,16 +113,26 @@ int main()
 	//Cargamos los modelos
 	cargaModelos();
 
-	std::vector<std::string> skyboxFaces;
+	std::vector<std::string> skyboxFaces_day;
+	std::vector<std::string> skyboxFaces_night;
 
-	skyboxFaces.push_back("Textures/Skybox/land_right.tga");
-	skyboxFaces.push_back("Textures/Skybox/land_left.tga");
-	skyboxFaces.push_back("Textures/Skybox/land_bottom.tga");
-	skyboxFaces.push_back("Textures/Skybox/land_top.tga");
-	skyboxFaces.push_back("Textures/Skybox/land_front.tga");
-	skyboxFaces.push_back("Textures/Skybox/land_back.tga");
+	
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_right.tga");
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_left.tga");
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_bottom.tga");
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_top.tga");
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_front.tga");
+	skyboxFaces_day.push_back("Textures/Skybox/heaven_back.tga");
+	
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_right.tga");
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_left.tga");
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_bottom.tga");
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_top.tga");
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_front.tga");
+	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_back.tga");
 
-	skybox = Skybox(skyboxFaces);
+	skybox_day = Skybox(skyboxFaces_day);
+	skybox_night = Skybox(skyboxFaces_night);
 
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
@@ -153,7 +161,8 @@ int main()
 	GLuint uniformColor = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 2000.0f);
 	float ang = 0.0f;
-
+	int sky = 0;
+	bool day = true;
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
@@ -170,7 +179,22 @@ int main()
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+
+		if (sky < 1000) {
+			sky++;
+		}
+		else {
+			sky = 0;
+			day = not day;
+		}
+
+		if (day) {
+			skybox_day.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+		else {
+			skybox_night.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
