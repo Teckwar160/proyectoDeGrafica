@@ -15,6 +15,7 @@ Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
 Model Dorry, Dorry_BR, Dorry_BL, Dorry_PR, Dorry_PL;
 Model thousandSunny;
 Model thousandSunnyDestruido;
+Model marina;
 Model littleGarden;
 Model reverseMountain;
 Model metaKnight;
@@ -37,6 +38,9 @@ void cargaModelos() {
 
 	Usopp = Model();
 	Usopp.LoadModel("Models/Usopp.obj");
+
+	marina = Model();
+	marina.LoadModel("Models/marina.obj");
 
 	// Carue
 	Carue = Model();

@@ -21,6 +21,7 @@ extern Model Brogy, Brogy_BR, Brogy_BL, Brogy_PR, Brogy_PL;
 extern Model Dorry, Dorry_BR, Dorry_BL, Dorry_PR, Dorry_PL;
 extern Model thousandSunny;
 extern Model thousandSunnyDestruido;
+extern Model marina;
 extern Model littleGarden;
 extern Model reverseMountain;
 extern Model metaKnight;
