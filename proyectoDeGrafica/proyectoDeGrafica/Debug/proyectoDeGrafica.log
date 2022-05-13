@@ -1,7 +1,7 @@
 ﻿  main.cpp
-C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(169,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(171,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(638,22): warning C4305: '+=': truncamiento de 'double' a 'float'
-  proyectoDeGrafica.vcxproj -> C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica1\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe
+C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(169,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(171,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(621,22): warning C4305: '+=': truncamiento de 'double' a 'float'
+  proyectoDeGrafica.vcxproj -> C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe

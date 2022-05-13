@@ -96,7 +96,7 @@ int main()
 
 	CreateShaders();
 
-	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	camera = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 
 	plainTexture = Texture("Textures/plain.png");
 	plainTexture.LoadTextureA();
@@ -159,7 +159,7 @@ int main()
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 2000.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 1000.0f);
 	float ang = 0.0f;
 	int sky = 0;
 	bool day = true;
@@ -251,113 +251,54 @@ int main()
 		toffset = glm::vec2(0.0f, 0.0f);
 
 
-		//Laboon
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-300.0f, -10.0f, 300.0f));
-		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
-		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		laboon.RenderModel();
-
 		//Thousand Sunny
 
 		//Animación
 		animaThousand(deltaTime);
-
-
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(thousandX, 10.0f, thousandZ));
+		model = glm::translate(model, glm::vec3(thousandX, 5.0f, thousandZ));
 		model = glm::rotate(model, glm::radians(giroThousand-180), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		thousandSunny.RenderModel();
-
-		//printf("\nZ:%f\n", thousandZ);
-		//printf("\nX:%f\n", thousandX);
-/*
-		//Thousand Sunny Destruido
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(50.0f, -8.0f, 0.0f));
-		modelaux = model;
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		//thousandSunny.RenderModel();
 		thousandSunnyDestruido.RenderModel();
-*/
+
 		//Barco 1 de la marina
 		model = modelaux;//glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-50.0f, 0.0f, -150.0f));
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		model = glm::translate(model, glm::vec3(-50.0f, 0.0f, -100.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		marina.RenderModel();
 
 		//Barco 2 de la marina
 		model = modelaux;//glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -150.0f));
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		marina.RenderModel();
-
-		//Barco 3 de la marina
-		model = modelaux;// glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(50.0f, 0.0f, -150.0f));
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -100.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		marina.RenderModel();
 
 		// Cofre del tesoro
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-1.5f, 25.5f, 9.0f));
+		model = glm::translate(model, glm::vec3(-3.5f, 13.98f, -7.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		treasureTexture.UseTexture();
 		meshList[1]->RenderMesh();
 
-		// Vivi
+		// Meta Knight
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-5.0f, 30.0f, 8.0f));
-		viviAux = model;
+		model = glm::translate(model, glm::vec3(0.0f, 17.0f, 8.0f));
+		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Vivi.RenderModel();
-
-		// Vivi brazo derecho
-		model = viviAux;
-		model = glm::translate(model, glm::vec3(-0.4f, 0.6f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Vivi_BR.RenderModel();
-
-		// Carue
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, 30.0f, 8.0f));
-		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
-		carueAux = model;
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue.RenderModel();
-
-		// Carue pie derecho
-		model = carueAux;
-		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue_ft.RenderModel();
-
-		// Carue pie izquierdo
-		model = carueAux;
-		model = glm::translate(model, glm::vec3(0.3f, -0.4f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue_ft.RenderModel();
+		metaKnight.RenderModel();
 
 		//Sanji
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, 25.0f, 8.0f));
+		model = glm::translate(model, glm::vec3(-2.0f, 13.5f, -7.0f));
 		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -365,7 +306,7 @@ int main()
 
 		//Brook
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-1.5f, 25.0f, 8.0f));
+		model = glm::translate(model, glm::vec3(-3.0f, 12.5f, 5.0f));
 		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -373,25 +314,25 @@ int main()
 
 		// Nami
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-11.0f, 25.0f, 8.0f));
+		model = glm::translate(model, glm::vec3(-4.0f, 8.8f, -2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Nami.RenderModel();
 
 		// Robin
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-13.0f, 25.0f, 8.0f));
+		model = glm::translate(model, glm::vec3(-5.5f, 12.3f, -6.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Robin.RenderModel();
 
 		// Usopp
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-8.0f, 25.0f, 8.0f));
+		model = glm::translate(model, glm::vec3(-4.2f, 29.5f, 0.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Usopp.RenderModel();
 
 		// Cuerpo Luffy
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-4.5f, 26.25f, 8.0f));
+		model = glm::translate(model, glm::vec3(-1.0f, 13.8f, 5.0f));
 		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
 		cuerpoAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -469,7 +410,7 @@ int main()
 
 		// Franky
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-16.0f, 28.0f, 5.0f));
+		model = glm::translate(model, glm::vec3(-6.0f, 13.7f, 5.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		frankyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -505,7 +446,7 @@ int main()
 
 		// Zoro
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-19.0f, 28.0f, 5.0f));
+		model = glm::translate(model, glm::vec3(-1.0f, 11.2f, -4.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro.RenderModel();
@@ -538,10 +479,56 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_PR.RenderModel();
 
+		//Little Garden
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, 10.0f, 200.0f));
+		modelaux = model;
+		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		littleGarden.RenderModel();
+
+		// Vivi
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-148.0f, 8.5f, 4.5));
+		viviAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi.RenderModel();
+
+		// Vivi brazo derecho
+		model = viviAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.6f, 0.0f));
+		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi_BR.RenderModel();
+
+		// Carue
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-148.0f, 6.9f, 5.0f));
+		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		carueAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue.RenderModel();
+
+		// Carue pie derecho
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
+
+		// Carue pie izquierdo
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(0.3f, -0.4f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
+
 		// Brogy
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(220.0f, -2.0f, 200.0f));
-		model = glm::scale(model, glm::vec3(60.0f, 60.0f, 60.0f));
+		model = glm::translate(model, glm::vec3(-20.0f, -2.0f, -50.0f));
+		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		brogyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy.RenderModel();
@@ -576,8 +563,9 @@ int main()
 
 		// Dorry
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(220.0f, -2.0f, 300.0f));
-		model = glm::scale(model, glm::vec3(60.0f, 60.0f, 60.0f));
+		model = glm::translate(model, glm::vec3(40.0f, -2.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		dorryAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry.RenderModel();
@@ -610,29 +598,24 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PR.RenderModel();
 
-		//Little Garden
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(20.0f, 10.0f, 20.0f));
-		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		littleGarden.RenderModel();
-
 		// Reverse Mountain
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-400.0f, -20.0f, -400.0f));
+		model = glm::translate(model, glm::vec3(0.0f, -11.0f, -400.0f));
+		modelaux = model;
 		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		reverseMountain.RenderModel();
 
-		// Meta Knight
+		//Laboon
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-22.0f, 28.0f, 5.0f));
-		zoroAux = model;
+		model = glm::translate(model, glm::vec3(-300.0f, -8.0f, 100.0f));
+		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		metaKnight.RenderModel();
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		laboon.RenderModel();
 
 
 		toffsetu += 0.00005;

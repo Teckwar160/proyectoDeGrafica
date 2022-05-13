@@ -7,8 +7,8 @@
 int i_max_steps = 200;
 int i_curr_steps = 4;
 
-float thousandX = 0;
-float thousandZ = 0;
+float thousandX = -170;
+float thousandZ = 200;
 float giroThousand = 180;
 FRAME KeyFrameThousand[MAX_FRAMES];
 float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
