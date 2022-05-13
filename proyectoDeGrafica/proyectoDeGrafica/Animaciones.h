@@ -2,10 +2,8 @@
 
 #include <glfw3.h>
 #include <glm.hpp>
-extern float thousandX;
-extern float thousandZ;
-extern float giroThousand;
 
+//Definición de Frame
 typedef struct _frame
 {
 	//Variables para GUARDAR Key Frames
@@ -17,6 +15,12 @@ typedef struct _frame
 	float incremento_giro;
 
 }FRAME;
+
+//Variables que se usaran en el main
+extern float thousandX;
+extern float thousandZ;
+extern float giroThousand;
+
 
 void controlDeTeclas(bool* keys, GLfloat delta);
 

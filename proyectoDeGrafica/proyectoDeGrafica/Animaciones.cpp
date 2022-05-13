@@ -1,33 +1,23 @@
 #include "Animaciones.h"
 
-
-
-
+//Control de Frames
 #define MAX_FRAMES 200
 int i_max_steps = 200;
-int i_curr_steps = 4;
+FRAME KeyFrameThousand[MAX_FRAMES];
+float reproduciranimacion, habilitaranimacion;
+bool animacion = false;
+int FrameIndex = 18;//5;
+int i_curr_steps;//5;
+bool play = false;
+int playIndex = 0;
 
+//Variables para thousand
 float thousandX = -170;
 float thousandZ = 200;
 float giroThousand = 180;
-FRAME KeyFrameThousand[MAX_FRAMES];
-float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
-
-
-bool animacion = false;
 
 
 
-//NEW// Keyframes
-
-int i = 0;
-
-
-
-
-int FrameIndex = 4;			//introducir datos
-bool play = false;
-int playIndex = 0;
 
 void resetElements(FRAME *KeyFrame, float *x, float *z, float *giro)
 {
@@ -115,24 +105,105 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 }
 
 
-
 void animaThousand(GLfloat delta) {
+	int i = 0;
 
-	KeyFrameThousand[0].z = -300.0f;
-	KeyFrameThousand[0].x = 0.0f;
-	KeyFrameThousand[0].giro = 180.0f;
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z = 200.0f;
+	KeyFrameThousand[i].giro = 180.0f;
+	i++;
 
-	KeyFrameThousand[1].z = 600.0f;
-	KeyFrameThousand[1].x = 0.0f;
-	KeyFrameThousand[1].giro = 180.0f;
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z = 250.0f;
+	KeyFrameThousand[i].giro = 180.0f;
+	i++;
 
-	KeyFrameThousand[2].z = 600.0f;
-	KeyFrameThousand[2].x = 0.0f;
-	KeyFrameThousand[2].giro = 270.0f;
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z =  300.0f;
+	KeyFrameThousand[i].giro = 180.0f;
+	i++;
 
-	KeyFrameThousand[3].z = 600.0f;
-	KeyFrameThousand[3].x = -600.0f;
-	KeyFrameThousand[3].giro = 270.0f;
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z = 360.0f;
+	KeyFrameThousand[i].giro = 180.0f;
+	i++;
+
+	//Giro
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z = 390.0f;
+	KeyFrameThousand[i].giro = 225.0f;
+	i++;
+
+	
+	KeyFrameThousand[i].x = -85.0f;
+	KeyFrameThousand[i].z = 420.0f;
+	KeyFrameThousand[i].giro = 270.0f;
+	i++;
+
+	KeyFrameThousand[i].x = 0.0f;
+	KeyFrameThousand[i].z = 420.0f;
+	KeyFrameThousand[i].giro = 270.0f;
+	i++;
+
+	//Siguiente tramo
+	KeyFrameThousand[i].x = 50.0f;
+	KeyFrameThousand[i].z = 420.0f;
+	KeyFrameThousand[i].giro = 270.0f;
+	i++;
+
+	KeyFrameThousand[i].x = 100.0f;
+	KeyFrameThousand[i].z = 420.0f;
+	KeyFrameThousand[i].giro = 270.0f;
+	i++; //8
+
+	KeyFrameThousand[i].x = 200.0f;
+	KeyFrameThousand[i].z = 420.0f;
+	KeyFrameThousand[i].giro = 270.0f;
+	i++; //9
+
+	//Giro
+	KeyFrameThousand[i].x = 200.0f;
+	KeyFrameThousand[i].z = 380.0f;
+	KeyFrameThousand[i].giro = 360.0f;
+	i++; //10
+
+	//Siguiente tramo
+	KeyFrameThousand[i].x = 200.0f;
+	KeyFrameThousand[i].z = 250.0f;
+	KeyFrameThousand[i].giro = 360.0f;
+	i++; //11
+
+	KeyFrameThousand[i].x = 200.0f;
+	KeyFrameThousand[i].z = 100.0f;
+	KeyFrameThousand[i].giro = 360.0f;
+	i++; //12
+
+	KeyFrameThousand[i].x = 200.0f;
+	KeyFrameThousand[i].z = 0.0f;
+	KeyFrameThousand[i].giro = 360.0f;
+	i++; //13
+
+	//Giro
+	KeyFrameThousand[i].x = 50.0f;
+	KeyFrameThousand[i].z = -50.0f;
+	KeyFrameThousand[i].giro = 450.0f;
+	i++; //14
+
+	KeyFrameThousand[i].x = 0.0f;
+	KeyFrameThousand[i].z = -50.0f;
+	KeyFrameThousand[i].giro = 450.0f;
+	i++; //15
+
+	KeyFrameThousand[i].x = -50.0f;
+	KeyFrameThousand[i].z = -50.0f;
+	KeyFrameThousand[i].giro = 450.0f;
+	i++; //16
+
+	//Siguitnete tramo
+	KeyFrameThousand[i].x = -170.0f;
+	KeyFrameThousand[i].z = -50.0f;
+	KeyFrameThousand[i].giro = 450.0f;
+	i++; //17
 
 	animate(KeyFrameThousand,&thousandX,&thousandZ,&giroThousand);
 }

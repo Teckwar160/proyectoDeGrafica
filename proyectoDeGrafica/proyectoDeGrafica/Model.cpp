@@ -135,7 +135,7 @@ void Model::LoadMaterials(const aiScene * scene)
 				{
 					if (TextureList[i]->LoadTextureA())
 					{
-						printf("Falló en cargar la Textura :%s\n", texPath);
+						//printf("Falló en cargar la Textura :%s\n", texPath);
 						delete TextureList[i];
 						TextureList[i] = nullptr;
 					}
@@ -144,7 +144,7 @@ void Model::LoadMaterials(const aiScene * scene)
 				{
 					if (TextureList[i]->LoadTexture())
 					{
-						printf("Falló en cargar la Textura :%s\n", texPath);
+						//printf("Falló en cargar la Textura :%s\n", texPath);
 						delete TextureList[i];
 						TextureList[i] = nullptr;
 					}
