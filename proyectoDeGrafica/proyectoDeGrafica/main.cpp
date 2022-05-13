@@ -267,10 +267,10 @@ int main()
 
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(thousandX, -12.0f, thousandZ));
+		model = glm::translate(model, glm::vec3(thousandX, 10.0f, thousandZ));
 		model = glm::rotate(model, glm::radians(giroThousand-180), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		thousandSunny.RenderModel();
@@ -612,8 +612,8 @@ int main()
 
 		//Little Garden
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(400.0f, -2.0f, 200.0f));
-		model = glm::scale(model, glm::vec3(65.0f, 65.0f, 65.0f));
+		model = glm::translate(model, glm::vec3(20.0f, 10.0f, 20.0f));
+		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		littleGarden.RenderModel();
@@ -644,8 +644,8 @@ int main()
 
 		// Piso
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(200.0f, 1.0f, 200.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 10.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));

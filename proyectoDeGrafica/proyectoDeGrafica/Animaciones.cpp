@@ -5,10 +5,10 @@
 
 #define MAX_FRAMES 200
 int i_max_steps = 200;
-int i_curr_steps = 3;
+int i_curr_steps = 4;
 
 float thousandX = 0;
-float thousandZ = -300;
+float thousandZ = 0;
 float giroThousand = 180;
 FRAME KeyFrameThousand[MAX_FRAMES];
 float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
@@ -25,7 +25,7 @@ int i = 0;
 
 
 
-int FrameIndex = 3;			//introducir datos
+int FrameIndex = 4;			//introducir datos
 bool play = false;
 int playIndex = 0;
 
@@ -129,6 +129,10 @@ void animaThousand(GLfloat delta) {
 	KeyFrameThousand[2].z = 600.0f;
 	KeyFrameThousand[2].x = 0.0f;
 	KeyFrameThousand[2].giro = 270.0f;
+
+	KeyFrameThousand[3].z = 600.0f;
+	KeyFrameThousand[3].x = -600.0f;
+	KeyFrameThousand[3].giro = 270.0f;
 
 	animate(KeyFrameThousand,&thousandX,&thousandZ,&giroThousand);
 }
