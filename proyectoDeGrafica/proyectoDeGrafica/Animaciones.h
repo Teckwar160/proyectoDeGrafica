@@ -34,6 +34,9 @@ void controlDeTeclas(bool* keys, GLfloat delta);
 //Animación de Thousand
 void animaThousand(GLfloat delta);
 
+//Animación de Laboon
 void animaLaboon(GLfloat delta);
+
+void animaMetaKnight(GLfloat delta);
 
 int getCameraType();

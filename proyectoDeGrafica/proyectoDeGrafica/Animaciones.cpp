@@ -31,6 +31,7 @@ float laboonZ = 80.0f;
 float velocidadLaboon = 0.5f;
 char sentidoLaboon = 'u';
 float anguloLaboon = 0.0f;
+bool comienzaAnimacionLaboon = false;
 
 
 int getCameraType() {
@@ -134,8 +135,13 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	}
 
 	//Control de animación de Thousand
-	if (keys[GLFW_KEY_L]) {
+	if (keys[GLFW_KEY_T]) {
 		comienzaAnimacionThousand = true;
+	}
+
+	//Control de animación de Laboon
+	if (keys[GLFW_KEY_L]) {
+		comienzaAnimacionLaboon = true;
 	}
 	
 }
@@ -351,10 +357,11 @@ void animaThousand(GLfloat delta) {
 
 void animaLaboon(GLfloat delta) {
 
-	switch (sentidoLaboon) {
+	if (comienzaAnimacionLaboon) {
+		switch (sentidoLaboon) {
 		case 'u':
 			laboonX += velocidadLaboon * delta;
-			
+
 			if (anguloLaboon < 0.0f) {
 				anguloLaboon += 0.1 * delta;
 			}
@@ -368,14 +375,18 @@ void animaLaboon(GLfloat delta) {
 			}
 
 			break;
-	}
+		}
 
-	if (laboonX > -220.0f) {
-		sentidoLaboon = 'd';
-	}
+		if (laboonX > -220.0f) {
+			sentidoLaboon = 'd';
+		}
 
-	if (laboonX < -300.0f) {
-		sentidoLaboon = 'u';
+		if (laboonX < -300.0f) {
+			sentidoLaboon = 'u';
+		}
 	}
+}
+
+void animaMetaKnight(GLfloat delta) {
 
 }
