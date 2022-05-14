@@ -59,6 +59,11 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 static double limitFPS = 1.0 / 60.0;
 
+//Ciclo dia noche
+GLfloat lastTimeSky = 0.0f;
+bool day = true;
+
+
 // luz direccional
 DirectionalLight mainLight;
 //para declarar varias luces de tipo pointlight
@@ -161,8 +166,8 @@ int main()
 	GLuint uniformColor = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 1000.0f);
 	float ang = 0.0f;
-	int sky = 0;
-	bool day = true;
+	
+
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
@@ -171,6 +176,10 @@ int main()
 		deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
 
+		if ((now - lastTimeSky) >= 30) {
+			day = !day;
+			lastTimeSky = now;
+		}
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
@@ -184,14 +193,7 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if (sky < 1000) {
-			sky++;
-		}
-		else {
-			sky = 0;
-			day = not day;
-		}
-
+		
 		if (day) {
 			skybox_day.DrawSkybox(camera.calculateViewMatrix(), projection);
 		}
