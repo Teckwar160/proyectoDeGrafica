@@ -26,3 +26,5 @@ void controlDeTeclas(bool* keys, GLfloat delta);
 
 //Animación de Thousand
 void animaThousand(GLfloat delta);
+
+int getCameraType();

@@ -12,10 +12,8 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 
 	moveSpeed = startMoveSpeed;
 	turnSpeed = startTurnSpeed;
-
 	update();
 }
-
 void Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
@@ -29,7 +27,7 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position -= front * velocity;
 	}
-
+	
 	if (keys[GLFW_KEY_A])
 	{
 		position -= right * velocity;
@@ -72,14 +70,13 @@ glm::vec3 Camera::getCameraPosition()
 	return position;
 }
 
-
 glm::vec3 Camera::getCameraDirection()
 {
 	return glm::normalize(front);
 }
 
 void Camera::update()
-{
+{	
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	front.y = sin(glm::radians(pitch));
 	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -88,7 +85,6 @@ void Camera::update()
 	right = glm::normalize(glm::cross(front, worldUp));
 	up = glm::normalize(glm::cross(right, front));
 }
-
 
 Camera::~Camera()
 {

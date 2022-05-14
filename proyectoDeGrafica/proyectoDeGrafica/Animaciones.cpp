@@ -1,5 +1,9 @@
 #include "Animaciones.h"
 
+//Control de camaras
+int cameraType = 1;
+bool cameraFlag = false;
+
 //Control de Frames
 #define MAX_FRAMES 200
 int i_max_steps = 200;
@@ -16,7 +20,9 @@ float thousandX = -170;
 float thousandZ = 200;
 float giroThousand = 180;
 
-
+int getCameraType() {
+	return cameraType;
+}
 
 
 void resetElements(FRAME *KeyFrame, float *x, float *z, float *giro)
@@ -102,6 +108,18 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 			reproduciranimacion = 0;
 		}
 	}
+
+	// Control de cámaras
+	if (keys[GLFW_KEY_C] and cameraFlag)
+	{
+		cameraType++;
+		if (cameraType > 3)	cameraType = 1;
+		cameraFlag = false;
+	}
+	if (keys[GLFW_KEY_X]) {
+		cameraFlag = true;
+	}
+	
 }
 
 

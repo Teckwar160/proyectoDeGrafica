@@ -22,6 +22,8 @@
 //#include "Mesh.h"
 #include "Shader_light.h"
 #include "Camera.h"
+#include "Camera3th.h"
+#include "CameraAerial.h"
 #include "Texture.h"
 #include "Sphere.h"
 //#include"Model.h"
@@ -34,13 +36,21 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 #include "Material.h"
+
+// Avatar
+#include "Avatar.h"
 const float toRadians = 3.14159265f / 180.0f;
 
 Window mainWindow;
 //std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 
-Camera camera;
+Avatar Luffy;
+
+Camera* camera;
+Camera cameraFree;
+Camera3th camera3th;
+CameraAerial cameraAerial;
 
 Texture plainTexture;
 Texture pisoTexture;
@@ -101,7 +111,17 @@ int main()
 
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	Luffy = Avatar(glm::vec3(-170.0f, 20.0f, 200.0f),0.3f, 0.3f);
+
+	//camera = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	camera3th = Camera3th(Luffy.getAvatarPosition(), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, -15.0f, 0.5f, 0.5f);
+	camera3th.setType(1);
+
+	cameraAerial = CameraAerial(glm::vec3(-170.0f, 100.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	cameraAerial.setType(2);
+
+	cameraFree = Camera(glm::vec3(100.0f, 70.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	cameraFree.setType(3);
 
 	plainTexture = Texture("Textures/plain.png");
 	plainTexture.LoadTextureA();
@@ -145,7 +165,8 @@ int main()
 	//luz direccional, s�lo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
 		0.3f, 0.3f,
-		0.0f, 0.0f, -1.0f);
+		0.0f, -1.0f, 0.0f);
+	//	0.0f, 0.0f, -1.0f);
 
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
@@ -183,11 +204,33 @@ int main()
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
-		camera.keyControl(mainWindow.getsKeys(), deltaTime);
-		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+
+		//Cambio de camara
+		switch ( getCameraType() )
+		{
+			case 3:
+				camera = &cameraFree;
+				camera->keyControl(mainWindow.getsKeys(), deltaTime);
+				camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+				break;
+
+			case 2:
+				camera = &cameraAerial;
+				camera->keyControl(mainWindow.getsKeys(), deltaTime);
+				camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+				break;
+
+			default:
+				Luffy.keyControl(mainWindow.getsKeys(), deltaTime);
+				Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+				camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
+				//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
+				camera = &camera3th;
+				break;
+		}
 
 		//Teclas prueba
-		controlDeTeclas(mainWindow.getsKeys(),deltaTime);
+		controlDeTeclas(mainWindow.getsKeys(), deltaTime);
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -195,10 +238,10 @@ int main()
 
 		
 		if (day) {
-			skybox_day.DrawSkybox(camera.calculateViewMatrix(), projection);
+			skybox_day.DrawSkybox(camera->calculateViewMatrix(), projection);
 		}
 		else {
-			skybox_night.DrawSkybox(camera.calculateViewMatrix(), projection);
+			skybox_night.DrawSkybox(camera->calculateViewMatrix(), projection);
 		}
 
 		shaderList[0].UseShader();
@@ -214,13 +257,13 @@ int main()
 		uniformShininess = shaderList[0].GetShininessLocation();
 
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera->calculateViewMatrix()));
+		glUniform3f(uniformEyePosition, camera->getCameraPosition().x, camera->getCameraPosition().y, camera->getCameraPosition().z);
 
 		// luz ligada a la c�mara de tipo flash
-		glm::vec3 lowerLight = camera.getCameraPosition();
+		glm::vec3 lowerLight = camera->getCameraPosition();
 		lowerLight.y -= 0.3f;
-		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
+		spotLights[0].SetFlash(lowerLight, camera->getCameraDirection());
 
 		//informaci�n al shader de fuentes de iluminaci�n
 		shaderList[0].SetDirectionalLight(&mainLight);
@@ -333,9 +376,12 @@ int main()
 		Usopp.RenderModel();
 
 		// Cuerpo Luffy
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-1.0f, 13.8f, 5.0f));
+		//model = modelaux;
+		//model = glm::translate(model, glm::vec3(-1.0f, 13.8f, 5.0f));
+		model = glm::mat4(1.0);
+		model = glm::translate(model, Luffy.getAvatarPosition());
 		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
+		model = glm::rotate(model, glm::radians(Luffy.getYaw()+90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		cuerpoAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		luffyTexture.UseTexture();
