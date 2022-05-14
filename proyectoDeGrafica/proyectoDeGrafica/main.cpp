@@ -302,7 +302,7 @@ int main()
 		animaThousand(deltaTime);
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(thousandX, 5.0f, thousandZ));
-		model = glm::rotate(model, glm::radians(giroThousand-180), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(-giroThousand), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -311,13 +311,15 @@ int main()
 		//thousandSunny.RenderModel();
 		thousandSunnyDestruido.RenderModel();
 
+		printf("\n\nX: %f, Z: %f\n\n", thousandX, thousandZ);
+
 		//Barco 1 de la marina
 		model = modelaux;//glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-50.0f, 0.0f, -100.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		marina.RenderModel();
+		//marina.RenderModel();
 
 		//Barco 2 de la marina
 		model = modelaux;//glm::mat4(1.0);
@@ -325,7 +327,7 @@ int main()
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		marina.RenderModel();
+		//marina.RenderModel();
 
 		// Cofre del tesoro
 		model = modelaux;

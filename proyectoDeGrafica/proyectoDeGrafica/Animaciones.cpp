@@ -18,7 +18,12 @@ int playIndex = 0;
 //Variables para thousand
 float thousandX = -170;
 float thousandZ = 200;
-float giroThousand = 180;
+float giroThousand = 0;
+char sentidoThousand = 'u';
+float velocidadThousand = 0.5;
+bool  comienzaAnimacionThousand = false;
+int c1 = 0, c2 = 0;
+bool banderaCentro = false;
 
 int getCameraType() {
 	return cameraType;
@@ -84,7 +89,7 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 		{
 			if (play == false && (FrameIndex > 1))
 			{
-				resetElements(KeyFrameThousand,&thousandX,&thousandZ,&giroThousand);
+				//resetElements(KeyFrameThousand,&thousandX,&thousandZ,&giroThousand);
 				//First Interpolation				
 				interpolation(KeyFrameThousand);
 				play = true;
@@ -119,10 +124,15 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	if (keys[GLFW_KEY_X]) {
 		cameraFlag = true;
 	}
+
+	//Control de animación de Thousand
+	if (keys[GLFW_KEY_L]) {
+		comienzaAnimacionThousand = true;
+	}
 	
 }
 
-
+/*
 void animaThousand(GLfloat delta) {
 	int i = 0;
 
@@ -224,4 +234,104 @@ void animaThousand(GLfloat delta) {
 	i++; //17
 
 	animate(KeyFrameThousand,&thousandX,&thousandZ,&giroThousand);
+}
+*/
+
+void calculaCentro(){
+	//Calculamos el centro
+	if (banderaCentro) {
+		if (sentidoThousand == '1') {
+			c1 = thousandX + 100; //x
+			c2 = thousandZ;	 //y
+			//sentidoThousand = '1';
+		}
+
+		if (sentidoThousand == '2') {
+			c1 = thousandX; //x
+			c2 = thousandZ - 100;	 //y
+		}
+
+		if (sentidoThousand == '3') {
+			c1 = thousandX -100; //x
+			c2 = thousandZ;	 //y
+		}
+
+		//Evitamos que se vuelva a calcular
+		banderaCentro = false;
+
+
+	}
+}
+
+
+void animaThousand(GLfloat delta) {
+
+	if (comienzaAnimacionThousand) {
+		//Control de movimiento
+		switch (sentidoThousand) {
+		case 'u':
+			thousandZ += velocidadThousand * delta;
+			break;
+		case 'd':
+			thousandZ -= velocidadThousand * delta;
+			break;
+		case 'l':
+			thousandX += velocidadThousand * delta;
+			break;
+		case 'r':
+			thousandX -= velocidadThousand * delta;
+			break;
+		case '1':
+			thousandX = c1 + 100 * glm::cos(glm::radians(giroThousand+180));
+			thousandZ = c2 + 100 * glm::sin(glm::radians(giroThousand+180));
+			giroThousand -= 0.3 * delta;
+
+			if (giroThousand < -90.0 && sentidoThousand == '1') {
+				sentidoThousand = 'l';
+			}
+
+			break;
+		case '2':
+			thousandX = c1 + 100 * glm::cos(glm::radians(giroThousand + 180));
+			thousandZ = c2 + 100 * glm::sin(glm::radians(giroThousand + 180));
+			giroThousand -= 0.3 * delta;
+
+			if (giroThousand < -180.0 && sentidoThousand == '2') {
+				sentidoThousand = 'd';
+			}
+			break;
+
+		case '3':
+			thousandX = c1 + 100 * glm::cos(glm::radians(giroThousand + 180));
+			thousandZ = c2 + 100 * glm::sin(glm::radians(giroThousand + 180));
+			giroThousand -= 0.3 * delta;
+
+			if (giroThousand < -270.0 && sentidoThousand == '3') {
+				sentidoThousand = 'r';
+			}
+			break;
+		}
+
+		//Control de giro
+		if (thousandZ > 330.0f && sentidoThousand == 'u') {
+			banderaCentro = true;
+			sentidoThousand = '1';
+		}
+
+		if (thousandX > 100.0f && sentidoThousand == 'l') {
+			banderaCentro = true;
+			sentidoThousand = '2';
+		}
+
+		if (thousandZ < 0.0f && sentidoThousand == 'd') {
+			banderaCentro = true;
+			sentidoThousand = '3';
+		}
+
+		//Calculamos el centro
+		calculaCentro();
+
+	}
+
+
 }
