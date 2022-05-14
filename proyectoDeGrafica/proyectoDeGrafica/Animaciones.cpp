@@ -328,6 +328,11 @@ void animaThousand(GLfloat delta) {
 			sentidoThousand = '3';
 		}
 
+		//Paramos el barco
+		if (thousandX < -200.0f && sentidoThousand == 'r') {
+			sentidoThousand = '4';
+		}
+
 		//Calculamos el centro
 		calculaCentro();
 

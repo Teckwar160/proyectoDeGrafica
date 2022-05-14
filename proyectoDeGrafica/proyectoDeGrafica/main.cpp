@@ -314,20 +314,22 @@ int main()
 		printf("\n\nX: %f, Z: %f\n\n", thousandX, thousandZ);
 
 		//Barco 1 de la marina
-		model = modelaux;//glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-50.0f, 0.0f, -100.0f));
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-250.0f, 5.0f, -125.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//marina.RenderModel();
+		marina.RenderModel();
 
 		//Barco 2 de la marina
-		model = modelaux;//glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -100.0f));
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-250.0f, 5.0f, -75.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//marina.RenderModel();
+		marina.RenderModel();
 
 		// Cofre del tesoro
 		model = modelaux;
