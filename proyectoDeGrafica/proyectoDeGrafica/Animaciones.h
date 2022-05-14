@@ -17,14 +17,23 @@ typedef struct _frame
 }FRAME;
 
 //Variables que se usaran en el main
+
+//Thousand
 extern float thousandX;
 extern float thousandZ;
 extern float giroThousand;
+
+//Laboon
+extern float laboonX;
+extern float laboonZ;
+extern float anguloLaboon;
 
 
 void controlDeTeclas(bool* keys, GLfloat delta);
 
 //Animación de Thousand
 void animaThousand(GLfloat delta);
+
+void animaLaboon(GLfloat delta);
 
 int getCameraType();

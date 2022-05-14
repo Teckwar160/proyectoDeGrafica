@@ -661,9 +661,11 @@ int main()
 		reverseMountain.RenderModel();
 
 		//Laboon
+		animaLaboon(deltaTime);
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-300.0f, -8.0f, 100.0f));
+		model = glm::translate(model, glm::vec3(laboonX, -8.0f, laboonZ));
 		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(anguloLaboon), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));

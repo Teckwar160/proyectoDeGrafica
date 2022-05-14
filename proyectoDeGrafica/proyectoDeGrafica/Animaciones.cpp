@@ -16,14 +16,22 @@ bool play = false;
 int playIndex = 0;
 
 //Variables para thousand
-float thousandX = -170;
-float thousandZ = 200;
+float thousandX = -170.0f;
+float thousandZ = 200.0f;
 float giroThousand = 0;
 char sentidoThousand = 'u';
-float velocidadThousand = 0.5;
+float velocidadThousand = 0.5f;
 bool  comienzaAnimacionThousand = false;
 int c1 = 0, c2 = 0;
 bool banderaCentro = false;
+
+//Vaariables para Laboon
+float laboonX = -300.0f;
+float laboonZ = 80.0f;
+float velocidadLaboon = 0.5f;
+char sentidoLaboon = 'u';
+float anguloLaboon = 0.0f;
+
 
 int getCameraType() {
 	return cameraType;
@@ -338,5 +346,36 @@ void animaThousand(GLfloat delta) {
 
 	}
 
+
+}
+
+void animaLaboon(GLfloat delta) {
+
+	switch (sentidoLaboon) {
+		case 'u':
+			laboonX += velocidadLaboon * delta;
+			
+			if (anguloLaboon < 0.0f) {
+				anguloLaboon += 0.1 * delta;
+			}
+
+			break;
+		case 'd':
+			laboonX -= velocidadLaboon * delta;
+
+			if (anguloLaboon > -45.0f) {
+				anguloLaboon -= 0.1 * delta;
+			}
+
+			break;
+	}
+
+	if (laboonX > -220.0f) {
+		sentidoLaboon = 'd';
+	}
+
+	if (laboonX < -300.0f) {
+		sentidoLaboon = 'u';
+	}
 
 }
