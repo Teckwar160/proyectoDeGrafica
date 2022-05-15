@@ -300,11 +300,11 @@ void animaLaboon(GLfloat delta) {
 void keyFrameMetaKnight() {
 	int i = 0;
 	//pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f, 0.0f, 0.0f); //Posicón final
-	pMetaKnight.set(-60.0f, 60.5f, 240.0f, 0.0f, -90.0f, 0.0f);
+	pMetaKnight.set(-60.0f, 61.8f, 240.0f, 0.0f, -90.0f, 0.0f);
 
 	//Tramo de bajada
 	pMetaKnight.KeyFrame[i].x = -60.0f;
-	pMetaKnight.KeyFrame[i].y = 60.5f;
+	pMetaKnight.KeyFrame[i].y = 61.8f;
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
 	pMetaKnight.KeyFrame[i].giroY = -90.0f;
@@ -320,7 +320,7 @@ void keyFrameMetaKnight() {
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].y = 21.3f;
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
 	pMetaKnight.KeyFrame[i].giroY = -90.0f;
@@ -329,16 +329,16 @@ void keyFrameMetaKnight() {
 
 	//Voltea hacia el barco
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].y = 21.03f;
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
 	pMetaKnight.KeyFrame[i].giroY = -180.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
-	//Comeinza ataque
+	//Comienza ataque
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].y = 21.3f;
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = -90.0f;
 	pMetaKnight.KeyFrame[i].giroY = -180.0f;
@@ -346,20 +346,22 @@ void keyFrameMetaKnight() {
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].y = 20.0f;
-	pMetaKnight.KeyFrame[i].z = 190.0f;
+	pMetaKnight.KeyFrame[i].y = 21.3f;
+	pMetaKnight.KeyFrame[i].z = 195.0f;
 	pMetaKnight.KeyFrame[i].giroX = -90.0f;
-	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	pMetaKnight.KeyFrame[i].giroY = -360.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
-	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].y = 20.0f;
-	pMetaKnight.KeyFrame[i].z = 190.0f;
-	pMetaKnight.KeyFrame[i].giroX = -90.0f;
-	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	//Se acomoda en pose
+	pMetaKnight.KeyFrame[i].x = -160.0f;
+	pMetaKnight.KeyFrame[i].y = 21.3f;
+	pMetaKnight.KeyFrame[i].z = 195.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -90.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
+
 
 	pMetaKnight.FrameIndex = i;
 }
