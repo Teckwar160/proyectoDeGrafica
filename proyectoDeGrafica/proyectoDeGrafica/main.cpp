@@ -187,6 +187,9 @@ int main()
 	GLuint uniformColor = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 1000.0f);
 	float ang = 0.0f;
+
+	//Animaciones por Keyframe
+	keyFrameMetaKnight();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -206,27 +209,27 @@ int main()
 		glfwPollEvents();
 
 		//Cambio de camara
-		switch ( getCameraType() )
+		switch (getCameraType())
 		{
-			case 3:
-				camera = &cameraFree;
-				camera->keyControl(mainWindow.getsKeys(), deltaTime);
-				camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-				break;
+		case 3:
+			camera = &cameraFree;
+			camera->keyControl(mainWindow.getsKeys(), deltaTime);
+			camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+			break;
 
-			case 2:
-				camera = &cameraAerial;
-				camera->keyControl(mainWindow.getsKeys(), deltaTime);
-				camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-				break;
+		case 2:
+			camera = &cameraAerial;
+			camera->keyControl(mainWindow.getsKeys(), deltaTime);
+			camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+			break;
 
-			default:
-				Luffy.keyControl(mainWindow.getsKeys(), deltaTime);
-				Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-				camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
-				//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
-				camera = &camera3th;
-				break;
+		default:
+			Luffy.keyControl(mainWindow.getsKeys(), deltaTime);
+			Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+			camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
+			//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
+			camera = &camera3th;
+			break;
 		}
 
 		//Teclas prueba
@@ -236,7 +239,7 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		
+
 		if (day) {
 			skybox_day.DrawSkybox(camera->calculateViewMatrix(), projection);
 		}
@@ -277,7 +280,7 @@ int main()
 		glm::mat4 cabezaAux(1.0);
 		glm::mat4 cuerpoAux(1.0);
 		glm::mat4 brazoRAux(1.0);
-		
+
 		glm::mat4 frankyAux(1.0);
 		glm::mat4 zoroAux(1.0);
 		glm::mat4 brogyAux(1.0);
@@ -311,8 +314,6 @@ int main()
 		//thousandSunny.RenderModel();
 		thousandSunnyDestruido.RenderModel();
 
-		printf("\n\nX: %f, Z: %f\n\n", thousandX, thousandZ);
-
 		//Barco 1 de la marina
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-250.0f, 5.0f, -125.0f));
@@ -338,9 +339,11 @@ int main()
 		treasureTexture.UseTexture();
 		meshList[1]->RenderMesh();
 
-		// Meta Knight
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, 17.0f, 8.0f));
+		// MetaKnight
+		animate(KeyFrameMetaKnight, &metaKnightX, &metaKnightZ, &giroMetaKnight, &iCSMetaKnight, iMSMetaKnight, &pIMetaKnight, fIMetaKnight, &comienzaAnimacionMetaKnight);
+		model = glm::mat4(1.0);//modelaux;
+		model = glm::translate(model, glm::vec3(metaKnightX, 20.0f, metaKnightZ));
+		model = glm::rotate(model, glm::radians(giroMetaKnight), glm::vec3(0.0f, 1.0f, 0.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		metaKnight.RenderModel();
@@ -348,7 +351,6 @@ int main()
 		//Sanji
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-2.0f, 13.5f, -7.0f));
-		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sanji.RenderModel();
@@ -356,7 +358,6 @@ int main()
 		//Brook
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-3.0f, 12.5f, 5.0f));
-		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		brook.RenderModel();
@@ -380,8 +381,6 @@ int main()
 		Usopp.RenderModel();
 
 		// Cuerpo Luffy
-		//model = modelaux;
-		//model = glm::translate(model, glm::vec3(-1.0f, 13.8f, 5.0f));
 		model = glm::mat4(1.0);
 		model = glm::translate(model, Luffy.getAvatarPosition());
 		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
@@ -396,24 +395,19 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 0.16f, 0.0f));
 		cabezaAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[3]->RenderMesh();
 
 		// Sombrero Luffy
 		model = cabezaAux;
 		model = glm::translate(model, glm::vec3(0.0f, 0.24f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[4]->RenderMesh();
-
-		//ang < 180 ? ang += 0.1 : ang = 0;
 
 		// Brazo L Luffy
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(0.18f, 0.1f, 0.0f));
 		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[5]->RenderMesh();
 
 		// Brazo R1 Luffy
@@ -422,43 +416,32 @@ int main()
 		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		brazoRAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[8]->RenderMesh();
-
-		//esc < 5.0f ? esc += 0.01f : esc = 1.0f;
 
 		// Brazo R2 Luffy
 		model = brazoRAux;
 		model = glm::translate(model, glm::vec3(0.0f, -0.14f, 0.0f));
 		//model = glm::scale(model, glm::vec3(1.0f, esc, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[9]->RenderMesh();
 
 		// Pierna L Luffy
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(0.08f, -0.2f, 0.0f));
-		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[6]->RenderMesh();
 
 		// Pierna R Luffy
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(-0.08f, -0.2f, 0.0f));
-		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[7]->RenderMesh();
 
 		// Entre pierna Luffy
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(0.0f, -0.2f, 0.0f));
-		//model = glm::rotate(model, -ang * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//luffyTexture.UseTexture();
 		meshList[10]->RenderMesh();
-
 
 		// Franky
 		model = modelaux;
@@ -471,28 +454,24 @@ int main()
 		// Franky Brazo izq
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(0.7f, 0.6f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_BL.RenderModel();
 
 		// Franky Brazo der
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(-0.6f, 0.6f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_BR.RenderModel();
 
 		// Franky Pierna izq
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(0.2f, 0.0f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_PL.RenderModel();
 
 		// Franky Pierna der
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(-0.1f, 0.0f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_PR.RenderModel();
 
@@ -585,14 +564,14 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy.RenderModel();
 
-		// Brogy Brazo izq
+		//Brogy Brazo izq
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
 		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_BL.RenderModel();
 
-		// Brogy Brazo der
+		//Brogy Brazo der
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
 		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -643,14 +622,14 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PL.RenderModel();
 
-		// Dorry Pierna der
+		//Dorry Pierna der
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(-0.1f, -0.5f, 0.0f));
 		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PR.RenderModel();
 
-		// Reverse Mountain
+		//Reverse Mountain
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -11.0f, -400.0f));
 		modelaux = model;
@@ -679,7 +658,7 @@ int main()
 
 		toffset = glm::vec2(toffsetu, toffsetv);
 
-		// Piso
+		//Piso
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 10.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
