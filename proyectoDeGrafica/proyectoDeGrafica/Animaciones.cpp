@@ -31,11 +31,13 @@ void personaje::reset() {
 	this->bandera = false;
 }
 
-void personaje::set(float x, float y, float z, float giro) {
+void personaje::set(float x, float y, float z, float giroX, float giroY, float giroZ) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
-	this->giro = giro;
+	this->giroX = giroX;
+	this->giroY = giroY;
+	this->giroZ = giroZ;
 }
 
 //Personajes
@@ -51,7 +53,9 @@ void resetElements(personaje* p)
 {
 	p-> x = p-> KeyFrame[0].x;
 	p-> z = p-> KeyFrame[0].z;
-	p-> giro = p-> KeyFrame[0].giro;
+	p-> giroX = p-> KeyFrame[0].giroX;
+	p->giroY = p->KeyFrame[0].giroY;
+	p->giroZ = p->KeyFrame[0].giroZ;
 	p->anguloBrazoDerecho = p->KeyFrame[0].anguloBrazoDerecho;
 	p->anguloBrazoIzquierdo = p->KeyFrame[0].anguloBrazoIzquierdo;
 	p->anguloPiernaDerecha = p->KeyFrame[0].anguloPiernaDerecha;
@@ -63,7 +67,9 @@ void interpolation(personaje* p)
 {
 	p-> KeyFrame[p-> playIndex].incremento_x = (p-> KeyFrame[p-> playIndex + 1].x - p-> KeyFrame[p-> playIndex].x) / p-> i_max_steps;
 	p-> KeyFrame[p-> playIndex].incremento_z = (p-> KeyFrame[p-> playIndex + 1].z - p-> KeyFrame[p-> playIndex].z) / p-> i_max_steps;
-	p-> KeyFrame[p-> playIndex].incremento_giro = (p-> KeyFrame[p-> playIndex + 1].giro - p-> KeyFrame[p-> playIndex].giro) / p-> i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_giroX = (p->KeyFrame[p->playIndex + 1].giroX - p->KeyFrame[p->playIndex].giroX) / p->i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_giroY = (p->KeyFrame[p->playIndex + 1].giroY - p->KeyFrame[p->playIndex].giroY) / p->i_max_steps;
+	p-> KeyFrame[p-> playIndex].incremento_giroZ = (p-> KeyFrame[p-> playIndex + 1].giroZ - p-> KeyFrame[p-> playIndex].giroZ) / p-> i_max_steps;
 	p->KeyFrame[p->playIndex].incremento_anguloBrazoDerecho = (p->KeyFrame[p->playIndex + 1].anguloBrazoDerecho - p->KeyFrame[p->playIndex].anguloBrazoDerecho) / p->i_max_steps;
 	p->KeyFrame[p->playIndex].incremento_anguloBrazoIzquierdo = (p->KeyFrame[p->playIndex + 1].anguloBrazoIzquierdo - p->KeyFrame[p->playIndex].anguloBrazoIzquierdo) / p->i_max_steps;
 	p->KeyFrame[p->playIndex].incremento_anguloPiernaDerecha = (p->KeyFrame[p->playIndex + 1].anguloPiernaDerecha - p->KeyFrame[p->playIndex].anguloPiernaDerecha) / p->i_max_steps;
@@ -88,7 +94,9 @@ void animate(personaje *p) {
 		else {
 			p->x += p->KeyFrame[p-> playIndex].incremento_x;
 			p->z += p->KeyFrame[p -> playIndex].incremento_z;
-			p->giro += p->KeyFrame[ p-> playIndex].incremento_giro;
+			p->giroX += p->KeyFrame[ p-> playIndex].incremento_giroX;
+			p->giroY += p->KeyFrame[p->playIndex].incremento_giroY;
+			p->giroZ += p->KeyFrame[p->playIndex].incremento_giroZ;
 			p->anguloBrazoDerecho += p->KeyFrame[p->playIndex].incremento_anguloBrazoDerecho;
 			p->anguloBrazoIzquierdo += p->KeyFrame[p->playIndex].incremento_anguloBrazoIzquierdo;
 			p->anguloPiernaDerecha += p->KeyFrame[p->playIndex].incremento_anguloPiernaDerecha;
@@ -288,21 +296,27 @@ void animaLaboon(GLfloat delta) {
 
 void keyFrameMetaKnight() {
 	int i = 0;
-	pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f);
+	pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f, 0.0f, 0.0f);
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
 	pMetaKnight.KeyFrame[i].z = 200.0f;
-	pMetaKnight.KeyFrame[i].giro = 0.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = 0.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
 	pMetaKnight.KeyFrame[i].z = 220.0f;
-	pMetaKnight.KeyFrame[i].giro = 0.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = 0.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 90.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
 	pMetaKnight.KeyFrame[i].z = 300.0f;
-	pMetaKnight.KeyFrame[i].giro = 45.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = 0.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
 	pMetaKnight.FrameIndex = i;
@@ -310,12 +324,12 @@ void keyFrameMetaKnight() {
 
 void keyFrameDorry() {
 	int i = 0;
-	pDorry.set(40.0f, -2.0f, 0.0f, 180.0f);
+	pDorry.set(40.0f, -2.0f, 0.0f, 0.0f, 180.0f, 0.0f);
 
 	pDorry.KeyFrame[i].x = 40.0f;
 	pDorry.KeyFrame[i].y = -2.0f;
 	pDorry.KeyFrame[i].z = 0.0f;
-	pDorry.KeyFrame[i].giro = 180.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
 	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
 	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
 	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
@@ -325,7 +339,7 @@ void keyFrameDorry() {
 	pDorry.KeyFrame[i].x = 40.0f;
 	pDorry.KeyFrame[i].y = -2.0f;
 	pDorry.KeyFrame[i].z = 0.0f;
-	pDorry.KeyFrame[i].giro = 180.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
 	pDorry.KeyFrame[i].anguloBrazoDerecho = -45.0f;
 	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
 	pDorry.KeyFrame[i].anguloPiernaDerecha = -45.0f;

@@ -345,7 +345,9 @@ int main()
 
 		model = glm::mat4(1.0);//modelaux;
 		model = glm::translate(model, glm::vec3(pMetaKnight.x, pMetaKnight.y, pMetaKnight.z));
-		model = glm::rotate(model, glm::radians(pMetaKnight.giro), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pMetaKnight.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pMetaKnight.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pMetaKnight.giroZ), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -599,7 +601,7 @@ int main()
 		animate(&pDorry);
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(pDorry.x, pDorry.y, pDorry.z));
-		model = glm::rotate(model, glm::radians(pDorry.giro), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pDorry.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		dorryAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));

@@ -13,8 +13,12 @@ typedef struct _frame
 	float incremento_y;
 	float z;
 	float incremento_z;
-	float giro;
-	float incremento_giro;
+	float giroX;
+	float incremento_giroX;
+	float giroY;
+	float incremento_giroY;
+	float giroZ;
+	float incremento_giroZ;
 
 	//Variables para cuerpos complejos
 	float anguloBrazoDerecho;
@@ -46,7 +50,9 @@ class personaje {
 		float x = 0;
 		float z = 0;
 		float y = 0;
-		float giro = 0;
+		float giroX = 0;
+		float giroY = 0;
+		float giroZ = 0;
 
 		//Atributos para cuerpos complejos
 		float anguloBrazoDerecho = 0;
@@ -59,7 +65,7 @@ class personaje {
 		void reset();
 
 		//Método encargado de definir el estado inicial del personaje
-		void set(float x, float y, float z, float giro);
+		void set(float x, float y, float z, float giroX, float giroY, float giroZ);
 };
 
 //Variables que se usaran en el main
