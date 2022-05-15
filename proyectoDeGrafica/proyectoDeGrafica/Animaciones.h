@@ -16,6 +16,17 @@ typedef struct _frame
 	float giro;
 	float incremento_giro;
 
+	//Variables para cuerpos complejos
+	float anguloBrazoDerecho;
+	float incremento_anguloBrazoDerecho;
+	float anguloBrazoIzquierdo;
+	float incremento_anguloBrazoIzquierdo;
+	float anguloPiernaDerecha;
+	float incremento_anguloPiernaDerecha;
+	float anguloPiernaIzquierda;
+	float incremento_anguloPiernaIzquierda;
+
+
 }FRAME;
 
 #define MAX_FRAMES 200
@@ -38,6 +49,11 @@ class personaje {
 		float giro = 0;
 
 		//Atributos para cuerpos complejos
+		float anguloBrazoDerecho = 0;
+		float anguloBrazoIzquierdo = 0;
+		float anguloPiernaDerecha = 0;
+		float anguloPiernaIzquierda = 0;
+
 
 		//Método encargada de resetear atributos para repetir la animación
 		void reset();
@@ -58,8 +74,9 @@ extern float laboonX;
 extern float laboonZ;
 extern float anguloLaboon;
 
-//Meta Knight
+//Personajes
 extern personaje pMetaKnight;
+extern personaje pDorry;
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
@@ -72,6 +89,9 @@ void animaLaboon(GLfloat delta);
 
 //Función encargada de definir la aniamción de MetaKnight
 void keyFrameMetaKnight();
+
+//Función encargada de definir la aniamción de Dorry
+void keyFrameDorry();
 
 //Función encargada de ejecutar la animación por KeyFrames de un personaje
 void animate(personaje *p);

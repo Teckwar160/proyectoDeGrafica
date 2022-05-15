@@ -38,8 +38,9 @@ void personaje::set(float x, float y, float z, float giro) {
 	this->giro = giro;
 }
 
-//Variable para Meta Knight
+//Personajes
 personaje pMetaKnight;
+personaje pDorry;
 
 
 int getCameraType() {
@@ -51,6 +52,11 @@ void resetElements(personaje* p)
 	p-> x = p-> KeyFrame[0].x;
 	p-> z = p-> KeyFrame[0].z;
 	p-> giro = p-> KeyFrame[0].giro;
+	p->anguloBrazoDerecho = p->KeyFrame[0].anguloBrazoDerecho;
+	p->anguloBrazoIzquierdo = p->KeyFrame[0].anguloBrazoIzquierdo;
+	p->anguloPiernaDerecha = p->KeyFrame[0].anguloPiernaDerecha;
+	p->anguloPiernaIzquierda = p->KeyFrame[0].anguloPiernaIzquierda;
+
 }
 
 void interpolation(personaje* p)
@@ -58,6 +64,10 @@ void interpolation(personaje* p)
 	p-> KeyFrame[p-> playIndex].incremento_x = (p-> KeyFrame[p-> playIndex + 1].x - p-> KeyFrame[p-> playIndex].x) / p-> i_max_steps;
 	p-> KeyFrame[p-> playIndex].incremento_z = (p-> KeyFrame[p-> playIndex + 1].z - p-> KeyFrame[p-> playIndex].z) / p-> i_max_steps;
 	p-> KeyFrame[p-> playIndex].incremento_giro = (p-> KeyFrame[p-> playIndex + 1].giro - p-> KeyFrame[p-> playIndex].giro) / p-> i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_anguloBrazoDerecho = (p->KeyFrame[p->playIndex + 1].anguloBrazoDerecho - p->KeyFrame[p->playIndex].anguloBrazoDerecho) / p->i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_anguloBrazoIzquierdo = (p->KeyFrame[p->playIndex + 1].anguloBrazoIzquierdo - p->KeyFrame[p->playIndex].anguloBrazoIzquierdo) / p->i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_anguloPiernaDerecha = (p->KeyFrame[p->playIndex + 1].anguloPiernaDerecha - p->KeyFrame[p->playIndex].anguloPiernaDerecha) / p->i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_anguloPiernaIzquierda = (p->KeyFrame[p->playIndex + 1].anguloPiernaIzquierda - p->KeyFrame[p->playIndex].anguloPiernaIzquierda) / p->i_max_steps;
 
 }
 
@@ -79,6 +89,11 @@ void animate(personaje *p) {
 			p->x += p->KeyFrame[p-> playIndex].incremento_x;
 			p->z += p->KeyFrame[p -> playIndex].incremento_z;
 			p->giro += p->KeyFrame[ p-> playIndex].incremento_giro;
+			p->anguloBrazoDerecho += p->KeyFrame[p->playIndex].incremento_anguloBrazoDerecho;
+			p->anguloBrazoIzquierdo += p->KeyFrame[p->playIndex].incremento_anguloBrazoIzquierdo;
+			p->anguloPiernaDerecha += p->KeyFrame[p->playIndex].incremento_anguloPiernaDerecha;
+			p->anguloPiernaIzquierda += p->KeyFrame[p->playIndex].incremento_anguloPiernaIzquierda;
+
 			(p-> i_curr_steps)++;
 		}
 	}
@@ -96,8 +111,23 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 		}
 
 	}
+
+	//Dorry
+	if (keys[GLFW_KEY_O]) {
+		if (pDorry.bandera) {
+			if (pDorry.play == false && pDorry.FrameIndex > 1) {
+				resetElements(&pDorry);
+				interpolation(&pDorry);
+				pDorry.reset();
+			}
+		}
+
+	}
+
+	//Activador de animaciones por keyFrame
 	if (keys[GLFW_KEY_K]) {
 		pMetaKnight.bandera = true;
+		pDorry.bandera = true;
 	}
 
 	// Control de cámaras
@@ -260,9 +290,9 @@ void keyFrameMetaKnight() {
 	int i = 0;
 	pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f);
 
-	pMetaKnight.KeyFrame[0].x = -170.0f;
-	pMetaKnight.KeyFrame[0].z = 200.0f;
-	pMetaKnight.KeyFrame[0].giro = 0.0f;
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].z = 200.0f;
+	pMetaKnight.KeyFrame[i].giro = 0.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
@@ -276,4 +306,33 @@ void keyFrameMetaKnight() {
 	i++;
 
 	pMetaKnight.FrameIndex = i;
+}
+
+void keyFrameDorry() {
+	int i = 0;
+	pDorry.set(40.0f, -2.0f, 0.0f, 180.0f);
+
+	pDorry.KeyFrame[i].x = 40.0f;
+	pDorry.KeyFrame[i].y = -2.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giro = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 40.0f;
+	pDorry.KeyFrame[i].y = -2.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giro = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = -45.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -20.0f;
+
+	i++;
+
+	pDorry.FrameIndex = i;
+
 }

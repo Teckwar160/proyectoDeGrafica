@@ -190,6 +190,7 @@ int main()
 
 	//Animaciones por Keyframe
 	keyFrameMetaKnight();
+	keyFrameDorry();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -595,9 +596,10 @@ int main()
 		Brogy_PR.RenderModel();
 
 		// Dorry
+		animate(&pDorry);
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(40.0f, -2.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(pDorry.x, pDorry.y, pDorry.z));
+		model = glm::rotate(model, glm::radians(pDorry.giro), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		dorryAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -606,28 +608,28 @@ int main()
 		// Dorry Brazo izq
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pDorry.anguloBrazoIzquierdo), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_BL.RenderModel();
 
 		// Dorry Brazo der
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pDorry.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_BR.RenderModel();
 
 		// Dorry Pierna izq
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(0.2f, -0.5f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pDorry.anguloPiernaIzquierda), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PL.RenderModel();
 
 		//Dorry Pierna der
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(-0.1f, -0.5f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pDorry.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PR.RenderModel();
 
