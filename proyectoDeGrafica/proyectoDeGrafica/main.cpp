@@ -191,6 +191,7 @@ int main()
 	//Animaciones por Keyframe
 	keyFrameMetaKnight();
 	keyFrameDorry();
+	keyFrameBrogy();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -569,8 +570,10 @@ int main()
 		Carue_ft.RenderModel();
 
 		// Brogy
+		animate(&pBrogy);
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-20.0f, -2.0f, -50.0f));
+		model = glm::translate(model, glm::vec3(pBrogy.x, pBrogy.y, pBrogy.z));
+		model = glm::rotate(model, glm::radians(pBrogy.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		brogyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -579,28 +582,28 @@ int main()
 		//Brogy Brazo izq
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pBrogy.anguloBrazoIzquierdo), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_BL.RenderModel();
 
 		//Brogy Brazo der
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pBrogy.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_BR.RenderModel();
 
 		// Brogy Pierna izq
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(0.2f, -0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pBrogy.anguloPiernaIzquierda), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_PL.RenderModel();
 
 		// Brogy Pierna der
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pBrogy.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_PR.RenderModel();
 

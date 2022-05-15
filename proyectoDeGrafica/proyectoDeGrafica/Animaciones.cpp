@@ -43,6 +43,7 @@ void personaje::set(float x, float y, float z, float giroX, float giroY, float g
 //Personajes
 personaje pMetaKnight;
 personaje pDorry;
+personaje pBrogy;
 
 
 int getCameraType() {
@@ -123,7 +124,7 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 
 	}
 
-	//Dorry
+	//Dorry && Brogy
 	if (keys[GLFW_KEY_O]) {
 		if (pDorry.bandera) {
 			if (pDorry.play == false && pDorry.FrameIndex > 1) {
@@ -133,12 +134,21 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 			}
 		}
 
+		if (pBrogy.bandera) {
+			if (pBrogy.play == false && pBrogy.FrameIndex > 1) {
+				resetElements(&pBrogy);
+				interpolation(&pBrogy);
+				pBrogy.reset();
+			}
+		}
+
 	}
 
 	//Activador de animaciones por keyFrame
 	if (keys[GLFW_KEY_K]) {
 		pMetaKnight.bandera = true;
 		pDorry.bandera = true;
+		pBrogy.bandera = true;
 	}
 
 	// Control de cámaras
@@ -299,7 +309,6 @@ void animaLaboon(GLfloat delta) {
 
 void keyFrameMetaKnight() {
 	int i = 0;
-	//pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f, 0.0f, 0.0f); //Posicón final
 	pMetaKnight.set(-60.0f, 61.8f, 240.0f, 0.0f, -90.0f, 0.0f);
 
 	//Tramo de bajada
@@ -368,11 +377,11 @@ void keyFrameMetaKnight() {
 
 void keyFrameDorry() {
 	int i = 0;
-	pDorry.set(40.0f, -2.0f, 0.0f, 0.0f, 180.0f, 0.0f);
+	pDorry.set(10.0f, 30.0f, 60.0f, 0.0f, 180.0f, 0.0f);
 
-	pDorry.KeyFrame[i].x = 40.0f;
-	pDorry.KeyFrame[i].y = -2.0f;
-	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 60.0f;
 	pDorry.KeyFrame[i].giroY = 180.0f;
 	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
 	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
@@ -380,17 +389,86 @@ void keyFrameDorry() {
 	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
 	i++;
 
-	pDorry.KeyFrame[i].x = 40.0f;
-	pDorry.KeyFrame[i].y = -2.0f;
-	pDorry.KeyFrame[i].z = 0.0f;
+	//Caminar
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 40.0f;
 	pDorry.KeyFrame[i].giroY = 180.0f;
 	pDorry.KeyFrame[i].anguloBrazoDerecho = -45.0f;
 	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
 	pDorry.KeyFrame[i].anguloPiernaDerecha = -45.0f;
-	pDorry.KeyFrame[i].anguloPiernaIzquierda = -20.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
 
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = -45.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 40.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Ataque con espada
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 225.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = -20.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 225.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
 	i++;
 
 	pDorry.FrameIndex = i;
 
+}
+
+void keyFrameBrogy() {
+	int i = 0;
+
+	pBrogy.set(-20.0f, -2.0f, -50.0f, 0.0f, 0.0f, 0.0f); 
+
+	pBrogy.KeyFrame[i].x = -20.0f;
+	pBrogy.KeyFrame[i].y = -2.0f;
+	pBrogy.KeyFrame[i].z = -50.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = -20.0f;
+	pBrogy.KeyFrame[i].y = -2.0f;
+	pBrogy.KeyFrame[i].z = -50.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = -45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pBrogy.FrameIndex = i;
 }
