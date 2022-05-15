@@ -312,8 +312,15 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//thousandSunny.RenderModel();
-		thousandSunnyDestruido.RenderModel();
+
+		//Cambio de modelo
+		if (pMetaKnight.z > 200) {
+			thousandSunny.RenderModel();
+		}
+		else {
+			thousandSunnyDestruido.RenderModel();
+		}
+		
 
 		//Barco 1 de la marina
 		model = glm::mat4(1.0);
@@ -348,7 +355,7 @@ int main()
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroZ), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
+		//model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		metaKnight.RenderModel();

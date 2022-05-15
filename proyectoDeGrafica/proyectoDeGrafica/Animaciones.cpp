@@ -52,6 +52,7 @@ int getCameraType() {
 void resetElements(personaje* p)
 {
 	p-> x = p-> KeyFrame[0].x;
+	p->y = p->KeyFrame[0].y;
 	p-> z = p-> KeyFrame[0].z;
 	p-> giroX = p-> KeyFrame[0].giroX;
 	p->giroY = p->KeyFrame[0].giroY;
@@ -66,6 +67,7 @@ void resetElements(personaje* p)
 void interpolation(personaje* p)
 {
 	p-> KeyFrame[p-> playIndex].incremento_x = (p-> KeyFrame[p-> playIndex + 1].x - p-> KeyFrame[p-> playIndex].x) / p-> i_max_steps;
+	p->KeyFrame[p->playIndex].incremento_y = (p->KeyFrame[p->playIndex + 1].y - p->KeyFrame[p->playIndex].y) / p->i_max_steps;
 	p-> KeyFrame[p-> playIndex].incremento_z = (p-> KeyFrame[p-> playIndex + 1].z - p-> KeyFrame[p-> playIndex].z) / p-> i_max_steps;
 	p->KeyFrame[p->playIndex].incremento_giroX = (p->KeyFrame[p->playIndex + 1].giroX - p->KeyFrame[p->playIndex].giroX) / p->i_max_steps;
 	p->KeyFrame[p->playIndex].incremento_giroY = (p->KeyFrame[p->playIndex + 1].giroY - p->KeyFrame[p->playIndex].giroY) / p->i_max_steps;
@@ -93,6 +95,7 @@ void animate(personaje *p) {
 		}
 		else {
 			p->x += p->KeyFrame[p-> playIndex].incremento_x;
+			p->y += p->KeyFrame[p->playIndex].incremento_y;
 			p->z += p->KeyFrame[p -> playIndex].incremento_z;
 			p->giroX += p->KeyFrame[ p-> playIndex].incremento_giroX;
 			p->giroY += p->KeyFrame[p->playIndex].incremento_giroY;
@@ -296,26 +299,65 @@ void animaLaboon(GLfloat delta) {
 
 void keyFrameMetaKnight() {
 	int i = 0;
-	pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f, 0.0f, 0.0f);
+	//pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f, 0.0f, 0.0f); //Posicón final
+	pMetaKnight.set(-60.0f, 60.5f, 240.0f, 0.0f, -90.0f, 0.0f);
 
-	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].z = 200.0f;
+	//Tramo de bajada
+	pMetaKnight.KeyFrame[i].x = -60.0f;
+	pMetaKnight.KeyFrame[i].y = 60.5f;
+	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -90.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	pMetaKnight.KeyFrame[i].x = -115.0f;
+	pMetaKnight.KeyFrame[i].y = 40.25f;
+	pMetaKnight.KeyFrame[i].z = 240.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -90.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].z = 220.0f;
+	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = 0.0f;
-	pMetaKnight.KeyFrame[i].giroZ = 90.0f;
+	pMetaKnight.KeyFrame[i].giroY = -90.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	//Voltea hacia el barco
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].z = 240.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	//Comeinza ataque
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].z = 240.0f;
+	pMetaKnight.KeyFrame[i].giroX = -90.0f;
+	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
-	pMetaKnight.KeyFrame[i].z = 300.0f;
-	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = 0.0f;
+	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].z = 190.0f;
+	pMetaKnight.KeyFrame[i].giroX = -90.0f;
+	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].y = 20.0f;
+	pMetaKnight.KeyFrame[i].z = 190.0f;
+	pMetaKnight.KeyFrame[i].giroX = -90.0f;
+	pMetaKnight.KeyFrame[i].giroY = -180.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
