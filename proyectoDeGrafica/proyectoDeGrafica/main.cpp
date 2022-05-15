@@ -340,10 +340,12 @@ int main()
 		meshList[1]->RenderMesh();
 
 		// MetaKnight
-		animate(KeyFrameMetaKnight, &metaKnightX, &metaKnightZ, &giroMetaKnight, &iCSMetaKnight, iMSMetaKnight, &pIMetaKnight, fIMetaKnight, &comienzaAnimacionMetaKnight);
+		animate(&pMetaKnight);
+
 		model = glm::mat4(1.0);//modelaux;
-		model = glm::translate(model, glm::vec3(metaKnightX, 20.0f, metaKnightZ));
-		model = glm::rotate(model, glm::radians(giroMetaKnight), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(pMetaKnight.x, pMetaKnight.y, pMetaKnight.z));
+		model = glm::rotate(model, glm::radians(pMetaKnight.giro), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		metaKnight.RenderModel();

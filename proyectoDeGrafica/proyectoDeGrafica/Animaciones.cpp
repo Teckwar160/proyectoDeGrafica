@@ -22,59 +22,64 @@ char sentidoLaboon = 'u';
 float anguloLaboon = 0.0f;
 bool comienzaAnimacionLaboon = false;
 
-//Variables para Meta Knight
-FRAME KeyFrameMetaKnight[MAX_FRAMES];
-float metaKnightX = -170;
-float metaKnightZ = 200;
-float giroMetaKnight = 0;
-int iCSMetaKnight = 0;
-int fIMetaKnight = 0;// = 18;//5;
-int iMSMetaKnight = 200;
-int pIMetaKnight = 0;
-bool comienzaAnimacionMetaKnight = false;
-bool banderaMetaKnight = true;
+
+//Funciones de clase personaje
+void personaje::reset() {
+	this->play = true;
+	this->playIndex = 0;
+	this->i_curr_steps = 0;
+	this->bandera = false;
+}
+
+void personaje::set(float x, float y, float z, float giro) {
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->giro = giro;
+}
+
+//Variable para Meta Knight
+personaje pMetaKnight;
 
 
 int getCameraType() {
 	return cameraType;
 }
 
-
-void resetElements(FRAME *KeyFrame, float *x, float* z, float* giro)
+void resetElements(personaje* p)
 {
-	*x = KeyFrame[0].x;
-	*z = KeyFrame[0].z;
-	*giro = KeyFrame[0].giro;
+	p-> x = p-> KeyFrame[0].x;
+	p-> z = p-> KeyFrame[0].z;
+	p-> giro = p-> KeyFrame[0].giro;
 }
 
-void interpolation(FRAME *KeyFrame, int i_max_steps, int playIndex)
+void interpolation(personaje* p)
 {
-	KeyFrame[playIndex].incremento_x = (KeyFrame[playIndex + 1].x - KeyFrame[playIndex].x) / i_max_steps;
-	KeyFrame[playIndex].incremento_z = (KeyFrame[playIndex + 1].z - KeyFrame[playIndex].z) / i_max_steps;
-	KeyFrame[playIndex].incremento_giro = (KeyFrame[playIndex + 1].giro - KeyFrame[playIndex].giro) / i_max_steps;
+	p-> KeyFrame[p-> playIndex].incremento_x = (p-> KeyFrame[p-> playIndex + 1].x - p-> KeyFrame[p-> playIndex].x) / p-> i_max_steps;
+	p-> KeyFrame[p-> playIndex].incremento_z = (p-> KeyFrame[p-> playIndex + 1].z - p-> KeyFrame[p-> playIndex].z) / p-> i_max_steps;
+	p-> KeyFrame[p-> playIndex].incremento_giro = (p-> KeyFrame[p-> playIndex + 1].giro - p-> KeyFrame[p-> playIndex].giro) / p-> i_max_steps;
 
 }
 
+void animate(personaje *p) {
+	if (p-> play) {
+		if (p-> i_curr_steps >= p-> i_max_steps) {
+			(p-> playIndex)++;
 
-void animate(FRAME* KeyFrame, float* x, float* z, float* giro, int* i_curr_steps, int i_max_steps, int *playIndex, int FrameIndex, bool *play) {
-	if (*play) {
-		if (*i_curr_steps >= i_max_steps) {
-			(*playIndex)++;
-
-			if (*playIndex > FrameIndex - 2) {
-				*playIndex = 0;
-				*play = false;
+			if (p-> playIndex > p-> FrameIndex - 2) {
+				p-> playIndex = 0;
+				p-> play = false;
 			}
 			else {
-				*i_curr_steps = 0;
-				interpolation(KeyFrame, i_max_steps, *playIndex);
+				p-> i_curr_steps = 0;
+				interpolation(p);
 			}
 		}
 		else {
-			*x += KeyFrame[*playIndex].incremento_x;
-			*z += KeyFrame[*playIndex].incremento_z;
-			*giro += KeyFrame[*playIndex].incremento_giro;
-			(*i_curr_steps)++;
+			p->x += p->KeyFrame[p-> playIndex].incremento_x;
+			p->z += p->KeyFrame[p -> playIndex].incremento_z;
+			p->giro += p->KeyFrame[ p-> playIndex].incremento_giro;
+			(p-> i_curr_steps)++;
 		}
 	}
 }
@@ -82,22 +87,17 @@ void animate(FRAME* KeyFrame, float* x, float* z, float* giro, int* i_curr_steps
 void controlDeTeclas(bool* keys, GLfloat delta) {
 	//Meta Knight
 	if (keys[GLFW_KEY_M]) {
-		if (banderaMetaKnight) {
-			if (comienzaAnimacionMetaKnight == false && fIMetaKnight > 1) {
-				resetElements(KeyFrameMetaKnight, &metaKnightX, &metaKnightZ, &giroMetaKnight);
-
-				interpolation(KeyFrameMetaKnight, iMSMetaKnight, pIMetaKnight);
-				comienzaAnimacionMetaKnight = true;
-				pIMetaKnight = 0;
-				iCSMetaKnight = 0;
-				banderaMetaKnight = false;
+		if (pMetaKnight.bandera) {
+			if (pMetaKnight.play == false && pMetaKnight.FrameIndex > 1) {
+				resetElements(&pMetaKnight);
+				interpolation(&pMetaKnight);
+				pMetaKnight.reset();
 			}
 		}
 
 	}
-
 	if (keys[GLFW_KEY_K]) {
-		banderaMetaKnight = true;
+		pMetaKnight.bandera = true;
 	}
 
 	// Control de cámaras
@@ -127,25 +127,22 @@ void calculaCentro(){
 	//Calculamos el centro
 	if (banderaCentro) {
 		if (sentidoThousand == '1') {
-			c1 = thousandX + 100; //x
-			c2 = thousandZ;	 //y
-			//sentidoThousand = '1';
+			c1 = thousandX + 100; 
+			c2 = thousandZ;	 
 		}
 
 		if (sentidoThousand == '2') {
-			c1 = thousandX; //x
-			c2 = thousandZ - 100;	 //y
+			c1 = thousandX; 
+			c2 = thousandZ - 100;	 
 		}
 
 		if (sentidoThousand == '3') {
-			c1 = thousandX -100; //x
-			c2 = thousandZ;	 //y
+			c1 = thousandX -100; 
+			c2 = thousandZ;	 
 		}
 
 		//Evitamos que se vuelva a calcular
 		banderaCentro = false;
-
-
 	}
 }
 
@@ -261,24 +258,22 @@ void animaLaboon(GLfloat delta) {
 
 void keyFrameMetaKnight() {
 	int i = 0;
+	pMetaKnight.set(-170.0f, 20.0f, 200.0f, 0.0f);
 
-	//0
-	KeyFrameMetaKnight[0].x = -170.0f;
-	KeyFrameMetaKnight[0].z = 200.0f;
-	KeyFrameMetaKnight[0].giro = 0.0f;
+	pMetaKnight.KeyFrame[0].x = -170.0f;
+	pMetaKnight.KeyFrame[0].z = 200.0f;
+	pMetaKnight.KeyFrame[0].giro = 0.0f;
 	i++;
 
-	//1
-	KeyFrameMetaKnight[i].x = -170.0f;
-	KeyFrameMetaKnight[i].z = 220.0f;
-	KeyFrameMetaKnight[i].giro = 0.0f;
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].z = 220.0f;
+	pMetaKnight.KeyFrame[i].giro = 0.0f;
 	i++;
 
-	//2
-	KeyFrameMetaKnight[i].x = -170.0f;
-	KeyFrameMetaKnight[i].z = 300.0f;
-	KeyFrameMetaKnight[i].giro = 45.0f;
+	pMetaKnight.KeyFrame[i].x = -170.0f;
+	pMetaKnight.KeyFrame[i].z = 300.0f;
+	pMetaKnight.KeyFrame[i].giro = 45.0f;
 	i++;
 
-	fIMetaKnight = i;
+	pMetaKnight.FrameIndex = i;
 }
