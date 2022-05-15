@@ -431,11 +431,176 @@ void keyFrameDorry() {
 	pDorry.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
 	i++;
 
+	//Defensa
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 10.0f;
+	pDorry.KeyFrame[i].giroY = 225.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 67.5f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
 	pDorry.KeyFrame[i].x = 10.0f;
 	pDorry.KeyFrame[i].y = 30.0f;
 	pDorry.KeyFrame[i].z = 0.0f;
-	pDorry.KeyFrame[i].giroY = 225.0f;
-	pDorry.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pDorry.KeyFrame[i].giroY = 135.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 60.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 22.5f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -22.5f;
+	i++;
+
+	//Espera
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 135.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 60.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 135.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 60.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Retirada
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 0.0f;
+	pDorry.KeyFrame[i].giroY = 135.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 82.5f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 10.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -22.5f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Espera
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Saludo
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 28.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroX = 22.5f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 22.5f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 22.5f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Regreso
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 90.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 20.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 40.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 60.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 60.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 60.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pDorry.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pDorry.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pDorry.KeyFrame[i].x = 10.0f;
+	pDorry.KeyFrame[i].y = 30.0f;
+	pDorry.KeyFrame[i].z = 60.0f;
+	pDorry.KeyFrame[i].giroX = 0.0f;
+	pDorry.KeyFrame[i].giroY = 180.0f;
+	pDorry.KeyFrame[i].anguloBrazoDerecho = 0.0f;
 	pDorry.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
 	pDorry.KeyFrame[i].anguloPiernaDerecha = 0.0f;
 	pDorry.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
@@ -448,11 +613,11 @@ void keyFrameDorry() {
 void keyFrameBrogy() {
 	int i = 0;
 
-	pBrogy.set(-20.0f, -2.0f, -50.0f, 0.0f, 0.0f, 0.0f); 
+	pBrogy.set(0.0f, 30.0f, -100.0f, 0.0f, 0.0f, 0.0f); 
 
-	pBrogy.KeyFrame[i].x = -20.0f;
-	pBrogy.KeyFrame[i].y = -2.0f;
-	pBrogy.KeyFrame[i].z = -50.0f;
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -100.0f;
 	pBrogy.KeyFrame[i].giroY = 0.0f;
 	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
 	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
@@ -460,15 +625,221 @@ void keyFrameBrogy() {
 	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
 	i++;
 
-	pBrogy.KeyFrame[i].x = -20.0f;
-	pBrogy.KeyFrame[i].y = -2.0f;
-	pBrogy.KeyFrame[i].z = -50.0f;
+	//Caminar
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -80.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = -45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -60.0f;
 	pBrogy.KeyFrame[i].giroY = 0.0f;
 	pBrogy.KeyFrame[i].anguloBrazoDerecho = -45.0f;
 	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
 	pBrogy.KeyFrame[i].anguloPiernaDerecha = -45.0f;
 	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
 	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = -45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 90.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Espera
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = -45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 90.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Contra ataque
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = -45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = -20.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 112.5f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -50.0f;
+	pBrogy.KeyFrame[i].giroY = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 112.5f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 40.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = -20.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = -20.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Retirada
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 67.5f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = -20.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = 45.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 67.5f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = -20.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = -22.5f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 10.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Saludo
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 28.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroX = 22.5f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 22.5f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 22.5f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Regreso
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 90.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -40.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 180.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -60.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 180.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+	
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -80.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 180.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+	
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -100.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 180.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -100.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pBrogy.KeyFrame[i].x = 0.0f;
+	pBrogy.KeyFrame[i].y = 30.0f;
+	pBrogy.KeyFrame[i].z = -100.0f;
+	pBrogy.KeyFrame[i].giroX = 0.0f;
+	pBrogy.KeyFrame[i].giroY = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pBrogy.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pBrogy.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
 
 	pBrogy.FrameIndex = i;
 }

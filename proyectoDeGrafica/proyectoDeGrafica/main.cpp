@@ -574,6 +574,7 @@ int main()
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(pBrogy.x, pBrogy.y, pBrogy.z));
 		model = glm::rotate(model, glm::radians(pBrogy.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pBrogy.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		brogyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -612,6 +613,7 @@ int main()
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(pDorry.x, pDorry.y, pDorry.z));
 		model = glm::rotate(model, glm::radians(pDorry.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pDorry.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(20.0f, 20.0f, 20.0f));
 		dorryAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
