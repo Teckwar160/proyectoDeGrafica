@@ -120,7 +120,7 @@ int main()
 	cameraAerial = CameraAerial(glm::vec3(-170.0f, 100.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 	cameraAerial.setType(2);
 
-	cameraFree = Camera(glm::vec3(100.0f, 70.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
+	cameraFree = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 	cameraFree.setType(3);
 
 	plainTexture = Texture("Textures/plain.png");
@@ -185,6 +185,7 @@ int main()
 	keyFrameBrogy();
 	keyFrameCarue();
 	keyFrameVivi();
+	keyFrameZoro();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -489,8 +490,11 @@ int main()
 		Franky_PR.RenderModel();
 
 		// Zoro
+		animate(&pZoro);
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-1.0f, 11.2f, -4.0f));
+		model = glm::translate(model, glm::vec3(pZoro.x, pZoro.y, pZoro.z));
+		model = glm::rotate(model, glm::radians(pZoro.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(pZoro.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro.RenderModel();
@@ -498,28 +502,28 @@ int main()
 		// Zoro Brazo izq
 		model = zoroAux;
 		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pZoro.anguloBrazoIzquierdo), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_BL.RenderModel();
 
 		// Zoro Brazo der
 		model = zoroAux;
 		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pZoro.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_BR.RenderModel();
 
 		// Zoro Pierna izq
 		model = zoroAux;
 		model = glm::translate(model, glm::vec3(0.2f, -0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pZoro.anguloPiernaIzquierda), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_PL.RenderModel();
 
 		// Zoro Pierna der
 		model = zoroAux;
 		model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.0f));
-		model = glm::rotate(model, -glm::radians(ang), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pZoro.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_PR.RenderModel();
 

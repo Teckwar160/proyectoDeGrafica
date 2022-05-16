@@ -93,6 +93,7 @@ extern personaje pDorry;
 extern personaje pBrogy;
 extern personaje pCarue;
 extern personaje pVivi;
+extern personaje pZoro;
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
@@ -121,7 +122,11 @@ void keyFrameBrogy();
 //Función encargada de definir la animación de Carue
 void keyFrameCarue();
 
+//Función encargada de definir la animación de Vivi
 void keyFrameVivi();
+
+//Función encargada de definir la animación de Zoro
+void keyFrameZoro();
 
 //Función encargada de ejecutar la animación por KeyFrames de un personaje
 void animate(personaje *p);
