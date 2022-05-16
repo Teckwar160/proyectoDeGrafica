@@ -48,6 +48,9 @@ float anguloLava = 0.0f;
 float rotacionLava = 0.0f; // x
 bool volcanActivo = false;
 
+//Bandera para eviatr el reseteo de la pelea de lso gignates
+bool peleaActiva = false;
+
 //Funciones de clase personaje
 void personaje::reset() {
 	this->play = true;
@@ -158,26 +161,6 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 
 	}
 
-	//Dorry && Brogy
-	if (keys[GLFW_KEY_O]) {
-		if (pDorry.bandera) {
-			if (pDorry.play == false && pDorry.FrameIndex > 1) {
-				resetElements(&pDorry);
-				interpolation(&pDorry);
-				pDorry.reset();
-			}
-		}
-
-		if (pBrogy.bandera) {
-			if (pBrogy.play == false && pBrogy.FrameIndex > 1) {
-				resetElements(&pBrogy);
-				interpolation(&pBrogy);
-				pBrogy.reset();
-			}
-		}
-
-	}
-
 	if (keys[GLFW_KEY_Z]) {
 		if (pZoro.bandera) {
 			if (pZoro.play == false && pZoro.FrameIndex > 1) {
@@ -191,8 +174,6 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	//Activador de animaciones por keyFrame
 	if (keys[GLFW_KEY_K]) {
 		pMetaKnight.bandera = true;
-		pDorry.bandera = true;
-		pBrogy.bandera = true;
 		pCarue.bandera = true;
 		pVivi.bandera = true;
 		pZoro.bandera = true;
@@ -1486,4 +1467,32 @@ void keyFrameZoro() {
 	i++;
 
 	pZoro.FrameIndex = i;
+}
+
+void iniciaPelea() {
+	if (volcanActivo && !peleaActiva) {
+		if (pDorry.bandera) {
+			if (pDorry.play == false && pDorry.FrameIndex > 1) {
+				resetElements(&pDorry);
+				interpolation(&pDorry);
+				pDorry.reset();
+			}
+		}
+
+		if (pBrogy.bandera) {
+			if (pBrogy.play == false && pBrogy.FrameIndex > 1) {
+				resetElements(&pBrogy);
+				interpolation(&pBrogy);
+				pBrogy.reset();
+			}
+		}
+
+		pDorry.bandera = true;
+		pBrogy.bandera = true;
+		peleaActiva = true;
+
+	}
+	else if(!volcanActivo) {
+		peleaActiva = false;
+	}
 }

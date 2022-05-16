@@ -126,6 +126,9 @@ void keyFrameDorry();
 //Función encargada de definir la animación de Brogy
 void keyFrameBrogy();
 
+//Función encargada de emepzar la pelea de lso gigantes
+void iniciaPelea();
+
 //Función encargada de definir la animación de Carue
 void keyFrameCarue();
 

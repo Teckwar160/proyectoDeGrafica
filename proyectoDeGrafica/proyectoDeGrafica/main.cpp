@@ -573,6 +573,7 @@ int main()
 		littleGarden.RenderModel();
 
 		// Brogy
+		iniciaPelea();
 		animate(&pBrogy);
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(pBrogy.x, pBrogy.y, pBrogy.z));
