@@ -35,6 +35,18 @@ bool alto = false;
 bool paso = false;
 bool mediopaso = false;
 
+// Luces del volcan
+glm::vec3 lavaPosition1 = glm::vec3(-48.0f, 45.0f, 14.0f);
+glm::vec3 lavaPosition2 = glm::vec3(-48.0f, 45.0f, 14.0f);
+glm::vec3 lavaPosition3 = glm::vec3(-48.0f, 45.0f, 14.0f);
+float radio = 10.0f;
+glm::vec3 centro1 = glm::vec3(-48.0f, 45.0f, 14.0f + radio);
+glm::vec3 centro2 = glm::vec3(-48.0f + radio, 45.0f, 14.0f);
+glm::vec3 centro3 = glm::vec3(-48.0f - radio, 45.0f, 14.0f);
+bool iniciaErupcionVolcan = false;
+float anguloLava = 0.0f;
+float rotacionLava = 0.0f; // x
+bool volcanActivo = false;
 
 //Funciones de clase personaje
 void personaje::reset() {
@@ -426,11 +438,62 @@ void animaAtaqueLuffy(GLfloat delta)
 		}
 		else {
 			if (escalaBrazo > 1) escalaBrazo -= 2.5 * delta;
-			else if (anguloBrazoR < 0.0f) anguloBrazoR++;
+			else if (anguloBrazoR < 0.0f) {
+				anguloBrazoR++;
+				escalaBrazo = 1.0f;
+			}
 			else {
 				ataqueEspecial = false;
 				golpe = false;
 			}
+		}
+	}
+}
+
+
+void animaLava(GLfloat delta) {
+	if (iniciaErupcionVolcan or volcanActivo) {
+		rotacionLava < 359 ? rotacionLava += 1.5 * delta : rotacionLava = 0.0f;
+
+		if (anguloLava < 180.0) {
+			lavaPosition1.z = centro1.z - radio * glm::cos(glm::radians(anguloLava));
+			lavaPosition1.y = centro1.y + radio * glm::sin(glm::radians(anguloLava));
+
+			lavaPosition2.x = centro2.x - radio * glm::cos(glm::radians(anguloLava));
+			lavaPosition2.y = centro2.y + radio * glm::sin(glm::radians(anguloLava));
+
+			lavaPosition3.x = centro3.x + radio * glm::cos(glm::radians(anguloLava));
+			lavaPosition3.y = centro3.y + radio * glm::sin(glm::radians(anguloLava));
+
+			anguloLava += 2.0 * delta;
+			volcanActivo = true;
+		}
+		else if (lavaPosition1.y > 35.0) {
+			lavaPosition1.y -= 0.3 * delta;
+			lavaPosition2.y -= 0.3 * delta;
+			lavaPosition3.y -= 0.3 * delta;
+		}
+		else if (lavaPosition1.y > 20.0) {
+			lavaPosition1.y -= 0.08 * delta;
+			lavaPosition1.z += 0.08 * delta;
+
+			lavaPosition2.y -= 0.08 * delta;
+			lavaPosition2.x += 0.08 * delta;
+
+			lavaPosition3.y -= 0.08 * delta;
+			lavaPosition3.x -= 0.08 * delta;
+		}
+		else if (anguloLava < 300.0f) {			// Para gastar tiempo
+			anguloLava += 2.0 * delta;
+			rotacionLava -= 1.5 * delta;
+		}
+		else {
+			volcanActivo = false;
+			lavaPosition1 = glm::vec3(-48.0f, 45.0f, 14.0f);
+			lavaPosition2 = glm::vec3(-48.0f, 45.0f, 14.0f);
+			lavaPosition3 = glm::vec3(-48.0f, 45.0f, 14.0f);
+			anguloLava = 0.0f;
+			rotacionLava = 0.0f;
 		}
 	}
 }

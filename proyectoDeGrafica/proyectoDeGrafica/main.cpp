@@ -56,6 +56,7 @@ Texture plainTexture;
 Texture pisoTexture;
 Texture treasureTexture;
 Texture luffyTexture;
+Texture transparentTexture;
 
 Skybox skybox_day;
 Skybox skybox_night;
@@ -73,6 +74,8 @@ static double limitFPS = 1.0 / 60.0;
 GLfloat lastTimeSky = 0.0f;
 bool day = true;
 
+// Ciclo de erupción del Volcan
+GLfloat lastTimeVolcano = 0.0f;
 
 // luz direccional
 DirectionalLight mainLight;
@@ -135,6 +138,9 @@ int main()
 	luffyTexture = Texture("Textures/LuffyA.tga");
 	luffyTexture.LoadTextureA();
 
+	transparentTexture = Texture("Textures/transparente.tga");
+	transparentTexture.LoadTextureA();
+
 	//Cargamos los modelos
 	cargaModelos();
 
@@ -169,9 +175,32 @@ int main()
 
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
-
 	unsigned int spotLightCount = 0;
 
+	// Luces del Volcan
+	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,			// color
+		20.0f, 20.0f,										// intensidad amb y dif
+		lavaPosition1.x, lavaPosition1.y, lavaPosition1.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLightCount++;
+
+	pointLights[1] = PointLight(1.0f, 0.0f, 0.0f,			// color
+		30.0f, 30.0f,										// intensidad amb y dif
+		lavaPosition1.x, lavaPosition1.y, lavaPosition1.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLightCount++;
+
+	pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,			// color
+		30.0f, 30.0f,										// intensidad amb y dif
+		lavaPosition2.x, lavaPosition2.y, lavaPosition2.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLightCount++;
+
+	pointLights[3] = PointLight(1.0f, 0.0f, 0.0f,			// color
+		30.0f, 30.0f,										// intensidad amb y dif
+		lavaPosition2.x, lavaPosition2.y, lavaPosition2.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLightCount++;
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -196,9 +225,16 @@ int main()
 		deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
 
-		if ((now - lastTimeSky) >= 30) {
+		// Tiempo de control del ciclo dia noche
+		if ((now - lastTimeSky) >= 50) {
 			day = !day;
 			lastTimeSky = now;
+		}
+
+		// Tiempo de control de erupción del volcan
+		if ((now - lastTimeVolcano) >= 30) {
+			iniciaErupcionVolcan = !iniciaErupcionVolcan;
+			lastTimeVolcano = now;
 		}
 
 		//Recibir eventos del usuario
@@ -261,15 +297,15 @@ int main()
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera->calculateViewMatrix()));
 		glUniform3f(uniformEyePosition, camera->getCameraPosition().x, camera->getCameraPosition().y, camera->getCameraPosition().z);
 
-		// luz ligada a la c�mara de tipo flash
-		glm::vec3 lowerLight = camera->getCameraPosition();
-		lowerLight.y -= 0.3f;
-		spotLights[0].SetFlash(lowerLight, camera->getCameraDirection());
-
 		//informaci�n al shader de fuentes de iluminaci�n
 		shaderList[0].SetDirectionalLight(&mainLight);
-		shaderList[0].SetPointLights(pointLights, pointLightCount);
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
+
+		// Actualización de posición de luces
+		pointLights[1].setPosition(lavaPosition1);
+		pointLights[2].setPosition(lavaPosition2);
+		pointLights[3].setPosition(lavaPosition3);
+		shaderList[0].SetPointLights(pointLights, pointLightCount);
 
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
@@ -678,6 +714,48 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
 
+		// Lava del volcan 1
+		animaLava(deltaTime);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lavaPosition1);
+		model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		transparentTexture.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[1]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		// Lava del volcan 2
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lavaPosition2);
+		model = glm::rotate(model, -glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		transparentTexture.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[1]->RenderMesh();
+		glDisable(GL_BLEND);
+
+		// Lava del volcan 3
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lavaPosition3);
+		model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		transparentTexture.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[1]->RenderMesh();
+		glDisable(GL_BLEND);
 
 		toffsetu += 0.00005;
 		if (toffsetu > 1.0) {

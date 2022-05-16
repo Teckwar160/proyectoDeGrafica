@@ -87,6 +87,13 @@ extern float anguloPiernaR;
 extern float anguloPiernaL;
 extern float escalaBrazo;
 
+// Luces del volcan
+extern glm::vec3 lavaPosition1;
+extern glm::vec3 lavaPosition2;
+extern glm::vec3 lavaPosition3;
+extern float rotacionLava; // x
+extern bool iniciaErupcionVolcan;
+
 //Personajes
 extern personaje pMetaKnight;
 extern personaje pDorry;
@@ -128,7 +135,11 @@ void keyFrameVivi();
 //Función encargada de definir la animación de Zoro
 void keyFrameZoro();
 
+// Función encargada de ejecutar la erupción del volcan.
+void animaLava(GLfloat delta);
+
 //Función encargada de ejecutar la animación por KeyFrames de un personaje
 void animate(personaje *p);
 
+// Funcion que devuelve el tipo de camara actual
 int getCameraType();

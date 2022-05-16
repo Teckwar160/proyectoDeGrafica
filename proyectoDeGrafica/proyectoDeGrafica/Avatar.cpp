@@ -26,7 +26,7 @@ void Avatar::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position += front * velocity;
 	}
-
+	/*
 	if (keys[GLFW_KEY_S])
 	{
 		position -= front * velocity;
@@ -40,6 +40,7 @@ void Avatar::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position += right * velocity;
 	}
+	*/
 }
 
 void Avatar::mouseControl(GLfloat xChange, GLfloat yChange)
