@@ -215,6 +215,7 @@ int main()
 	keyFrameCarue();
 	keyFrameVivi();
 	keyFrameZoro();
+	keyFrameFranky();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -347,11 +348,11 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 
 		//Cambio de modelo
-		if (pMetaKnight.z > 200) {
-			thousandSunny.RenderModel();
+		if (velaRota) {
+			thousandSunnyDestruido.RenderModel();
 		}
 		else {
-			thousandSunnyDestruido.RenderModel();
+			thousandSunny.RenderModel();
 		}
 		
 
@@ -382,6 +383,11 @@ int main()
 
 		// MetaKnight
 		animate(&pMetaKnight);
+
+		//Ruptura de vela
+		if (pMetaKnight.z < 205 && pMetaKnight.x < -160.0f) {
+			velaRota = true;
+		}
 
 		model = glm::mat4(1.0);//modelaux;
 		model = glm::translate(model, glm::vec3(pMetaKnight.x, pMetaKnight.y, pMetaKnight.z));
@@ -494,8 +500,10 @@ int main()
 		meshList[10]->RenderMesh();
 
 		// Franky
+		animate(&pFranky);
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-6.0f, 13.7f, 5.0f));
+		model = glm::translate(model, glm::vec3(pFranky.x, pFranky.y, pFranky.z));
+		model = glm::rotate(model, glm::radians(pFranky.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		frankyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -504,24 +512,34 @@ int main()
 		// Franky Brazo izq
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(0.7f, 0.6f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pFranky.anguloBrazoIzquierdo), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_BL.RenderModel();
 
 		// Franky Brazo der
+
+		//Reparación de vela
+		if (pFranky.anguloBrazoDerecho > 90.0f && pFranky.anguloBrazoDerecho < 135.0f && pFranky.x >= 0.0f) {
+			velaRota = false;
+		}
+
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(-0.6f, 0.6f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pFranky.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_BR.RenderModel();
 
 		// Franky Pierna izq
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(0.2f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pFranky.anguloPiernaIzquierda), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_PL.RenderModel();
 
 		// Franky Pierna der
 		model = frankyAux;
 		model = glm::translate(model, glm::vec3(-0.1f, 0.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pFranky.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Franky_PR.RenderModel();
 

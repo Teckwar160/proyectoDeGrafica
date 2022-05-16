@@ -94,6 +94,9 @@ extern glm::vec3 lavaPosition3;
 extern float rotacionLava; // x
 extern bool iniciaErupcionVolcan;
 
+// Ruptura de vela de bardo
+extern bool velaRota;
+
 //Personajes
 extern personaje pMetaKnight;
 extern personaje pDorry;
@@ -101,6 +104,7 @@ extern personaje pBrogy;
 extern personaje pCarue;
 extern personaje pVivi;
 extern personaje pZoro;
+extern personaje pFranky;
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
@@ -137,6 +141,9 @@ void keyFrameVivi();
 
 //Función encargada de definir la animación de Zoro
 void keyFrameZoro();
+
+//Función encargada de definir la animación de Franky
+void keyFrameFranky();
 
 // Función encargada de ejecutar la erupción del volcan.
 void animaLava(GLfloat delta);

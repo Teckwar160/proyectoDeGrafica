@@ -48,6 +48,10 @@ float anguloLava = 0.0f;
 float rotacionLava = 0.0f; // x
 bool volcanActivo = false;
 
+// Ruptura de vela de bardo
+bool velaRota = false;
+
+
 //Bandera para eviatr el reseteo de la pelea de lso gignates
 bool peleaActiva = false;
 
@@ -75,6 +79,7 @@ personaje pBrogy;
 personaje pCarue;
 personaje pVivi;
 personaje pZoro;
+personaje pFranky;
 
 int getCameraType() {
 	return cameraType;
@@ -149,7 +154,7 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	// Ataque de Luffy
 	if (keys[GLFW_KEY_G]) ataqueEspecial = true;
 
-	//Meta Knight
+	//MetaKnight
 	if (keys[GLFW_KEY_M]) {
 		if (pMetaKnight.bandera) {
 			if (pMetaKnight.play == false && pMetaKnight.FrameIndex > 1) {
@@ -160,6 +165,19 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 		}
 
 	}
+
+	//Franky
+	if (keys[GLFW_KEY_F]) {
+		if (pFranky.bandera) {
+			if (pFranky.play == false && pFranky.FrameIndex > 1) {
+				resetElements(&pFranky);
+				interpolation(&pFranky);
+				pFranky.reset();
+			}
+		}
+
+	}
+
 
 	if (keys[GLFW_KEY_Z]) {
 		if (pZoro.bandera) {
@@ -177,6 +195,7 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 		pCarue.bandera = true;
 		pVivi.bandera = true;
 		pZoro.bandera = true;
+		pFranky.bandera = true;
 	}
 
 	// Control de cámaras
@@ -497,7 +516,7 @@ void keyFrameMetaKnight() {
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
 	pMetaKnight.KeyFrame[i].giroY = -90.0f;
-	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 180.0f;
 	i++;
 
 	pMetaKnight.KeyFrame[i].x = -170.0f;
@@ -505,7 +524,7 @@ void keyFrameMetaKnight() {
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
 	pMetaKnight.KeyFrame[i].giroY = -90.0f;
-	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 360.0f;
 	i++;
 
 	//Voltea hacia el barco
@@ -522,7 +541,7 @@ void keyFrameMetaKnight() {
 	pMetaKnight.KeyFrame[i].y = 21.3f;
 	pMetaKnight.KeyFrame[i].z = 240.0f;
 	pMetaKnight.KeyFrame[i].giroX = -90.0f;
-	pMetaKnight.KeyFrame[i].giroY = -180.0f;
+	pMetaKnight.KeyFrame[i].giroY = -540.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
@@ -530,7 +549,7 @@ void keyFrameMetaKnight() {
 	pMetaKnight.KeyFrame[i].y = 21.3f;
 	pMetaKnight.KeyFrame[i].z = 195.0f;
 	pMetaKnight.KeyFrame[i].giroX = -90.0f;
-	pMetaKnight.KeyFrame[i].giroY = -360.0f;
+	pMetaKnight.KeyFrame[i].giroY = -900.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
@@ -539,7 +558,7 @@ void keyFrameMetaKnight() {
 	pMetaKnight.KeyFrame[i].y = 21.3f;
 	pMetaKnight.KeyFrame[i].z = 195.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = -90.0f;
+	pMetaKnight.KeyFrame[i].giroY = -810.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
@@ -1495,4 +1514,202 @@ void iniciaPelea() {
 	else if(!volcanActivo) {
 		peleaActiva = false;
 	}
+}
+
+void keyFrameFranky() {
+	int i = 0;
+
+	pFranky.set(-6.0f, 13.7f, 5.0f, 0.0f, 0.0f, 0.0f);
+
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 13.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0;
+	i++;
+
+	//Brinco
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 15.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 180;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 180;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0;
+	i++;
+
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0;
+	i++;
+
+	//Giro
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 90.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	//Acomodo en bandera
+	pFranky.KeyFrame[i].x = -4.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 90.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = -2.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 90.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = -45.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 45.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 90.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	//Giro
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 180.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Reparación de vela
+
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 180.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 135.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 180.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 180.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 135.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 180.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Giro de regreo
+	pFranky.KeyFrame[i].x = 0.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 270.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	//Acomodo en origen
+	pFranky.KeyFrame[i].x = -2.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 270.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = -4.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 270.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 270.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	//Giro
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 17.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 360.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Acomodo final
+	pFranky.KeyFrame[i].x = -6.0f;
+	pFranky.KeyFrame[i].y = 13.7f;
+	pFranky.KeyFrame[i].z = 5.0f;
+	pFranky.KeyFrame[i].giroY = 360.0f;
+	pFranky.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	pFranky.KeyFrame[i].anguloBrazoIzquierdo = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pFranky.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pFranky.FrameIndex = i;
 }
