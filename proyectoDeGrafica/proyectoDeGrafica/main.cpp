@@ -408,7 +408,7 @@ int main()
 
 		//Brook
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-3.0f, 12.5f, 5.0f));
+		model = glm::translate(model, glm::vec3(-6.0f, 12.5f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		brook.RenderModel();
@@ -519,7 +519,7 @@ int main()
 		// Franky Brazo der
 
 		//Reparación de vela
-		if (pFranky.anguloBrazoDerecho > 90.0f && pFranky.anguloBrazoDerecho < 135.0f && pFranky.x >= 0.0f) {
+		if (pFranky.anguloBrazoDerecho > 135.0f && pFranky.anguloBrazoDerecho < 180.0f && pFranky.x <= -1.5f && pFranky.y >= 16.7f) {
 			velaRota = false;
 		}
 
