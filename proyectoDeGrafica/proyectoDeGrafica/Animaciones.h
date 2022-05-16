@@ -80,6 +80,13 @@ extern float laboonX;
 extern float laboonZ;
 extern float anguloLaboon;
 
+// Luffy
+extern float anguloBrazoR;
+extern float anguloBrazoL;
+extern float anguloPiernaR;
+extern float anguloPiernaL;
+extern float escalaBrazo;
+
 //Personajes
 extern personaje pMetaKnight;
 extern personaje pDorry;
@@ -95,6 +102,12 @@ void animaThousand(GLfloat delta);
 
 //Animación de Laboon
 void animaLaboon(GLfloat delta);
+
+//Función encargada de definir la animación de Luffy
+void animaLuffy(GLfloat delta);
+
+// Función encargada de ejecutar el golpe de Luffy
+void animaAtaqueLuffy(GLfloat delta);
 
 //Función encargada de definir la animación de MetaKnight
 void keyFrameMetaKnight();

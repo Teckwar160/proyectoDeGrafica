@@ -1,13 +1,7 @@
-﻿  Animaciones.cpp
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(203,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(204,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(208,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(209,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(213,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(214,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(243,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(253,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(263,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(308,25): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(316,25): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
-  proyectoDeGrafica.vcxproj -> C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe
+﻿  main.cpp
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(193,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(195,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(678,22): warning C4305: '+=': truncamiento de 'double' a 'float'
+  proyectoDeGrafica.vcxproj -> C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe

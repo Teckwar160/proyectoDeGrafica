@@ -22,6 +22,19 @@ char sentidoLaboon = 'u';
 float anguloLaboon = 0.0f;
 bool comienzaAnimacionLaboon = false;
 
+// Variables Luffy
+float anguloBrazoR = 0.0f;
+float anguloBrazoL = 0.0f;
+float anguloPiernaR = 0.0f;
+float anguloPiernaL = 0.0f;
+float escalaBrazo = 1.0f;
+bool ataqueEspecial = false;
+bool golpe = false;
+bool comienzaAnimacionLuffy = false;
+bool alto = false;
+bool paso = false;
+bool mediopaso = false;
+
 
 //Funciones de clase personaje
 void personaje::reset() {
@@ -113,6 +126,13 @@ void animate(personaje *p) {
 }
 
 void controlDeTeclas(bool* keys, GLfloat delta) {
+
+	// Luffy
+	comienzaAnimacionLuffy = keys[GLFW_KEY_W] and cameraType == 1;
+
+	// Ataque de Luffy
+	if (keys[GLFW_KEY_G]) ataqueEspecial = true;
+
 	//Meta Knight
 	if (keys[GLFW_KEY_M]) {
 		if (pMetaKnight.bandera) {
@@ -325,6 +345,81 @@ void animaLaboon(GLfloat delta) {
 
 		if (laboonX < -300.0f) {
 			sentidoLaboon = 'u';
+		}
+	}
+}
+
+void animaLuffy(GLfloat delta) {
+	if (comienzaAnimacionLuffy or !alto) {
+		if (!paso) {
+			alto = false;
+			if (!mediopaso) {
+				if (anguloBrazoL < 45.0f) {
+					anguloBrazoL++;
+					anguloPiernaR++;
+					anguloPiernaL--;
+					if (!ataqueEspecial) anguloBrazoR = -anguloBrazoL;
+				}
+				else mediopaso = true;
+			}
+			else {
+				if (anguloBrazoL > 0.0f) {
+					anguloBrazoL--;
+					anguloPiernaR--;
+					anguloPiernaL++;
+					if (!ataqueEspecial) anguloBrazoR = -anguloBrazoL;
+				}
+				else {
+					mediopaso = false;
+					paso = true;
+					alto = true;
+				}
+			}
+		}
+		else {
+			alto = false;
+			if (!mediopaso) {
+				if (anguloBrazoL > -45.0f) {
+					anguloBrazoL--;
+					anguloPiernaR--;
+					anguloPiernaL++;
+					if (!ataqueEspecial) anguloBrazoR = -anguloBrazoL;
+				}
+				else mediopaso = true;
+			}
+			else {
+				if (anguloBrazoL < 0.0f) {
+					anguloBrazoL++;
+					anguloPiernaR++;
+					anguloPiernaL--;
+					if (!ataqueEspecial) anguloBrazoR = -anguloBrazoL;
+				}
+				else {
+					mediopaso = false;
+					paso = false;
+					alto = true;
+				}
+			}
+		}
+	}
+}
+
+void animaAtaqueLuffy(GLfloat delta)
+{
+	if (ataqueEspecial)
+	{
+		if (!golpe) {
+			if (anguloBrazoR > -90.0f) anguloBrazoR--;
+			else if (escalaBrazo <= 40) escalaBrazo += 2.5 * delta;
+			else golpe = true;
+		}
+		else {
+			if (escalaBrazo > 1) escalaBrazo -= 2.5 * delta;
+			else if (anguloBrazoR < 0.0f) anguloBrazoR++;
+			else {
+				ataqueEspecial = false;
+				golpe = false;
+			}
 		}
 	}
 }
