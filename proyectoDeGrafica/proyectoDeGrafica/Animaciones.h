@@ -84,6 +84,8 @@ extern float anguloLaboon;
 extern personaje pMetaKnight;
 extern personaje pDorry;
 extern personaje pBrogy;
+extern personaje pCarue;
+extern personaje pVivi;
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
@@ -94,14 +96,19 @@ void animaThousand(GLfloat delta);
 //Animación de Laboon
 void animaLaboon(GLfloat delta);
 
-//Función encargada de definir la aniamción de MetaKnight
+//Función encargada de definir la animación de MetaKnight
 void keyFrameMetaKnight();
 
-//Función encargada de definir la aniamción de Dorry
+//Función encargada de definir la animación de Dorry
 void keyFrameDorry();
 
-//Función encargada de definir la aniamción de Brogy
+//Función encargada de definir la animación de Brogy
 void keyFrameBrogy();
+
+//Función encargada de definir la animación de Carue
+void keyFrameCarue();
+
+void keyFrameVivi();
 
 //Función encargada de ejecutar la animación por KeyFrames de un personaje
 void animate(personaje *p);

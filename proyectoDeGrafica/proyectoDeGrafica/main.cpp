@@ -192,6 +192,8 @@ int main()
 	keyFrameMetaKnight();
 	keyFrameDorry();
 	keyFrameBrogy();
+	keyFrameCarue();
+	keyFrameVivi();
 	
 
 	////Loop mientras no se cierra la ventana
@@ -532,43 +534,6 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		littleGarden.RenderModel();
 
-		// Vivi
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-148.0f, 8.5f, 4.5));
-		viviAux = model;
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Vivi.RenderModel();
-
-		// Vivi brazo derecho
-		model = viviAux;
-		model = glm::translate(model, glm::vec3(-0.4f, 0.6f, 0.0f));
-		//model = glm::rotate(model, -glm::radians(ang), glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Vivi_BR.RenderModel();
-
-		// Carue
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(-148.0f, 6.9f, 5.0f));
-		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
-		carueAux = model;
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue.RenderModel();
-
-		// Carue pie derecho
-		model = carueAux;
-		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue_ft.RenderModel();
-
-		// Carue pie izquierdo
-		model = carueAux;
-		model = glm::translate(model, glm::vec3(0.3f, -0.4f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		Carue_ft.RenderModel();
-
 		// Brogy
 		animate(&pBrogy);
 		model = modelaux;
@@ -646,6 +611,49 @@ int main()
 		model = glm::rotate(model, -glm::radians(pDorry.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PR.RenderModel();
+
+		// Carue
+		animate(&pCarue);
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(pCarue.x, pCarue.y, pCarue.z));
+		model = glm::rotate(model, -glm::radians(pCarue.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelaux = model;
+		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
+		carueAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue.RenderModel();
+
+		// Carue pie derecho
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pCarue.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
+
+		// Carue pie izquierdo
+		model = carueAux;
+		model = glm::translate(model, glm::vec3(0.3f, -0.4f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pCarue.anguloPiernaIzquierda), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		Carue_ft.RenderModel();
+
+		// Vivi
+		animate(&pVivi);
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.0f, 0.8f, -0.5));
+		viviAux = model;
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi.RenderModel();
+
+		// Vivi brazo derecho
+		model = viviAux;
+		model = glm::translate(model, glm::vec3(-0.4f, 0.6f, 0.0f));
+		model = glm::rotate(model, -glm::radians(pVivi.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Vivi_BR.RenderModel();
 
 		//Reverse Mountain
 		model = glm::mat4(1.0);

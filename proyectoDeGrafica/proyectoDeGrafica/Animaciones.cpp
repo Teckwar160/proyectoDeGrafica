@@ -44,7 +44,8 @@ void personaje::set(float x, float y, float z, float giroX, float giroY, float g
 personaje pMetaKnight;
 personaje pDorry;
 personaje pBrogy;
-
+personaje pCarue;
+personaje pVivi;
 
 int getCameraType() {
 	return cameraType;
@@ -144,11 +145,32 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 
 	}
 
+	//Carue && Vivi
+	if (keys[GLFW_KEY_R]) {
+		if (pCarue.bandera) {
+			if (pCarue.play == false && pCarue.FrameIndex > 1) {
+				resetElements(&pCarue);
+				interpolation(&pCarue);
+				pCarue.reset();
+			}
+		}
+
+		if (pVivi.bandera) {
+			if (pVivi.play == false && pVivi.FrameIndex > 1) {
+				resetElements(&pVivi);
+				interpolation(&pVivi);
+				pVivi.reset();
+			}
+		}
+	}
+
 	//Activador de animaciones por keyFrame
 	if (keys[GLFW_KEY_K]) {
 		pMetaKnight.bandera = true;
 		pDorry.bandera = true;
 		pBrogy.bandera = true;
+		pCarue.bandera = true;
+		pVivi.bandera = true;
 	}
 
 	// Control de cámaras
@@ -842,4 +864,198 @@ void keyFrameBrogy() {
 
 
 	pBrogy.FrameIndex = i;
+}
+
+void keyFrameCarue() {
+	int i = 0;
+	int j = 0;
+
+	pCarue.set(-148.0f, 6.9f, 5.0f, 0.0f, 0.0f, 0.0f);
+	pVivi.set(0.0f, 0.8f, -0.5f, 0.0f, 0.0f, 0.0f);
+
+	//Recorrido de carue
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 5.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 0;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 0;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 25.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 45.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 65.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Espera
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = 0;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 0.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 0.0f;
+	i++;
+
+	//Regreso
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 85.0f;
+	pCarue.KeyFrame[i].giroY = -180;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 65.0f;
+	pCarue.KeyFrame[i].giroY = -180;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 45.0f;
+	pCarue.KeyFrame[i].giroY = -180;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 25.0f;
+	pCarue.KeyFrame[i].giroY = -180;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	//Entra al bosque
+	pCarue.KeyFrame[i].x = -148.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 25.0f;
+	pCarue.KeyFrame[i].giroY = -90;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = 45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = -45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -128.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 25.0f;
+	pCarue.KeyFrame[i].giroY = -90;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pCarue.KeyFrame[i].x = -108.0f;
+	pCarue.KeyFrame[i].y = 6.9f;
+	pCarue.KeyFrame[i].z = 25.0f;
+	pCarue.KeyFrame[i].giroY = -90;
+	pCarue.KeyFrame[i].anguloPiernaDerecha = -45.0f;
+	pCarue.KeyFrame[i].anguloPiernaIzquierda = 45.0f;
+	i++;
+
+	pCarue.FrameIndex = i;
+}
+
+void keyFrameVivi() {
+	int i = 0;
+
+	//Saludo de Vivi
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 90.0f;
+	i++;
+
+	//Despedida más alegre
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 135.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 135.0f;
+	i++;
+
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 45.0f;
+	i++;
+
+	//Fin de saludo
+	pVivi.KeyFrame[i].anguloBrazoDerecho = 0.0f;
+	i++;
+
+	pVivi.FrameIndex = i;
+
 }
