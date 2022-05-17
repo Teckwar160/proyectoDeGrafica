@@ -205,7 +205,7 @@ int main()
 	// Luces fireworks
 	pointLights[4] = PointLight(1.0f, 0.0f, 0.0f,			// color rojo
 		10.0f, 10.0f,										// intensidad amb y dif
-		fireworksR.x, fireworksR.y, fireworksR.z,	// posicion
+		0.0f, 0.0f, 0.0f,	// posicion
 		0.1f, 0.1f, 0.1f);									// ec. 1 + x + x^2	
 		//0.1f, 0.01f, 0.001f);									// ec. 1 + x + x^2	
 	pointLightCount++;
@@ -239,6 +239,7 @@ int main()
 	keyFrameZoro();
 	keyFrameFranky();
 	
+	fireworkRed.setPointLight(&pointLights[4]);
 
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
@@ -329,10 +330,8 @@ int main()
 		pointLights[2].setPosition(posicionesVolcan[1]);
 		pointLights[3].setPosition(posicionesVolcan[2]);
 		
-		if (comienzaAnimacionFireworks) {
-			pointLights[4].setPosition(fireworksR);
-			pointLights[4].setIntensity(intensidadFw, intensidadFw);
-			pointLights[4].setEcuation(ecuacionFw);
+		if (fireworkRed.isAnimating()) {
+			fireworkRed.updateLight();
 			shaderList[0].SetPointLights(pointLights, pointLightCount);
 		}
 		else {
@@ -781,10 +780,11 @@ int main()
 		}
 		
 		// Fireworks
-		animaFireworks(deltaTime);
+		//animaFireworks(deltaTime);
+		fireworkRed.animate(deltaTime);
 		// Firework red
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, fireworksR);
+		model = glm::translate(model, fireworkRed.getCentralPos());
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -795,10 +795,12 @@ int main()
 		meshList[1]->RenderMesh();
 		glDisable(GL_BLEND);
 
-		if (comienzaAnimacionFireworks) {
-			for (glm::vec3 pos : posicionesFw) {
+		if (fireworkRed.isAnimating()) {
+			glm::vec3* p = fireworkRed.getPositions();
+
+			for (int i = 0; i < fireworkRed.getSize();i++) {
 				model = glm::mat4(1.0f);
-				model = glm::translate(model, pos);
+				model = glm::translate(model,p[i]);
 				model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 				glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 				glUniform3fv(uniformColor, 1, glm::value_ptr(color));

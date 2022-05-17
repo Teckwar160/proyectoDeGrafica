@@ -17,7 +17,7 @@ public:
 
 	void setPosition(glm::vec3 pos) { position = pos; }
 	void setEcuation(glm::vec3 ec) { constant = ec.x; linear = ec.y; exponent = ec.z; }
-
+	void setColor(glm::vec3 col) { color = col; }
 	~PointLight();
 
 protected:

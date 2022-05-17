@@ -1,7 +1,8 @@
 #pragma once
+#include "Firework.h"
 
 #include <glfw3.h>
-#include <glm.hpp>
+//#include <glm.hpp>
 
 //Definición de Frame
 typedef struct _frame
@@ -96,15 +97,6 @@ extern bool iniciaErupcionVolcan;
 // Ruptura de vela de bardo
 extern bool velaRota;
 
-// Fireworks
-const int numFw = 200;
-extern float intensidadFw;
-extern glm::vec3 fireworksR;
-extern glm::vec3 ecuacionFw;
-extern glm::vec3 posicionesFw[numFw];
-extern bool comienzaAnimacionFireworks;
-
-
 //Personajes
 extern personaje pMetaKnight;
 extern personaje pDorry;
@@ -113,6 +105,10 @@ extern personaje pCarue;
 extern personaje pVivi;
 extern personaje pZoro;
 extern personaje pFranky;
+
+// Fuegos artificiales
+extern Firework fireworkRed;
+//extern Firework fireworks[2];
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
@@ -161,6 +157,3 @@ void animate(personaje *p);
 
 // Funcion que devuelve el tipo de camara actual
 int getCameraType();
-
-// Función encargada de ejecutar los fuegos artificiales
-void animaFireworks(GLfloat delta);
