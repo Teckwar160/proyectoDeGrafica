@@ -36,13 +36,10 @@ bool paso = false;
 bool mediopaso = false;
 
 // Luces del volcan
-glm::vec3 lavaPosition1 = glm::vec3(-48.0f, 45.0f, 14.0f);
-glm::vec3 lavaPosition2 = glm::vec3(-48.0f, 45.0f, 14.0f);
-glm::vec3 lavaPosition3 = glm::vec3(-48.0f, 45.0f, 14.0f);
+glm::vec3 posicionesVolcan[3];
+glm::vec3 posicionOrigenV = glm::vec3(-48.0f, 45.0f, 14.0f);
 float radio = 10.0f;
-glm::vec3 centro1 = glm::vec3(-48.0f, 45.0f, 14.0f + radio);
-glm::vec3 centro2 = glm::vec3(-48.0f + radio, 45.0f, 14.0f);
-glm::vec3 centro3 = glm::vec3(-48.0f - radio, 45.0f, 14.0f);
+glm::vec3 centros[3];
 bool iniciaErupcionVolcan = false;
 float anguloLava = 0.0f;
 float rotacionLava = 0.0f; // x
@@ -51,9 +48,47 @@ bool volcanActivo = false;
 // Ruptura de vela de bardo
 bool velaRota = false;
 
+// Fireworks
+int i = 0;
+int stepFireworks = 0;
+float intensidadFw = 20.0f;
+glm::vec3 posicionesFw[numFw];
+glm::vec3 posicionesFinales[numFw];
+glm::vec3 ecuacionFw = glm::vec3(0.1f, 0.1f, 0.1f);
+glm::vec3 posicionOrigenFw = glm::vec3(0.0f, 270.0f, -400.0f);
+glm::vec3 fireworksR = posicionOrigenFw;
+glm::vec3 fireworksG = posicionOrigenFw;
+bool fireworksOnce = true;
+bool comienzaAnimacionFireworks = false;
+
 
 //Bandera para eviatr el reseteo de la pelea de lso gignates
 bool peleaActiva = false;
+
+void calculaPosicionesVolcan() {
+	for (i = 0; i < 3; i++) {
+		posicionesVolcan[i] = posicionOrigenV;
+	}
+	centros[0] = glm::vec3(-48.0f, 45.0f, 14.0f + radio);
+	centros[1] = glm::vec3(-48.0f + radio, 45.0f, 14.0f);
+	centros[2] = glm::vec3(-48.0f - radio, 45.0f, 14.0f);
+
+}
+
+// Función que calcula las posiciones finales de los fuegos artificiales
+void calculaPosicionesFw() {
+	int min = -150;
+	int max = 150;
+	int xr, yr, zr;
+
+	for (i = 0; i < numFw; i++) {
+		xr = min + rand() % (max + 1 - min);
+		yr = min + rand() % (max + 1 - min);
+		zr = min + rand() % (max + 1 - min);
+		posicionesFw[i] = fireworksR;
+		posicionesFinales[i] = fireworksR + glm::vec3(xr, yr, zr);
+	}
+}
 
 //Funciones de clase personaje
 void personaje::reset() {
@@ -236,6 +271,22 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	if (keys[GLFW_KEY_L]) {
 		comienzaAnimacionLaboon = true;
 	}
+
+	// Control de animación de los fuegos artificiales
+	if (keys[GLFW_KEY_Q]) {
+		// Reseteo de posiciones
+		fireworksR = posicionOrigenFw;
+
+		for (i = 0; i < numFw; i++) {
+			posicionesFw[i] = glm::vec3(0.0f, 0.0f, -400.0f);
+		}
+		stepFireworks = 0;
+		intensidadFw = 10.f;
+		ecuacionFw = glm::vec3(0.1f, 0.1f, 0.1f);
+		// Activación de animación
+		fireworksOnce = true;
+		comienzaAnimacionFireworks = true;
+	}
 	
 }
 
@@ -260,8 +311,8 @@ void calculaCentro(){
 		//Evitamos que se vuelva a calcular
 		banderaCentro = false;
 	}
-}
 
+}
 
 void animaThousand(GLfloat delta) {
 
@@ -450,38 +501,38 @@ void animaAtaqueLuffy(GLfloat delta)
 	}
 }
 
-
 void animaLava(GLfloat delta) {
 	if (iniciaErupcionVolcan or volcanActivo) {
 		rotacionLava < 359 ? rotacionLava += 1.5 * delta : rotacionLava = 0.0f;
 
 		if (anguloLava < 180.0) {
-			lavaPosition1.z = centro1.z - radio * glm::cos(glm::radians(anguloLava));
-			lavaPosition1.y = centro1.y + radio * glm::sin(glm::radians(anguloLava));
+			posicionesVolcan[0].z = centros[0].z - radio * glm::cos(glm::radians(anguloLava));
+			posicionesVolcan[0].y = centros[0].y + radio * glm::sin(glm::radians(anguloLava));
 
-			lavaPosition2.x = centro2.x - radio * glm::cos(glm::radians(anguloLava));
-			lavaPosition2.y = centro2.y + radio * glm::sin(glm::radians(anguloLava));
+			posicionesVolcan[1].x = centros[1].x - radio * glm::cos(glm::radians(anguloLava));
+			posicionesVolcan[1].y = centros[2].y + radio * glm::sin(glm::radians(anguloLava));
 
-			lavaPosition3.x = centro3.x + radio * glm::cos(glm::radians(anguloLava));
-			lavaPosition3.y = centro3.y + radio * glm::sin(glm::radians(anguloLava));
+			posicionesVolcan[2].x = centros[2].x + radio * glm::cos(glm::radians(anguloLava));
+			posicionesVolcan[2].y = centros[2].y + radio * glm::sin(glm::radians(anguloLava));
 
 			anguloLava += 2.0 * delta;
+		}
+		else if (posicionesVolcan[0].y > 35.0) {
+			posicionesVolcan[0].y -= 0.3 * delta;
+			posicionesVolcan[1].y -= 0.3 * delta;
+			posicionesVolcan[2].y -= 0.3 * delta;
 			volcanActivo = true;
-		}
-		else if (lavaPosition1.y > 35.0) {
-			lavaPosition1.y -= 0.3 * delta;
-			lavaPosition2.y -= 0.3 * delta;
-			lavaPosition3.y -= 0.3 * delta;
-		}
-		else if (lavaPosition1.y > 20.0) {
-			lavaPosition1.y -= 0.08 * delta;
-			lavaPosition1.z += 0.08 * delta;
 
-			lavaPosition2.y -= 0.08 * delta;
-			lavaPosition2.x += 0.08 * delta;
+		}
+		else if (posicionesVolcan[0].y > 20.0) {
+			posicionesVolcan[0].y -= 0.08 * delta;
+			posicionesVolcan[0].z += 0.08 * delta;
 
-			lavaPosition3.y -= 0.08 * delta;
-			lavaPosition3.x -= 0.08 * delta;
+			posicionesVolcan[1].y -= 0.08 * delta;
+			posicionesVolcan[1].x += 0.08 * delta;
+
+			posicionesVolcan[2].y -= 0.08 * delta;
+			posicionesVolcan[2].x -= 0.08 * delta;
 		}
 		else if (anguloLava < 300.0f) {			// Para gastar tiempo
 			anguloLava += 2.0 * delta;
@@ -489,11 +540,44 @@ void animaLava(GLfloat delta) {
 		}
 		else {
 			volcanActivo = false;
-			lavaPosition1 = glm::vec3(-48.0f, 45.0f, 14.0f);
-			lavaPosition2 = glm::vec3(-48.0f, 45.0f, 14.0f);
-			lavaPosition3 = glm::vec3(-48.0f, 45.0f, 14.0f);
+			calculaPosicionesVolcan();
 			anguloLava = 0.0f;
 			rotacionLava = 0.0f;
+		}
+	}
+}
+
+void animaFireworks(GLfloat delta)
+{
+	if (comienzaAnimacionFireworks)
+	{
+		if (fireworksR.y < 500.0f) {
+			fireworksR.y++;
+		}
+		else if (fireworksOnce) {
+			calculaPosicionesFw();
+			fireworksOnce = false;
+			intensidadFw = 45.f;
+			ecuacionFw = glm::vec3(0.1f, 0.01f, 0.001f);
+		}
+		else if (stepFireworks < 500) {
+			for (i = 0; i < numFw; i++) {
+				posicionesFw[i] += (posicionesFinales[i] - posicionesFw[i]) / 500.0f;
+			}
+			//intensidadFw += (0.0 - intensidadFw) / 1000;
+			stepFireworks++;
+
+		}
+		else if (stepFireworks < 800) {
+			//ecuacionFw.y += (0.1 - ecuacionFw.y) / 800;
+			ecuacionFw.z += (0.1 - ecuacionFw.z) / 800;
+			intensidadFw += (0.0 - intensidadFw) / 800;
+			stepFireworks++;
+		}
+		else
+		{
+			comienzaAnimacionFireworks = false;
+			fireworksR = posicionOrigenFw;
 		}
 	}
 }

@@ -88,14 +88,22 @@ extern float anguloPiernaL;
 extern float escalaBrazo;
 
 // Luces del volcan
-extern glm::vec3 lavaPosition1;
-extern glm::vec3 lavaPosition2;
-extern glm::vec3 lavaPosition3;
+extern glm::vec3 posicionesVolcan[3];
+extern glm::vec3 posicionOrigenV;
 extern float rotacionLava; // x
 extern bool iniciaErupcionVolcan;
 
 // Ruptura de vela de bardo
 extern bool velaRota;
+
+// Fireworks
+const int numFw = 200;
+extern float intensidadFw;
+extern glm::vec3 fireworksR;
+extern glm::vec3 ecuacionFw;
+extern glm::vec3 posicionesFw[numFw];
+extern bool comienzaAnimacionFireworks;
+
 
 //Personajes
 extern personaje pMetaKnight;
@@ -153,3 +161,6 @@ void animate(personaje *p);
 
 // Funcion que devuelve el tipo de camara actual
 int getCameraType();
+
+// Función encargada de ejecutar los fuegos artificiales
+void animaFireworks(GLfloat delta);

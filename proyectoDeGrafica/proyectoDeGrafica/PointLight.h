@@ -16,6 +16,7 @@ public:
 		GLfloat constantLocation, GLfloat linearLocation, GLfloat exponentLocation);
 
 	void setPosition(glm::vec3 pos) { position = pos; }
+	void setEcuation(glm::vec3 ec) { constant = ec.x; linear = ec.y; exponent = ec.z; }
 
 	~PointLight();
 

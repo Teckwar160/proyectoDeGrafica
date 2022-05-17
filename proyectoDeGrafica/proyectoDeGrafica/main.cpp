@@ -72,7 +72,7 @@ static double limitFPS = 1.0 / 60.0;
 
 //Ciclo dia noche
 GLfloat lastTimeSky = 0.0f;
-bool day = true;
+bool day = false;
 
 // Ciclo de erupción del Volcan
 GLfloat lastTimeVolcano = 0.0f;
@@ -180,27 +180,49 @@ int main()
 	// Luces del Volcan
 	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,			// color
 		20.0f, 20.0f,										// intensidad amb y dif
-		lavaPosition1.x, lavaPosition1.y, lavaPosition1.z,	// posicion
+		posicionOrigenV.x, posicionOrigenV.y, posicionOrigenV.z,	// posicion
 		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
 	pointLightCount++;
 
 	pointLights[1] = PointLight(1.0f, 0.0f, 0.0f,			// color
 		30.0f, 30.0f,										// intensidad amb y dif
-		lavaPosition1.x, lavaPosition1.y, lavaPosition1.z,	// posicion
+		posicionesVolcan[0].x, posicionesVolcan[0].y, posicionesVolcan[0].z,	// posicion
 		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
 	pointLightCount++;
 
 	pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,			// color
 		30.0f, 30.0f,										// intensidad amb y dif
-		lavaPosition2.x, lavaPosition2.y, lavaPosition2.z,	// posicion
+		posicionesVolcan[1].x, posicionesVolcan[1].y, posicionesVolcan[1].z,	// posicion
 		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
 	pointLightCount++;
 
 	pointLights[3] = PointLight(1.0f, 0.0f, 0.0f,			// color
 		30.0f, 30.0f,										// intensidad amb y dif
-		lavaPosition2.x, lavaPosition2.y, lavaPosition2.z,	// posicion
+		posicionesVolcan[2].x, posicionesVolcan[2].y, posicionesVolcan[2].z,	// posicion
 		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
 	pointLightCount++;
+
+	// Luces fireworks
+	pointLights[4] = PointLight(1.0f, 0.0f, 0.0f,			// color rojo
+		10.0f, 10.0f,										// intensidad amb y dif
+		fireworksR.x, fireworksR.y, fireworksR.z,	// posicion
+		0.1f, 0.1f, 0.1f);									// ec. 1 + x + x^2	
+		//0.1f, 0.01f, 0.001f);									// ec. 1 + x + x^2	
+	pointLightCount++;
+	/*
+	pointLights[5] = PointLight(0.0f, 1.0f, 0.0f,			// color verde
+		30.0f, 30.0f,										// intensidad amb y dif
+		fireworksG.x, fireworksG.y, fireworksG.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2
+	pointLightCount++;
+
+	pointLights[6] = PointLight(0.0f, 0.0f, 1.0f,			// color azul
+		30.0f, 30.0f,										// intensidad amb y dif
+		fireworksB.x, fireworksB.y, fireworksB.z,	// posicion
+		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2
+	pointLightCount++;
+	*/
+
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -303,10 +325,19 @@ int main()
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 
 		// Actualización de posición de luces
-		pointLights[1].setPosition(lavaPosition1);
-		pointLights[2].setPosition(lavaPosition2);
-		pointLights[3].setPosition(lavaPosition3);
-		shaderList[0].SetPointLights(pointLights, pointLightCount);
+		pointLights[1].setPosition(posicionesVolcan[0]);
+		pointLights[2].setPosition(posicionesVolcan[1]);
+		pointLights[3].setPosition(posicionesVolcan[2]);
+		
+		if (comienzaAnimacionFireworks) {
+			pointLights[4].setPosition(fireworksR);
+			pointLights[4].setIntensity(intensidadFw, intensidadFw);
+			pointLights[4].setEcuation(ecuacionFw);
+			shaderList[0].SetPointLights(pointLights, pointLightCount);
+		}
+		else {
+			shaderList[0].SetPointLights(pointLights, pointLightCount-1);
+		}
 
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
@@ -733,11 +764,27 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
 
-		// Lava del volcan 1
 		animaLava(deltaTime);
+		for (glm::vec3 posVolcan : posicionesVolcan) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, posVolcan);
+			model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+			model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			transparentTexture.UseTexture();
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			meshList[1]->RenderMesh();
+			glDisable(GL_BLEND);
+		}
+		
+		// Fireworks
+		animaFireworks(deltaTime);
+		// Firework red
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, lavaPosition1);
-		model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+		model = glm::translate(model, fireworksR);
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -748,33 +795,21 @@ int main()
 		meshList[1]->RenderMesh();
 		glDisable(GL_BLEND);
 
-		// Lava del volcan 2
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, lavaPosition2);
-		model = glm::rotate(model, -glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		transparentTexture.UseTexture();
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[1]->RenderMesh();
-		glDisable(GL_BLEND);
-
-		// Lava del volcan 3
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, lavaPosition3);
-		model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		transparentTexture.UseTexture();
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[1]->RenderMesh();
-		glDisable(GL_BLEND);
+		if (comienzaAnimacionFireworks) {
+			for (glm::vec3 pos : posicionesFw) {
+				model = glm::mat4(1.0f);
+				model = glm::translate(model, pos);
+				model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+				glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+				glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				transparentTexture.UseTexture();
+				Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+				meshList[1]->RenderMesh();
+				glDisable(GL_BLEND);
+			}
+		}
 
 		toffsetu += 0.00005;
 		if (toffsetu > 1.0) {
