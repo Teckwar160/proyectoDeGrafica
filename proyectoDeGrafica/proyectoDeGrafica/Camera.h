@@ -17,17 +17,17 @@ public:
 	virtual void keyControl(bool* keys, GLfloat deltaTime);
 	void mouseControl(GLfloat xChange, GLfloat yChange);
 
-	void setCameraPosition(glm::vec3 pos);
-	void setCameraDirection(glm::vec3 dir);
+	void setPosition(glm::vec3 pos);
+	//void setCameraDirection(glm::vec3 dir);
 	
-	//void setYaw(GLfloat yawn) { yaw = yawn; }
-	//void setPitch(GLfloat pitchn) { pitch = pitchn; }
+	void setYaw(GLfloat yawn) { yaw = yawn; }
+	void setPitch(GLfloat pitchn) { pitch = pitchn; }
 	
-	//float getYaw() { return yaw; }
-	//float getPitch() { return pitch; }
+	GLfloat getYaw() { return yaw; }
+	GLfloat getPitch() { return pitch; }
 
-	glm::vec3 getCameraPosition();
-	glm::vec3 getCameraDirection();
+	glm::vec3 getPosition();
+	//glm::vec3 getCameraDirection();
 	glm::mat4 calculateViewMatrix();
 	void setType(int type) { cameraType = type; }
 

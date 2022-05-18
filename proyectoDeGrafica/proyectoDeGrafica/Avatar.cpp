@@ -9,7 +9,7 @@ Avatar::Avatar(glm::vec3 startPosition, GLfloat startMoveSpeed, GLfloat startTur
 {
 	position = startPosition;
 	front = glm::vec3(0.0f, 0.0f, -1.0f);
-	yaw = 60.0f;
+	yaw = 0.0f;
 	rotation = 0.0f;
 	pitch = 0.0f;
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -73,14 +73,14 @@ void Avatar::mouseControl(GLfloat xChange, GLfloat yChange)
 	yaw -= xChange;
 	pitch += yChange;
 
-	if (pitch > 20.0f)
+	if (pitch > 0.0f)
 	{
-		pitch = 20.0f;
+		pitch = 0.0f;
 	}
 
-	if (pitch < -20.0f)
+	if (pitch < -30.0f)
 	{
-		pitch = -20.0f;
+		pitch = -30.0f;
 	}
 
 	update();

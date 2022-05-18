@@ -1,6 +1,6 @@
 #pragma once
 #include "Firework.h"
-
+#include "Camera.h"
 #include <glfw3.h>
 //#include <glm.hpp>
 
@@ -123,6 +123,10 @@ void animaLuffy(GLfloat delta);
 
 // Función encargada de ejecutar el golpe de Luffy
 void animaAtaqueLuffy(GLfloat delta);
+
+// Función encargada de guiar las cámaras para el recorrido
+//void animaRecorrido(GLfloat delta); 
+void animaRecorrido(Camera* cam, GLfloat delta);
 
 //Función encargada de definir la animación de MetaKnight
 void keyFrameMetaKnight();

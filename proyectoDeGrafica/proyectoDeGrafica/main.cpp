@@ -114,7 +114,7 @@ int main()
 
 	CreateShaders();
 
-	Luffy = Avatar(glm::vec3(-170.0f, 20.0f, 200.0f),0.3f, 0.3f);
+	Luffy = Avatar(glm::vec3(-174.0f, 18.8f, 204.0f),0.3f, 0.3f);
 
 	camera3th = Camera3th(Luffy.getAvatarPosition(), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, -15.0f, 0.5f, 0.5f);
 	camera3th.setType(1);
@@ -250,7 +250,7 @@ int main()
 		//Recibir eventos del usuario
 		glfwPollEvents();
 
-		
+		animaRecorrido(&cameraFree, deltaTime);
 
 		//Cambio de camara
 		switch (getCameraType())
@@ -270,9 +270,9 @@ int main()
 		default:
 			Luffy.keyControl(mainWindow.getsKeys(), deltaTime);
 			Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-			camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
-			//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
-			cameraFree.setCameraPosition(camera3th.getCameraPosition());
+			//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
+			camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
+			cameraFree.setPosition(camera3th.getPosition());
 			camera = &camera3th;
 			break;
 		}
@@ -309,7 +309,7 @@ int main()
 
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera->calculateViewMatrix()));
-		glUniform3f(uniformEyePosition, camera->getCameraPosition().x, camera->getCameraPosition().y, camera->getCameraPosition().z);
+		glUniform3f(uniformEyePosition, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 
 		//informaci�n al shader de fuentes de iluminaci�n
 		shaderList[0].SetDirectionalLight(&mainLight);
@@ -758,7 +758,7 @@ int main()
 		for (glm::vec3 posVolcan : posicionesVolcan) {
 			model = glm::mat4(1.0f);
 			model = glm::translate(model, posVolcan);
-			model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(1.0f, 0.0f, 1.0f));
+			model = glm::rotate(model, glm::radians(rotacionLava), glm::vec3(0.0f, 1.0f, 1.0f));
 			model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			glUniform3fv(uniformColor, 1, glm::value_ptr(color));

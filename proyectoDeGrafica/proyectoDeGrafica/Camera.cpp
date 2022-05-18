@@ -37,6 +37,14 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position += right * velocity;
 	}
+	
+	if (keys[GLFW_KEY_P]) {
+		printf("Position: %.2f,%.2f,%.2f\n", position.x, position.y, position.z);
+		printf("Direction: %.2f,%.2f,%.2f\n", front.x, front.y, front.z);
+		printf("Pitch: %.2f\n", pitch);
+		printf("Yaw: %.2f\n", yaw);
+	}
+
 }
 
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
@@ -65,17 +73,17 @@ glm::mat4 Camera::calculateViewMatrix()
 	return glm::lookAt(position, position + front, up);
 }
 
-glm::vec3 Camera::getCameraPosition()
+glm::vec3 Camera::getPosition()
 {
 	return position;
 }
 
-void Camera::setCameraPosition( glm::vec3 pos)
+void Camera::setPosition( glm::vec3 pos)
 {
 	position = pos;
 	update();
 }
-
+/*
 void Camera::setCameraDirection(glm::vec3 dir) {
 	front = dir;
 }
@@ -85,7 +93,7 @@ glm::vec3 Camera::getCameraDirection()
 	return glm::normalize(front);
 }
 
-
+*/
 void Camera::update()
 {	
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));

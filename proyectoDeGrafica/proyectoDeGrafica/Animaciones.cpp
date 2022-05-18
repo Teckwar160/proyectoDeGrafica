@@ -48,6 +48,13 @@ bool volcanActivo = false;
 // Fuegos artificiales
 Firework fireworkRed = Firework(200, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 250.0f, -400.0f));
 
+// Bandera de activación del recorrido
+bool comienzaRecorrido = false;
+int steps = 0;
+int rcam = 1;
+GLfloat yawFinal, pitchFinal;
+glm::vec3 posFinal;
+
 // Ruptura de vela de bardo
 bool velaRota = false;
 
@@ -251,6 +258,11 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	if (keys[GLFW_KEY_Q]) {
 		fireworkRed.reset();
 		fireworkRed.start();
+	}
+
+	// Activación del recorrido
+	if (keys[GLFW_KEY_R]) {
+		comienzaRecorrido = true;
 	}
 	
 }
@@ -508,6 +520,67 @@ void animaLava(GLfloat delta) {
 			calculaPosicionesVolcan();
 			anguloLava = 0.0f;
 			rotacionLava = 0.0f;
+		}
+	}
+}
+
+bool cerca(glm::vec3 posi, glm::vec3 posf) {
+	float px = posf.x * 0.05;
+	float py = posf.y * 0.05;
+
+	if ((posf.x - px) < posi.x and posi.x < (posf.x + px)) {
+		if ((posf.y - py) < posi.y and posi.y < (posf.y + py)) return true;
+	}
+	return false;
+}
+
+void animaRecorrido(Camera* cam, GLfloat delta) {
+	if (comienzaRecorrido) {
+		cameraType = 2;
+
+		switch (rcam)
+		{
+		case 1:
+			posFinal = glm::vec3(-162.87, 19.85, 202.25);
+			yawFinal = -162.0;
+			pitchFinal = -8.0;
+			break;
+
+		case 2:
+			posFinal = glm::vec3(-190.17, 29.92, 234.30);
+			yawFinal = -24.50;
+			pitchFinal = -9.50;
+			break;
+
+		case 3:
+			posFinal = glm::vec3(-143.00, 151.54, -25.16);
+			yawFinal = 45.0;
+			pitchFinal = -41.0;
+			break;
+
+		case 4:
+
+			posFinal = glm::vec3(-380.63, 92.45, 211.69);
+			yawFinal = -64.0;
+			pitchFinal = 11.0;
+			break;
+
+		default:
+			rcam = 1;
+			cameraType = 1;
+			break;
+		}
+
+		if (steps < 2000) {
+			cam->setYaw(cam->getYaw() + (yawFinal - cam->getYaw()) / 500.0f);
+			cam->setPitch(cam->getPitch() + (pitchFinal - cam->getPitch()) / 500.0f);
+			cam->setPosition(cam->getPosition() + (posFinal - cam->getPosition()) / 500.0f);
+			steps++;
+		}
+		else {
+			comienzaRecorrido = false;
+			steps = 0;
+			rcam++;
 		}
 	}
 }
