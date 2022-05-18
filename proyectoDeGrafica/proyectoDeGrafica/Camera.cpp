@@ -70,10 +70,21 @@ glm::vec3 Camera::getCameraPosition()
 	return position;
 }
 
+void Camera::setCameraPosition( glm::vec3 pos)
+{
+	position = pos;
+	update();
+}
+
+void Camera::setCameraDirection(glm::vec3 dir) {
+	front = dir;
+}
+
 glm::vec3 Camera::getCameraDirection()
 {
 	return glm::normalize(front);
 }
+
 
 void Camera::update()
 {	

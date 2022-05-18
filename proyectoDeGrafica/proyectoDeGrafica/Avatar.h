@@ -19,6 +19,7 @@ public:
 	glm::vec3 getAvatarPosition();
 
 	GLfloat getYaw() { return yaw; }
+	GLfloat getRotation() { return rotation; }
 	GLfloat getPitch() { return pitch; }
 
 	~Avatar();
@@ -31,6 +32,7 @@ private:
 
 	GLfloat yaw;
 	GLfloat pitch;
+	GLfloat rotation;
 
 	GLfloat moveSpeed;
 	GLfloat turnSpeed;

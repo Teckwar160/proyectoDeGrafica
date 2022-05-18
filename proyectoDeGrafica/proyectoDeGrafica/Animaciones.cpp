@@ -158,7 +158,8 @@ void animate(personaje *p) {
 void controlDeTeclas(bool* keys, GLfloat delta) {
 
 	// Luffy
-	comienzaAnimacionLuffy = keys[GLFW_KEY_W] and cameraType == 1;
+	comienzaAnimacionLuffy = ((keys[GLFW_KEY_W] or keys[GLFW_KEY_A] or keys[GLFW_KEY_D] or keys[GLFW_KEY_S]) and cameraType == 1);
+	//comienzaAnimacionLuffy = keys[GLFW_KEY_W] and cameraType == 1;
 
 	// Ataque de Luffy
 	if (keys[GLFW_KEY_G]) ataqueEspecial = true;
@@ -447,14 +448,14 @@ void animaAtaqueLuffy(GLfloat delta)
 	if (ataqueEspecial)
 	{
 		if (!golpe) {
-			if (anguloBrazoR > -90.0f) anguloBrazoR--;
-			else if (escalaBrazo <= 40) escalaBrazo += 2.5 * delta;
+			if (anguloBrazoR > -90.0f) anguloBrazoR -= 6.0 * delta;
+			else if (escalaBrazo <= 40) escalaBrazo += 3.0 * delta;
 			else golpe = true;
 		}
 		else {
-			if (escalaBrazo > 1) escalaBrazo -= 2.5 * delta;
+			if (escalaBrazo > 1) escalaBrazo -= 3.0 * delta;
 			else if (anguloBrazoR < 0.0f) {
-				anguloBrazoR++;
+				anguloBrazoR += 6.0 * delta;
 				escalaBrazo = 1.0f;
 			}
 			else {

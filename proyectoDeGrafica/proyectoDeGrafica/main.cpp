@@ -116,7 +116,6 @@ int main()
 
 	Luffy = Avatar(glm::vec3(-170.0f, 20.0f, 200.0f),0.3f, 0.3f);
 
-	//camera = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 	camera3th = Camera3th(Luffy.getAvatarPosition(), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, -15.0f, 0.5f, 0.5f);
 	camera3th.setType(1);
 
@@ -209,19 +208,6 @@ int main()
 		0.1f, 0.1f, 0.1f);									// ec. 1 + x + x^2	
 		//0.1f, 0.01f, 0.001f);									// ec. 1 + x + x^2	
 	pointLightCount++;
-	/*
-	pointLights[5] = PointLight(0.0f, 1.0f, 0.0f,			// color verde
-		30.0f, 30.0f,										// intensidad amb y dif
-		fireworksG.x, fireworksG.y, fireworksG.z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2
-	pointLightCount++;
-
-	pointLights[6] = PointLight(0.0f, 0.0f, 1.0f,			// color azul
-		30.0f, 30.0f,										// intensidad amb y dif
-		fireworksB.x, fireworksB.y, fireworksB.z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2
-	pointLightCount++;
-	*/
 
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
@@ -264,16 +250,18 @@ int main()
 		//Recibir eventos del usuario
 		glfwPollEvents();
 
+		
+
 		//Cambio de camara
 		switch (getCameraType())
 		{
-		case 3:
+		case 2:
 			camera = &cameraFree;
 			camera->keyControl(mainWindow.getsKeys(), deltaTime);
 			camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 			break;
 
-		case 2:
+		case 3:
 			camera = &cameraAerial;
 			camera->keyControl(mainWindow.getsKeys(), deltaTime);
 			camera->mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
@@ -284,9 +272,11 @@ int main()
 			Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 			camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
 			//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
+			cameraFree.setCameraPosition(camera3th.getCameraPosition());
 			camera = &camera3th;
 			break;
 		}
+
 
 		//Teclas prueba
 		controlDeTeclas(mainWindow.getsKeys(), deltaTime);
@@ -467,7 +457,8 @@ int main()
 		model = glm::mat4(1.0);
 		model = glm::translate(model, Luffy.getAvatarPosition());
 		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
-		model = glm::rotate(model, glm::radians(Luffy.getYaw()+90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(Luffy.getRotation() + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(Luffy.getYaw()+90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		cuerpoAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		luffyTexture.UseTexture();
