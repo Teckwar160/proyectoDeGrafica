@@ -27,7 +27,7 @@ public:
 	~Firework();
 private:
 	// Fireworks
-	int i;
+	int i, x;
 	int numFireworks;
 	int stepFireworks;
 	

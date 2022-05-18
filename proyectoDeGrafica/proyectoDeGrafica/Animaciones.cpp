@@ -46,11 +46,7 @@ float rotacionLava = 0.0f; // x
 bool volcanActivo = false;
 
 // Fuegos artificiales
-//Firework fireworks[2] = {
-Firework fireworkRed = Firework(100, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 250.0f, -400.0f));
-	//Firework(100, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 250.0f, -400.0f))
-//bool controlFlag = true;
-///int fireworksCount = 0;
+Firework fireworkRed = Firework(200, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 250.0f, -400.0f));
 
 // Ruptura de vela de bardo
 bool velaRota = false;

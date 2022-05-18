@@ -47,15 +47,16 @@ void Firework::reset() {
 	for (i = 0; i < numFireworks; i++) {
 		posiciones[i] = glm::vec3(0.0f, 0.0f, -400.0f);
 	}
+	x = 0;
 	stepFireworks = 0;
 	intensidadFw = 10.f;
-	ecuacionFw = glm::vec3(0.1f, 0.1f, 0.1f);
+	ecuacionFw = glm::vec3(0.2f, 0.3f, 0.3f);
 }
 
 void Firework::updateLight() {
 	pLight->setColor(color);
-	pLight->setPosition(posicionCentral);
 	pLight->setIntensity(intensidadFw, intensidadFw);
+	pLight->setPosition(posicionCentral);
 	pLight->setEcuation(ecuacionFw);
 }
 
@@ -77,28 +78,43 @@ void Firework::calculaPosiciones() {
 void Firework::animate(GLfloat delta)
 {
 	if (comienzaAnimacionFireworks)
-	{
+	{	
+		//Color
+		x < 768 ? x++ : x = 0;
+		if (x <= 255) {
+			color.x = 255 - x;
+			color.y = x;
+			color.z = 0;
+		}
+		else if (x <= 511) {
+			color.x = 0;
+			color.y = 255 - (x - 256);
+			color.z = x - 256;
+		}
+		else {
+			color.x = x - 512;
+			color.y = 0;
+			color.z = 255 - (x - 512);
+		}
+		// Posicion
 		if (posicionCentral.y < 500.0f) {
 			posicionCentral.y++;
 		}
 		else if (fireworksOnce) {
 			calculaPosiciones();
 			fireworksOnce = false;
-			intensidadFw = 45.f;
-			ecuacionFw = glm::vec3(0.1f, 0.01f, 0.001f);
+			intensidadFw = 60.f;
+			//ecuacionFw = glm::vec3(0.1f, 0.01f, 0.001f);
 		}
 		else if (stepFireworks < 500) {
 			for (i = 0; i < numFireworks; i++) {
 				posiciones[i] += (posicionesFinales[i] - posiciones[i]) / 500.0f;
 			}
-			//intensidadFw += (0.0 - intensidadFw) / 1000;
 			stepFireworks++;
 
 		}
 		else if (stepFireworks < 800) {
-			//ecuacionFw.y += (0.1 - ecuacionFw.y) / 800;
-			ecuacionFw.z += (0.1 - ecuacionFw.z) / 800;
-			intensidadFw += (0.1 - intensidadFw) / 800;
+			//intensidadFw += (0.1 - intensidadFw) / 800;
 			stepFireworks++;
 		}
 		else

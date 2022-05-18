@@ -227,7 +227,7 @@ int main()
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.7f, 1000.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.5f, 1000.0f);
 	float ang = 0.0f;
 
 	//Animaciones por Keyframe
@@ -780,7 +780,7 @@ int main()
 		}
 		
 		// Fireworks
-		//animaFireworks(deltaTime);
+		
 		fireworkRed.animate(deltaTime);
 		// Firework red
 		model = glm::mat4(1.0f);

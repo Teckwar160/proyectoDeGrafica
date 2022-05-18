@@ -108,7 +108,6 @@ extern personaje pFranky;
 
 // Fuegos artificiales
 extern Firework fireworkRed;
-//extern Firework fireworks[2];
 
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys, GLfloat delta);
