@@ -107,7 +107,7 @@ int main()
 	CreateShaders();
 
 	// Creación del avatar
-	Luffy = Avatar(glm::vec3(-174.0f, 18.8f, 204.0f),0.3f, 0.3f);
+	Luffy = Avatar(glm::vec3(-149.0f, 17.5f, 194.0f),0.3f, 0.3f);  //-174.0f, 18.8f, 204.0f
 
 	// Creación de la camara en tercera persona
 	camera3th = Camera3th(Luffy.getAvatarPosition(), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, -15.0f, 0.5f, 0.5f);

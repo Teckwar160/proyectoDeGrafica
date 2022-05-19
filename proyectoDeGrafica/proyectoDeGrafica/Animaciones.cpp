@@ -659,11 +659,11 @@ void keyFrameMetaKnight() {
 	i++;
 
 	// Se acomoda en pose
-	pMetaKnight.KeyFrame[i].x = -160.0f;
-	pMetaKnight.KeyFrame[i].y = 21.3f;
+	pMetaKnight.KeyFrame[i].x = -155.0f;
+	pMetaKnight.KeyFrame[i].y = 19.3f;
 	pMetaKnight.KeyFrame[i].z = 195.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = -810.0f;
+	pMetaKnight.KeyFrame[i].giroY = -630.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
@@ -1712,17 +1712,17 @@ void keyFrameFranky() {
 void keyFrameMetaKnightFight() {
 	int i = 0;
 
-	pMetaKnight.KeyFrame[i].x = -160.0f;
-	pMetaKnight.KeyFrame[i].y = 21.3f;
+	pMetaKnight.KeyFrame[i].x = -155.0f;
+	pMetaKnight.KeyFrame[i].y = 19.3f;
 	pMetaKnight.KeyFrame[i].z = 195.0f;
 	pMetaKnight.KeyFrame[i].giroX = 0.0f;
-	pMetaKnight.KeyFrame[i].giroY = -810.0f;
+	pMetaKnight.KeyFrame[i].giroY = -630.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
-	pMetaKnight.KeyFrame[i].x = -60.0f;
+	pMetaKnight.KeyFrame[i].x = -1000.0f;
 	pMetaKnight.KeyFrame[i].y = 40.0f;
-	pMetaKnight.KeyFrame[i].z = 150.0f;
+	pMetaKnight.KeyFrame[i].z = 190.0f;
 	pMetaKnight.KeyFrame[i].giroX = 360.0f;
 	pMetaKnight.KeyFrame[i].giroY = -810.0f;
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
