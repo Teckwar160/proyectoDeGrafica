@@ -1,13 +1,14 @@
 #pragma once
+
+// Bibliotecas
 #include "Firework.h"
 #include "Camera.h"
 #include <glfw3.h>
-//#include <glm.hpp>
 
-//Definición de Frame
+// Definición de Frame
 typedef struct _frame
 {
-	//Variables para GUARDAR Key Frames
+	// Variables para cuerpos sencillos
 	float x;
 	float incremento_x;
 	float y;
@@ -21,7 +22,7 @@ typedef struct _frame
 	float giroZ;
 	float incremento_giroZ;
 
-	//Variables para cuerpos complejos
+	// Variables para cuerpos complejos
 	float anguloBrazoDerecho;
 	float incremento_anguloBrazoDerecho;
 	float anguloBrazoIzquierdo;
@@ -38,7 +39,7 @@ typedef struct _frame
 
 class personaje {
 	public:
-		//Atributos para key frames
+		// Atributos para key frames
 		FRAME KeyFrame[MAX_FRAMES];
 		int i_curr_steps = 0; 
 		int i_max_steps = 200; 
@@ -47,7 +48,7 @@ class personaje {
 		bool play = false;
 		bool bandera = true;
 
-		//Atributos de posición
+		// Atributos de posición
 		float x = 0;
 		float z = 0;
 		float y = 0;
@@ -55,28 +56,28 @@ class personaje {
 		float giroY = 0;
 		float giroZ = 0;
 
-		//Atributos para cuerpos complejos
+		// Atributos para cuerpos complejos
 		float anguloBrazoDerecho = 0;
 		float anguloBrazoIzquierdo = 0;
 		float anguloPiernaDerecha = 0;
 		float anguloPiernaIzquierda = 0;
 
 
-		//Método encargada de resetear atributos para repetir la animación
+		// Método encargado de resetear atributos para repetir la animación
 		void reset();
 
-		//Método encargado de definir el estado inicial del personaje
+		// Método encargado de definir el estado inicial del personaje
 		void set(float x, float y, float z, float giroX, float giroY, float giroZ);
 };
 
-//Variables que se usaran en el main
+// Variables que se usarán en el main
 
-//Thousand
+// Thousand
 extern float thousandX;
 extern float thousandZ;
 extern float giroThousand;
 
-//Laboon
+// Laboon
 extern float laboonX;
 extern float laboonZ;
 extern float anguloLaboon;
@@ -97,7 +98,7 @@ extern bool iniciaErupcionVolcan;
 // Ruptura de vela de bardo
 extern bool velaRota;
 
-//Personajes
+// Personajes
 extern personaje pMetaKnight;
 extern personaje pDorry;
 extern personaje pBrogy;
@@ -112,13 +113,13 @@ extern Firework fireworkRed;
 //Función encargada de controlar las teclas para las animaciones
 void controlDeTeclas(bool* keys);
 
-//Animación de Thousand
+// Animación de Thousand
 void animaThousand(GLfloat delta);
 
-//Animación de Laboon
+// Animación de Laboon
 void animaLaboon(GLfloat delta);
 
-//Función encargada de definir la animación de Luffy
+// Función encargada de definir la animación de Luffy
 void animaLuffy(GLfloat delta);
 
 // Función encargada de ejecutar el golpe de Luffy
@@ -127,34 +128,34 @@ void animaAtaqueLuffy(GLfloat delta);
 // Función encargada de guiar las cámaras para el recorrido
 void animaRecorrido(Camera* cam, GLfloat delta);
 
-//Función encargada de definir la animación de MetaKnight
+// Función encargada de definir la animación de Meta Knight
 void keyFrameMetaKnight();
 
-//Función encargada de definir la animación de Dorry
+// Función encargada de definir la animación de Dorry
 void keyFrameDorry();
 
-//Función encargada de definir la animación de Brogy
+// Función encargada de definir la animación de Brogy
 void keyFrameBrogy();
 
-//Función encargada de emepzar la pelea de lso gigantes
+// Función encargada de empezar la pelea de los gigantes
 void iniciaPelea();
 
-//Función encargada de definir la animación de Carue
+// Función encargada de definir la animación de Carue
 void keyFrameCarue();
 
-//Función encargada de definir la animación de Vivi
+// Función encargada de definir la animación de Vivi
 void keyFrameVivi();
 
-//Función encargada de definir la animación de Zoro
+// Función encargada de definir la animación de Zoro
 void keyFrameZoro();
 
-//Función encargada de definir la animación de Franky
+// Función encargada de definir la animación de Franky
 void keyFrameFranky();
 
 // Función encargada de ejecutar la erupción del volcan.
 void animaLava(GLfloat delta);
 
-//Función encargada de ejecutar la animación por KeyFrames de un personaje
+// Función encargada de ejecutar la animación por KeyFrames de un personaje
 void animate(personaje *p);
 
 // Funcion que devuelve el tipo de camara actual
