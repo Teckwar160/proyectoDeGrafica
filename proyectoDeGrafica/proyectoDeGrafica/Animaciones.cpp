@@ -47,6 +47,7 @@ bool volcanActivo = false;
 
 // Fuegos artificiales
 Firework fireworkRed = Firework(200, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 250.0f, -400.0f));
+bool fireworkActivo = false;
 
 // Bandera de activación del recorrido
 bool comienzaRecorrido = false;
@@ -259,12 +260,6 @@ void controlDeTeclas(bool* keys) {
 	// Control de animación de Laboon
 	if (keys[GLFW_KEY_L]) {
 		comienzaAnimacionLaboon = true;
-	}
-
-	// Control de animación de los fuegos artificiales
-	if (keys[GLFW_KEY_Q]) {
-		fireworkRed.reset();
-		fireworkRed.start();
 	}
 
 	// Activación del recorrido
@@ -1721,4 +1716,11 @@ void keyFrameMetaKnightFight() {
 
 	pMetaKnight.FrameIndex = i;
 
+}
+
+void iniciaShow(bool day) {
+	if (!day && !fireworkRed.getComienzaAnimacionFirework()) {
+		fireworkRed.reset();
+		fireworkRed.start();
+	}
 }

@@ -300,6 +300,9 @@ int main()
 			skybox_night.DrawSkybox(camera->calculateViewMatrix(), projection);
 		}
 
+		// Fuegos artificiales
+		iniciaShow(day);
+
 		// Obtención de las variables uniformes
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();

@@ -34,6 +34,9 @@ public:
 	// Función encargada de actualizar la luz
 	void updateLight();
 
+	// Función encargada de devolver el valro de comienzaAnimacionFireworks
+	bool getComienzaAnimacionFirework() { return comienzaAnimacionFireworks; }
+
 	~Firework();
 
 private:
@@ -60,4 +63,6 @@ private:
 
 	// Función encargada de calcular la posición
 	void calculaPosiciones();
+
+	
 };
