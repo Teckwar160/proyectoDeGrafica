@@ -1,3 +1,4 @@
+// Biblioteca necesaria
 #include "CameraAerial.h"
 
 CameraAerial::CameraAerial() : Camera() {}

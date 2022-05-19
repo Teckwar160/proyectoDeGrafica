@@ -1,4 +1,4 @@
-
+// Biblioteca
 #include "Avatar.h"
 
 Avatar::Avatar()

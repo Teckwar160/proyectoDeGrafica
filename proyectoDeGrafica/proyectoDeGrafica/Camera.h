@@ -1,24 +1,22 @@
 #pragma once
 
+// Bibliotecas necesarias
 #include <glew.h>
-
 #include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
-
 #include <glfw3.h>
 
+// Clase camera
 class Camera
 {
 public:
 	Camera();
 	Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed);
 
-	//virtual void calculatePosition(glm::vec3 avPos);
 	virtual void keyControl(bool* keys, GLfloat deltaTime);
 	void mouseControl(GLfloat xChange, GLfloat yChange);
 
 	void setPosition(glm::vec3 pos);
-	//void setCameraDirection(glm::vec3 dir);
 	
 	void setYaw(GLfloat yawn) { yaw = yawn; }
 	void setPitch(GLfloat pitchn) { pitch = pitchn; }
@@ -27,7 +25,6 @@ public:
 	GLfloat getPitch() { return pitch; }
 
 	glm::vec3 getPosition();
-	//glm::vec3 getCameraDirection();
 	glm::mat4 calculateViewMatrix();
 	void setType(int type) { cameraType = type; }
 

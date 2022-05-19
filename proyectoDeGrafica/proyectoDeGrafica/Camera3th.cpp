@@ -1,3 +1,4 @@
+// Biblioteca necesaria
 #include "Camera3th.h"
 
 Camera3th::Camera3th() : Camera()

@@ -1,3 +1,4 @@
+// Biblioteca necesaria
 #include "Camera.h"
 
 Camera::Camera() {}
@@ -83,17 +84,7 @@ void Camera::setPosition( glm::vec3 pos)
 	position = pos;
 	update();
 }
-/*
-void Camera::setCameraDirection(glm::vec3 dir) {
-	front = dir;
-}
 
-glm::vec3 Camera::getCameraDirection()
-{
-	return glm::normalize(front);
-}
-
-*/
 void Camera::update()
 {	
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));

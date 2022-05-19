@@ -1,13 +1,10 @@
 #pragma once
 
+// Bibliotecas necesarias
 #include "Model.h"
 #include "Mesh.h"
 
-
-
-/**
-* @brief Declaraci� nde modelos
-*/
+// Declaración de modelos
 extern Model laboon;
 extern Model sanji;
 extern Model brook;
@@ -26,13 +23,16 @@ extern Model marina;
 extern Model littleGarden;
 extern Model reverseMountain;
 extern Model metaKnight;
-
-
 extern std::vector<Mesh*> meshList;
-/**
-* @brief Funci�n encargada de cargar los modelos
-*/
+
+// Función encargada de cargar los modelos
 void cargaModelos();
+
+// Función encargada de crear el piso
 void CreateFloor();
+
+// Función encargada de crear el cofre
 void CreateChest();
+
+// Función encargada de crear a Luffy
 void CreateLuffy();

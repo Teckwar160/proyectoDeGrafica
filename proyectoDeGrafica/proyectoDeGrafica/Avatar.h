@@ -1,12 +1,12 @@
 #pragma once
 
+// Bibliotecas
 #include <glew.h>
-
 #include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
-
 #include <glfw3.h>
 
+// Clase Avatar
 class Avatar
 {
 public:

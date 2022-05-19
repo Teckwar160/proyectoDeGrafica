@@ -1,5 +1,6 @@
 #pragma once
 
+// Biblioteca necesaria
 #include "Camera.h"
 
 
