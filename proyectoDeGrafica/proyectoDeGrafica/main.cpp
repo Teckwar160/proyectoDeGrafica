@@ -478,14 +478,12 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 0.16f, 0.0f));
 		cabezaAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[3]->RenderMesh();
 
 		// Sombrero Luffy
 		model = cabezaAux;
 		model = glm::translate(model, glm::vec3(0.0f, 0.24f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[4]->RenderMesh();
 
 		// Brazo L Luffy
@@ -493,7 +491,6 @@ int main()
 		model = glm::translate(model, glm::vec3(0.18f, 0.1f, 0.0f));
 		model = glm::rotate(model, glm::radians(anguloBrazoL), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[5]->RenderMesh();
 
 		// Brazo R1 Luffy
@@ -503,7 +500,6 @@ int main()
 		model = glm::rotate(model, glm::radians(anguloBrazoR), glm::vec3(1.0f, 0.0f, 0.0f));
 		brazoRAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[8]->RenderMesh();
 
 		// Brazo R2 Luffy
@@ -511,7 +507,6 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, -0.14f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f, escalaBrazo, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[9]->RenderMesh();
 
 		// Pierna L Luffy
@@ -519,7 +514,6 @@ int main()
 		model = glm::translate(model, glm::vec3(0.08f, -0.2f, 0.0f));
 		model = glm::rotate(model, glm::radians(anguloPiernaL), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[6]->RenderMesh();
 
 		// Pierna R Luffy
@@ -527,14 +521,12 @@ int main()
 		model = glm::translate(model, glm::vec3(-0.08f, -0.2f, 0.0f));
 		model = glm::rotate(model, glm::radians(anguloPiernaR), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[7]->RenderMesh();
 
 		// Entre pierna Luffy
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(0.0f, -0.2f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[10]->RenderMesh();
 
 		// Franky
@@ -545,6 +537,7 @@ int main()
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		frankyAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Franky.RenderModel();
 
 		// Franky Brazo izq
