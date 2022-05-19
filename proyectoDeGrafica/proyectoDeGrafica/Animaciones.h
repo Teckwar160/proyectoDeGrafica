@@ -95,6 +95,9 @@ extern glm::vec3 posicionOrigenV;
 extern float rotacionLava; // x
 extern bool iniciaErupcionVolcan;
 
+// Luces de la marina
+extern bool lucesMarina;
+
 // Ruptura de vela de bardo
 extern bool velaRota;
 

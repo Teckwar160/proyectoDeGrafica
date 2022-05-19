@@ -62,6 +62,10 @@ bool velaRota = false;
 // Bandera para evitar el reseteo de la pelea de los gigantes
 bool peleaActiva = false;
 
+// Luces de la marina
+bool lucesMarina = false;
+
+
 // Función encargada de calcular la posición del volcán
 void calculaPosicionesVolcan() {
 	for (int i = 0; i < 3; i++) {
@@ -266,6 +270,16 @@ void controlDeTeclas(bool* keys) {
 	if (keys[GLFW_KEY_R]) {
 		comienzaRecorrido = true;
 	}
+
+	// Control de luces
+	if (keys[GLFW_KEY_4]) {
+		lucesMarina = true;
+	}
+
+	if (keys[GLFW_KEY_5]) {
+		lucesMarina = false;
+	}
+
 	
 }
 

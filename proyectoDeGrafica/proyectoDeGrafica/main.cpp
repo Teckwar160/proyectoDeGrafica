@@ -64,7 +64,7 @@ static double limitFPS = 1.0 / 60.0;
 
 // Ciclo dia noche
 GLfloat lastTimeSky = 0.0f;
-bool day = true;
+bool day = false;
 
 // Ciclo de erupción del Volcan
 GLfloat lastTimeVolcano = 0.0f;
@@ -210,6 +210,24 @@ int main()
 		0.1f, 0.1f, 0.1f);																
 	pointLightCount++;
 
+	//Luz de barco de marina 1
+	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+		0.0f, 20.0f,
+		-300.0f, 20.0f, -135.0f,
+		1.0f, 0.0f, 0.2f,
+		1.0f, 0.0f, 0.0f,
+		10.0f);
+	spotLightCount++;
+
+	//Luz de barco de marina 2
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
+		0.0f, 20.0f,
+		-300.0f, 20.0f, -65.0f,
+		1.0f, 0.0f, -0.2f,
+		1.0f, 0.0f, 0.0f,
+		10.0f);
+	spotLightCount++;
+
 	// Definimos nuestras variables uniformes
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 	uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -321,8 +339,16 @@ int main()
 		glUniform3f(uniformEyePosition, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 
 		// Información al shader de fuentes de iluminaci�n
+
 		shaderList[0].SetDirectionalLight(&mainLight);
-		shaderList[0].SetSpotLights(spotLights, spotLightCount);
+		
+
+		if (lucesMarina) {
+			shaderList[0].SetSpotLights(spotLights, spotLightCount);
+		}
+		else {
+			shaderList[0].SetSpotLights(spotLights, spotLightCount-2);
+		}
 
 		// Actualización de posición de luces
 		pointLights[1].setPosition(posicionesVolcan[0]);
