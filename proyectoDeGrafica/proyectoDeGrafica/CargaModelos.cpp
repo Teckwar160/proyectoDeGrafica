@@ -1,4 +1,4 @@
-#include "Carga modelos.h"
+#include "CargaModelos.h"
 
 std::vector<Mesh*> meshList;
 
@@ -148,9 +148,9 @@ void CreateFloor()
 
 	GLfloat floorVertices[] = {
 		-10.0f, 0.0f, -10.0f,	0.0f, 0.0f,	0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, -10.0f,	0.0f, 0.9f,	0.0f, -1.0f, 0.0f,
-		-10.0f, 0.0f, 10.0f,	0.9f, 0.0f,	0.0f, -1.0f, 0.0f,
-		10.0f, 0.0f, 10.0f,		0.9f, 0.9f,	0.0f, -1.0f, 0.0f
+		10.0f, 0.0f, -10.0f,	0.0f, 0.8f,	0.0f, -1.0f, 0.0f,
+		-10.0f, 0.0f, 10.0f,	0.8f, 0.0f,	0.0f, -1.0f, 0.0f,
+		10.0f, 0.0f, 10.0f,		0.8f, 0.8f,	0.0f, -1.0f, 0.0f
 	};
 
 	Mesh* floor = new Mesh();

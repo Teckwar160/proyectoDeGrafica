@@ -161,7 +161,7 @@ void animate(personaje *p) {
 	}
 }
 
-void controlDeTeclas(bool* keys, GLfloat delta) {
+void controlDeTeclas(bool* keys) {
 
 	// Luffy
 	comienzaAnimacionLuffy = ((keys[GLFW_KEY_W] or keys[GLFW_KEY_A] or keys[GLFW_KEY_D] or keys[GLFW_KEY_S]) and cameraType == 1);

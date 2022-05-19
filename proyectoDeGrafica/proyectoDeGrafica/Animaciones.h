@@ -110,7 +110,7 @@ extern personaje pFranky;
 extern Firework fireworkRed;
 
 //Función encargada de controlar las teclas para las animaciones
-void controlDeTeclas(bool* keys, GLfloat delta);
+void controlDeTeclas(bool* keys);
 
 //Animación de Thousand
 void animaThousand(GLfloat delta);

@@ -1,36 +1,28 @@
 
-//para cargar imagen
+// Para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
 
+// Bibliotecas
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
 #include <vector>
 #include <math.h>
-
 #include <glew.h>
-//#include <glfw3.h>
 #include "Animaciones.h"
-
-//#include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
 #include <gtc\type_ptr.hpp>
-//para probar el importer
-//#include<assimp/Importer.hpp>
-
 #include "Window.h"
-//#include "Mesh.h"
 #include "Shader_light.h"
 #include "Camera.h"
 #include "Camera3th.h"
 #include "CameraAerial.h"
 #include "Texture.h"
 #include "Sphere.h"
-//#include"Model.h"
-#include "Carga modelos.h"
+#include "CargaModelos.h"
 #include "Skybox.h"
 
-//para iluminaci�n
+// Para iluminacion
 #include "CommonValues.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
@@ -39,38 +31,38 @@
 
 // Avatar
 #include "Avatar.h"
-const float toRadians = 3.14159265f / 180.0f;
 
 Window mainWindow;
-//std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 
 Avatar Luffy;
 
+// Camaras
 Camera* camera;
 Camera cameraFree;
 Camera3th camera3th;
 CameraAerial cameraAerial;
 
-Texture plainTexture;
+// Texturas
 Texture pisoTexture;
 Texture treasureTexture;
 Texture luffyTexture;
 Texture transparentTexture;
 
+// Skybox
 Skybox skybox_day;
 Skybox skybox_night;
 
-//materiales
+// Materiales
 Material Material_brillante;
 Material Material_opaco;
 
-//Sphere cabeza = Sphere(0.5, 20, 20);
+// Para los FPS
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 static double limitFPS = 1.0 / 60.0;
 
-//Ciclo dia noche
+// Ciclo dia noche
 GLfloat lastTimeSky = 0.0f;
 bool day = false;
 
@@ -79,7 +71,6 @@ GLfloat lastTimeVolcano = 0.0f;
 
 // luz direccional
 DirectionalLight mainLight;
-//para declarar varias luces de tipo pointlight
 PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
 
@@ -90,6 +81,7 @@ static const char* vShader = "shaders/shader_light.vert";
 static const char* fShader = "shaders/shader_light.frag";
 
 
+// Función para crear lso shaders
 void CreateShaders()
 {
 	Shader *shader1 = new Shader();
@@ -97,56 +89,62 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
-//Movimiento de texturas
+// Movimiento de texturas
 GLuint uniformTextureOffset = 0;
 float toffsetu = 0.0f;
 float toffsetv = 0.0f;
 
-
+// Función principal
 int main()
 {
-	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
+	mainWindow = Window(1366, 768);
 	mainWindow.Initialise();
 
-	CreateFloor();		// 0
-	CreateChest();		// 1
-	CreateLuffy();		// 2 - 10
-
+	// Se crean las texturas
+	CreateFloor();		
+	CreateChest();		
+	CreateLuffy();		
 	CreateShaders();
 
+	// Creación del avatar
 	Luffy = Avatar(glm::vec3(-174.0f, 18.8f, 204.0f),0.3f, 0.3f);
 
+	// Creación de la camara en tercera persona
 	camera3th = Camera3th(Luffy.getAvatarPosition(), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, -15.0f, 0.5f, 0.5f);
 	camera3th.setType(1);
 
+	// Creación de camara aerea
 	cameraAerial = CameraAerial(glm::vec3(-170.0f, 100.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 	cameraAerial.setType(2);
 
+	// Creación de camara aerea
 	cameraFree = Camera(glm::vec3(-170.0f, 20.0f, 200.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
 	cameraFree.setType(3);
 
-	plainTexture = Texture("Textures/plain.png");
-	plainTexture.LoadTextureA();
-
+	// Carga de textura del mar
 	pisoTexture = Texture("Textures/mar.tga");
 	pisoTexture.LoadTextureA();
 
+	// Carga de textura de cofre
 	treasureTexture = Texture("Textures/treasure_chest.tga");
 	treasureTexture.LoadTextureA();
 
+	// Carga de trextura de Luffy
 	luffyTexture = Texture("Textures/LuffyA.tga");
 	luffyTexture.LoadTextureA();
 
+	// Carga de textura de transparencia
 	transparentTexture = Texture("Textures/transparente.tga");
 	transparentTexture.LoadTextureA();
 
-	//Cargamos los modelos
+	// Cargamos los modelos
 	cargaModelos();
 
+	// Caras de los skybox
 	std::vector<std::string> skyboxFaces_day;
 	std::vector<std::string> skyboxFaces_night;
 
-	
+	// Cargamos las caras del skybox de día
 	skyboxFaces_day.push_back("Textures/Skybox/heaven_right.tga");
 	skyboxFaces_day.push_back("Textures/Skybox/heaven_left.tga");
 	skyboxFaces_day.push_back("Textures/Skybox/heaven_bottom.tga");
@@ -154,6 +152,8 @@ int main()
 	skyboxFaces_day.push_back("Textures/Skybox/heaven_front.tga");
 	skyboxFaces_day.push_back("Textures/Skybox/heaven_back.tga");
 	
+
+	// Cargamos las caras del skybox de noche
 	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_right.tga");
 	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_left.tga");
 	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_bottom.tga");
@@ -161,62 +161,65 @@ int main()
 	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_front.tga");
 	skyboxFaces_night.push_back("Textures/Skybox/heaven_night_back.tga");
 
+	// Creamos los skybox
 	skybox_day = Skybox(skyboxFaces_day);
 	skybox_night = Skybox(skyboxFaces_night);
 
+	// Creamos los materiales
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
 
-	//luz direccional, s�lo 1 y siempre debe de existir
+	// Luz direccional
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
 		0.5f, 0.5f,
 		0.0f, -1.0f, 0.0f);
 
-	//contador de luces puntuales
+	// Contador de luces puntuales
 	unsigned int pointLightCount = 0;
 	unsigned int spotLightCount = 0;
 
 	// Luces del Volcan
-	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,			// color
-		20.0f, 20.0f,										// intensidad amb y dif
-		posicionOrigenV.x, posicionOrigenV.y, posicionOrigenV.z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,					
+		20.0f, 20.0f,												
+		posicionOrigenV.x, posicionOrigenV.y, posicionOrigenV.z,	
+		0.9f, 0.5f, 0.5f);											
 	pointLightCount++;
 
-	pointLights[1] = PointLight(1.0f, 0.0f, 0.0f,			// color
-		30.0f, 30.0f,										// intensidad amb y dif
-		posicionesVolcan[0].x, posicionesVolcan[0].y, posicionesVolcan[0].z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLights[1] = PointLight(1.0f, 0.0f, 0.0f,								
+		30.0f, 30.0f,										
+		posicionesVolcan[0].x, posicionesVolcan[0].y, posicionesVolcan[0].z,	
+		0.9f, 0.5f, 0.5f);									
 	pointLightCount++;
 
-	pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,			// color
-		30.0f, 30.0f,										// intensidad amb y dif
-		posicionesVolcan[1].x, posicionesVolcan[1].y, posicionesVolcan[1].z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,			
+		30.0f, 30.0f,										
+		posicionesVolcan[1].x, posicionesVolcan[1].y, posicionesVolcan[1].z,	
+		0.9f, 0.5f, 0.5f);									
 	pointLightCount++;
 
-	pointLights[3] = PointLight(1.0f, 0.0f, 0.0f,			// color
-		30.0f, 30.0f,										// intensidad amb y dif
-		posicionesVolcan[2].x, posicionesVolcan[2].y, posicionesVolcan[2].z,	// posicion
-		0.9f, 0.5f, 0.5f);									// ec. 1 + x + x^2	
+	pointLights[3] = PointLight(1.0f, 0.0f, 0.0f,			
+		30.0f, 30.0f,										
+		posicionesVolcan[2].x, posicionesVolcan[2].y, posicionesVolcan[2].z,	
+		0.9f, 0.5f, 0.5f);									
 	pointLightCount++;
 
 	// Luces fireworks
-	pointLights[4] = PointLight(1.0f, 0.0f, 0.0f,			// color rojo
-		10.0f, 10.0f,										// intensidad amb y dif
-		0.0f, 0.0f, 0.0f,	// posicion
-		0.1f, 0.1f, 0.1f);									// ec. 1 + x + x^2	
-		//0.1f, 0.01f, 0.001f);									// ec. 1 + x + x^2	
+	pointLights[4] = PointLight(1.0f, 0.0f, 0.0f,			
+		10.0f, 10.0f,										
+		0.0f, 0.0f, 0.0f,	
+		0.1f, 0.1f, 0.1f);																
 	pointLightCount++;
 
-
+	// Definimos nuestras variables uniformes
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
-		uniformSpecularIntensity = 0, uniformShininess = 0;
+	uniformSpecularIntensity = 0, uniformShininess = 0;
 	GLuint uniformColor = 0;
+
+	// Definimos la proyección
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.5f, 1000.0f);
 	float ang = 0.0f;
 
-	//Animaciones por Keyframe
+	// Animaciones por Keyframe
 	keyFrameMetaKnight();
 	keyFrameDorry();
 	keyFrameBrogy();
@@ -225,11 +228,12 @@ int main()
 	keyFrameZoro();
 	keyFrameFranky();
 	
+	// Posicionamos la luz del fuego artificial
 	fireworkRed.setPointLight(&pointLights[4]);
 
-	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
+		// Para limitar los FPS
 		GLfloat now = glfwGetTime();
 		deltaTime = now - lastTime;
 		deltaTime += (now - lastTime) / limitFPS;
@@ -247,12 +251,13 @@ int main()
 			lastTimeVolcano = now;
 		}
 
-		//Recibir eventos del usuario
+		// Recibir eventos del usuario
 		glfwPollEvents();
 
+		// Definimos el recorrido del video
 		animaRecorrido(&cameraFree, deltaTime);
 
-		//Cambio de camara
+		// Cambio de camara
 		switch (getCameraType())
 		{
 		case 2:
@@ -270,7 +275,6 @@ int main()
 		default:
 			Luffy.keyControl(mainWindow.getsKeys(), deltaTime);
 			Luffy.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
-			//camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw());
 			camera3th.calculatePosition(Luffy.getAvatarPosition(), Luffy.getYaw(), Luffy.getPitch());
 			cameraFree.setPosition(camera3th.getPosition());
 			camera = &camera3th;
@@ -278,14 +282,15 @@ int main()
 		}
 
 
-		//Teclas prueba
-		controlDeTeclas(mainWindow.getsKeys(), deltaTime);
+		// Control de eventos de animación
+		controlDeTeclas(mainWindow.getsKeys());
 
-		// Clear the window
+		// Limpiamos la ventana
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
+		// Cambio de skybox
 		if (day) {
 			mainLight.setIntensity(0.5f, 0.5f);
 			skybox_day.DrawSkybox(camera->calculateViewMatrix(), projection);
@@ -295,6 +300,7 @@ int main()
 			skybox_night.DrawSkybox(camera->calculateViewMatrix(), projection);
 		}
 
+		// Obtención de las variables uniformes
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
@@ -303,7 +309,7 @@ int main()
 		uniformColor = shaderList[0].getColorLocation();
 		uniformTextureOffset = shaderList[0].getOffsetLocation();
 
-		//informaci�n en el shader de intensidad especular y brillo
+		// Información en el shader de intensidad especular y brillo
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
 
@@ -311,7 +317,7 @@ int main()
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera->calculateViewMatrix()));
 		glUniform3f(uniformEyePosition, camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
 
-		//informaci�n al shader de fuentes de iluminaci�n
+		// Información al shader de fuentes de iluminaci�n
 		shaderList[0].SetDirectionalLight(&mainLight);
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 
@@ -328,9 +334,11 @@ int main()
 			shaderList[0].SetPointLights(pointLights, pointLightCount-1);
 		}
 
+		// Matrices auxiliares
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
 		glm::mat4 aux(1.0);
+
 		// Matrices auxiliares para Luffy
 		glm::mat4 cabezaAux(1.0);
 		glm::mat4 cuerpoAux(1.0);
@@ -346,18 +354,19 @@ int main()
 		// Color base
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 
-		//Movimiento de textura de mar
+		// Movimiento de textura de mar
 		glm::vec2 toffset = glm::vec2(0.0f, 0.0f);
 
 
-		//Reinicio de movimiento de textura
+		// Reinicio de movimiento de textura
 		toffset = glm::vec2(0.0f, 0.0f);
 
 
-		//Thousand Sunny
+		// Thousand Sunny
 
-		//Animación
+		// Animación
 		animaThousand(deltaTime);
+
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(thousandX, 5.0f, thousandZ));
 		model = glm::rotate(model, glm::radians(-giroThousand), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -367,7 +376,7 @@ int main()
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 
-		//Cambio de modelo
+		// Cambio de modelo
 		if (velaRota) {
 			thousandSunnyDestruido.RenderModel();
 		}
@@ -376,7 +385,7 @@ int main()
 		}
 		
 
-		//Barco 1 de la marina
+		// Barco 1 de la marina
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-250.0f, 5.0f, -125.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -385,7 +394,7 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		marina.RenderModel();
 
-		//Barco 2 de la marina
+		// Barco 2 de la marina
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-250.0f, 5.0f, -75.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -401,32 +410,31 @@ int main()
 		treasureTexture.UseTexture();
 		meshList[1]->RenderMesh();
 
-		// MetaKnight
+		// Meta Knight
 		animate(&pMetaKnight);
 
-		//Ruptura de vela
+		// Ruptura de vela
 		if (pMetaKnight.z < 205 && pMetaKnight.x < -160.0f) {
 			velaRota = true;
 		}
 
-		model = glm::mat4(1.0);//modelaux;
+		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(pMetaKnight.x, pMetaKnight.y, pMetaKnight.z));
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroX), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(pMetaKnight.giroZ), glm::vec3(0.0f, 0.0f, 1.0f));
-		//model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		zoroAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		metaKnight.RenderModel();
 
-		//Sanji
+		// Sanji
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-2.0f, 13.5f, -7.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sanji.RenderModel();
 
-		//Brook
+		// Brook
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-6.0f, 12.5f, 5.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -453,12 +461,12 @@ int main()
 		
 		// Luffy
 		animaLuffy(deltaTime);
+
 		// Cuerpo Luffy
 		model = glm::mat4(1.0);
 		model = glm::translate(model, Luffy.getAvatarPosition());
 		model = glm::scale(model, glm::vec3(2.4f, 2.4f, 2.4f));
 		model = glm::rotate(model, glm::radians(Luffy.getRotation() + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::rotate(model, glm::radians(Luffy.getYaw()+90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		cuerpoAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		luffyTexture.UseTexture();
@@ -539,7 +547,7 @@ int main()
 
 		// Franky Brazo der
 
-		//Reparación de vela
+		// Reparación de vela
 		if (pFranky.anguloBrazoDerecho > 135.0f && pFranky.anguloBrazoDerecho < 180.0f && pFranky.x <= -1.5f && pFranky.y >= 16.7f) {
 			velaRota = false;
 		}
@@ -602,7 +610,7 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Zoro_PR.RenderModel();
 
-		//Little Garden
+		// Little Garden
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 10.0f, 200.0f));
 		modelaux = model;
@@ -623,14 +631,14 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy.RenderModel();
 
-		//Brogy Brazo izq
+		// Brogy Brazo izq
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(0.5f, 0.4f, 0.0f));
 		model = glm::rotate(model, -glm::radians(pBrogy.anguloBrazoIzquierdo), glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Brogy_BL.RenderModel();
 
-		//Brogy Brazo der
+		// Brogy Brazo der
 		model = brogyAux;
 		model = glm::translate(model, glm::vec3(-0.4f, 0.4f, 0.0f));
 		model = glm::rotate(model, -glm::radians(pBrogy.anguloBrazoDerecho), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -683,7 +691,7 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Dorry_PL.RenderModel();
 
-		//Dorry Pierna der
+		// Dorry Pierna der
 		model = dorryAux;
 		model = glm::translate(model, glm::vec3(-0.1f, -0.5f, 0.0f));
 		model = glm::rotate(model, -glm::radians(pDorry.anguloPiernaDerecha), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -696,7 +704,6 @@ int main()
 		model = glm::translate(model, glm::vec3(pCarue.x, pCarue.y, pCarue.z));
 		model = glm::rotate(model, -glm::radians(pCarue.giroY), glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux = model;
-		//model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
 		carueAux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -733,27 +740,28 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Vivi_BR.RenderModel();
 
-		//Reverse Mountain
+		// Reverse Mountain
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -11.0f, -400.0f));
 		modelaux = model;
-		model = glm::rotate(model, -90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, -glm::radians(90.0f) , glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		reverseMountain.RenderModel();
 
-		//Laboon
+		// Laboon
 		animaLaboon(deltaTime);
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(laboonX, -8.0f, laboonZ));
-		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(anguloLaboon), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(40.0f, 40.0f, 40.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		laboon.RenderModel();
 
+		//Animación de la lava
 		animaLava(deltaTime);
 		for (glm::vec3 posVolcan : posicionesVolcan) {
 			model = glm::mat4(1.0f);
@@ -771,8 +779,8 @@ int main()
 		}
 		
 		// Fireworks
-		
 		fireworkRed.animate(deltaTime);
+
 		// Firework red
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, fireworkRed.getCentralPos());
@@ -811,7 +819,7 @@ int main()
 
 		toffset = glm::vec2(toffsetu, toffsetv);
 
-		//Piso
+		// Mar
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 10.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(100.0f, 1.0f, 100.0f));
