@@ -172,7 +172,17 @@ void controlDeTeclas(bool* keys) {
 	comienzaAnimacionLuffy = ((keys[GLFW_KEY_W] or keys[GLFW_KEY_A] or keys[GLFW_KEY_D] or keys[GLFW_KEY_S]) and cameraType == 1);
 
 	// Ataque de Luffy
-	if (keys[GLFW_KEY_G]) ataqueEspecial = true;
+	if (keys[GLFW_KEY_G]) {
+		ataqueEspecial = true;
+		keyFrameMetaKnightFight();
+
+		if (pMetaKnight.play == false && pMetaKnight.FrameIndex > 1) {
+			resetElements(&pMetaKnight);
+			interpolation(&pMetaKnight);
+			pMetaKnight.reset();
+		}
+
+	} 
 
 	// MetaKnight
 	if (keys[GLFW_KEY_M]) {
@@ -1688,4 +1698,27 @@ void keyFrameFranky() {
 	i++;
 
 	pFranky.FrameIndex = i;
+}
+
+void keyFrameMetaKnightFight() {
+	int i = 0;
+
+	pMetaKnight.KeyFrame[i].x = -160.0f;
+	pMetaKnight.KeyFrame[i].y = 21.3f;
+	pMetaKnight.KeyFrame[i].z = 195.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -810.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	pMetaKnight.KeyFrame[i].x = -60.0f;
+	pMetaKnight.KeyFrame[i].y = 40.0f;
+	pMetaKnight.KeyFrame[i].z = 150.0f;
+	pMetaKnight.KeyFrame[i].giroX = 360.0f;
+	pMetaKnight.KeyFrame[i].giroY = -810.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
+	pMetaKnight.FrameIndex = i;
+
 }

@@ -131,6 +131,9 @@ void animaRecorrido(Camera* cam, GLfloat delta);
 // Función encargada de definir la animación de Meta Knight
 void keyFrameMetaKnight();
 
+// Función encargada de animar cuando Meta Knight es golpeado
+void keyFrameMetaKnightFight();
+
 // Función encargada de definir la animación de Dorry
 void keyFrameDorry();
 
