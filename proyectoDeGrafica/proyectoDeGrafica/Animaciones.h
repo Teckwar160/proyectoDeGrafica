@@ -125,7 +125,6 @@ void animaLuffy(GLfloat delta);
 void animaAtaqueLuffy(GLfloat delta);
 
 // Función encargada de guiar las cámaras para el recorrido
-//void animaRecorrido(GLfloat delta); 
 void animaRecorrido(Camera* cam, GLfloat delta);
 
 //Función encargada de definir la animación de MetaKnight

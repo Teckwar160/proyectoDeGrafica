@@ -2,7 +2,6 @@
 
 //Control de camaras
 int cameraType = 1;
-bool cameraFlag = false;
 
 //Variables para thousand
 float thousandX = -170.0f;
@@ -195,7 +194,7 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 
 	}
 
-
+	// Zoro
 	if (keys[GLFW_KEY_Z]) {
 		if (pZoro.bandera) {
 			if (pZoro.play == false && pZoro.FrameIndex > 1) {
@@ -216,15 +215,9 @@ void controlDeTeclas(bool* keys, GLfloat delta) {
 	}
 
 	// Control de cámaras
-	if (keys[GLFW_KEY_C] and cameraFlag)
-	{
-		cameraType++;
-		if (cameraType > 3)	cameraType = 1;
-		cameraFlag = false;
-	}
-	if (keys[GLFW_KEY_X]) {
-		cameraFlag = true;
-	}
+	if (keys[GLFW_KEY_1]) { cameraType = 1; }
+	if (keys[GLFW_KEY_2]) { cameraType = 2; }
+	if (keys[GLFW_KEY_3]) { cameraType = 3; }
 
 	//Control de animación de Thousand && Carue && Vivi
 	if (keys[GLFW_KEY_T]) {
@@ -524,16 +517,6 @@ void animaLava(GLfloat delta) {
 	}
 }
 
-bool cerca(glm::vec3 posi, glm::vec3 posf) {
-	float px = posf.x * 0.05;
-	float py = posf.y * 0.05;
-
-	if ((posf.x - px) < posi.x and posi.x < (posf.x + px)) {
-		if ((posf.y - py) < posi.y and posi.y < (posf.y + py)) return true;
-	}
-	return false;
-}
-
 void animaRecorrido(Camera* cam, GLfloat delta) {
 	if (comienzaRecorrido) {
 		cameraType = 2;
@@ -571,7 +554,7 @@ void animaRecorrido(Camera* cam, GLfloat delta) {
 			break;
 		}
 
-		if (steps < 2000) {
+		if (steps < 1800) {
 			cam->setYaw(cam->getYaw() + (yawFinal - cam->getYaw()) / 500.0f);
 			cam->setPitch(cam->getPitch() + (pitchFinal - cam->getPitch()) / 500.0f);
 			cam->setPosition(cam->getPosition() + (posFinal - cam->getPosition()) / 500.0f);
