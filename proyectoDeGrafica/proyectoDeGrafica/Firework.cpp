@@ -1,4 +1,4 @@
-
+// Bibliotecas necesarias
 #include "Firework.h"
 #include <glm.hpp>
 
@@ -35,12 +35,14 @@ bool Firework::isAnimating() {
 }
 
 void Firework::start() {
+
 	// Activación de animación
 	fireworksOnce = true;
 	comienzaAnimacionFireworks = true;
 }
 
 void Firework::reset() {
+
 	// Reseteo de posiciones
 	posicionCentral = posicionOrigen;
 
@@ -79,7 +81,7 @@ void Firework::animate(GLfloat delta)
 {
 	if (comienzaAnimacionFireworks)
 	{	
-		//Color
+		// Color
 		x < 768 ? x++ : x = 0;
 		if (x <= 255) {
 			color.x = 255 - x;
@@ -104,7 +106,6 @@ void Firework::animate(GLfloat delta)
 			calculaPosiciones();
 			fireworksOnce = false;
 			intensidadFw = 60.f;
-			//ecuacionFw = glm::vec3(0.1f, 0.01f, 0.001f);
 		}
 		else if (stepFireworks < 500) {
 			for (i = 0; i < numFireworks; i++) {
@@ -114,7 +115,6 @@ void Firework::animate(GLfloat delta)
 
 		}
 		else if (stepFireworks < 800) {
-			//intensidadFw += (0.1 - intensidadFw) / 800;
 			stepFireworks++;
 		}
 		else

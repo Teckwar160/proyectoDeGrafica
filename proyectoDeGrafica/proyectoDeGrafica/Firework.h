@@ -1,5 +1,6 @@
 #pragma once
 
+// Biblioteca necesaria
 #include "PointLight.h"
 
 
@@ -11,21 +12,32 @@ public:
 	
 	glm::vec3* getPositions();
 	
+	// Define la posición de la luz
 	void setPointLight(PointLight* light);
 	
+	// Función que nos dice si esta la animación corriendo
 	bool isAnimating();
 	glm::vec3 getCentralPos();
+
 	// Función encargada de ejecutar los fuegos artificiales
 	void animate(GLfloat delta);
+
+	// Función encarga de devovler el número de cubos
 	int getSize() { return numFireworks; }
+
+	// Función encargada de resetear el objeto
 	void reset();
 
+	// Función encargada comenzar la animación
 	void start();
 
+	// Función encargada de actualizar la luz
 	void updateLight();
 
 	~Firework();
+
 private:
+
 	// Fireworks
 	int i, x;
 	int numFireworks;
@@ -46,5 +58,6 @@ private:
 	bool fireworksOnce;
 	bool comienzaAnimacionFireworks;
 
+	// Función encargada de calcular la posición
 	void calculaPosiciones();
 };
