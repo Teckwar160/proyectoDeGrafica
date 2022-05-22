@@ -64,7 +64,7 @@ static double limitFPS = 1.0 / 60.0;
 
 // Ciclo dia noche
 GLfloat lastTimeSky = 0.0f;
-bool day = false;
+bool day = true;
 
 // Ciclo de erupción del Volcan
 GLfloat lastTimeVolcano = 0.0f;
