@@ -65,6 +65,10 @@ bool peleaActiva = false;
 // Luces de la marina
 bool lucesMarina = false;
 
+// Audio
+ISoundEngine* audioAmbiental = createIrrKlangDevice();
+ISoundEngine* audioAtaque = createIrrKlangDevice();
+
 
 // Función encargada de calcular la posición del volcán
 void calculaPosicionesVolcan() {
@@ -178,6 +182,12 @@ void controlDeTeclas(bool* keys) {
 
 	// Ataque de Luffy
 	if (keys[GLFW_KEY_G]) {
+
+		if (!ataqueEspecial) {
+			audioAtaque->play2D("audio/gomugomunopistol.wav", false);
+			audioAtaque->setSoundVolume(1);
+		}
+
 		ataqueEspecial = true;
 		keyFrameMetaKnightFight();
 
@@ -186,7 +196,7 @@ void controlDeTeclas(bool* keys) {
 			interpolation(&pMetaKnight);
 			pMetaKnight.reset();
 		}
-
+		
 	} 
 
 	// MetaKnight
@@ -485,11 +495,11 @@ void animaAtaqueLuffy(GLfloat delta)
 	{
 		if (!golpe) {
 			if (anguloBrazoR > -90.0f) anguloBrazoR -= 6.0 * delta;
-			else if (escalaBrazo <= 40) escalaBrazo += 3.0 * delta;
+			else if (escalaBrazo <= 40) escalaBrazo += 0.3 * delta;
 			else golpe = true;
 		}
 		else {
-			if (escalaBrazo > 1) escalaBrazo -= 3.0 * delta;
+			if (escalaBrazo > 1) escalaBrazo -= 0.3 * delta;
 			else if (anguloBrazoR < 0.0f) {
 				anguloBrazoR += 6.0 * delta;
 				escalaBrazo = 1.0f;
@@ -499,7 +509,10 @@ void animaAtaqueLuffy(GLfloat delta)
 				golpe = false;
 			}
 		}
+
+		
 	}
+	
 }
 
 void animaLava(GLfloat delta) {

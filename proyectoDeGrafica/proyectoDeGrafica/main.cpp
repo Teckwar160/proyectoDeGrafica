@@ -249,6 +249,10 @@ int main()
 	// Posicionamos la luz del fuego artificial
 	fireworkRed.setPointLight(&pointLights[4]);
 
+	//Audio ambiental
+	audioAmbiental ->play2D("audio/One Piece We Are.wav", true);
+	audioAmbiental->setSoundVolume(0.2);
+
 	while (!mainWindow.getShouldClose())
 	{
 		// Para limitar los FPS

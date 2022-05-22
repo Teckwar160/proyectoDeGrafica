@@ -4,6 +4,8 @@
 #include "Firework.h"
 #include "Camera.h"
 #include <glfw3.h>
+#include <irrKlang.h>
+using namespace irrklang;
 
 // Definición de Frame
 typedef struct _frame
@@ -109,6 +111,10 @@ extern personaje pCarue;
 extern personaje pVivi;
 extern personaje pZoro;
 extern personaje pFranky;
+
+// Audio
+extern ISoundEngine* audioAmbiental;
+extern ISoundEngine* audioAtaque;
 
 // Fuegos artificiales
 extern Firework fireworkRed;
