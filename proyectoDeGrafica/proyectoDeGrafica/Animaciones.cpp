@@ -1747,6 +1747,14 @@ void keyFrameMetaKnightFight() {
 	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
 	i++;
 
+	pMetaKnight.KeyFrame[i].x = -155.0f;
+	pMetaKnight.KeyFrame[i].y = 19.3f;
+	pMetaKnight.KeyFrame[i].z = 195.0f;
+	pMetaKnight.KeyFrame[i].giroX = 0.0f;
+	pMetaKnight.KeyFrame[i].giroY = -630.0f;
+	pMetaKnight.KeyFrame[i].giroZ = 0.0f;
+	i++;
+
 	pMetaKnight.KeyFrame[i].x = -1000.0f;
 	pMetaKnight.KeyFrame[i].y = 40.0f;
 	pMetaKnight.KeyFrame[i].z = 190.0f;
