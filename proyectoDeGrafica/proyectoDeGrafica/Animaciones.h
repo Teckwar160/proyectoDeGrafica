@@ -175,3 +175,5 @@ int getCameraType();
 
 // Función encargada de ejecutar los fuegos artificiales
 void iniciaShow(bool day);
+
+void verificaAtaque();

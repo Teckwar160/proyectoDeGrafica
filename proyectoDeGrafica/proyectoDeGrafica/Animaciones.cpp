@@ -68,6 +68,10 @@ bool lucesMarina = false;
 // Audio
 ISoundEngine* audioAmbiental = createIrrKlangDevice();
 ISoundEngine* audioAtaque = createIrrKlangDevice();
+GLfloat lastTimeAtaque = 0.0f;
+bool onceAtaque = true;
+bool lanzaAtaque = false;
+
 
 
 // Función encargada de calcular la posición del volcán
@@ -183,12 +187,9 @@ void controlDeTeclas(bool* keys) {
 	// Ataque de Luffy
 	if (keys[GLFW_KEY_G]) {
 
-		if (!ataqueEspecial) {
-			audioAtaque->play2D("audio/gomugomunopistol.wav", false);
-			audioAtaque->setSoundVolume(1);
-		}
+		//ataqueEspecial = true;
+		lanzaAtaque = true;
 
-		ataqueEspecial = true;
 		keyFrameMetaKnightFight();
 
 		if (pMetaKnight.play == false && pMetaKnight.FrameIndex > 1) {
@@ -488,6 +489,20 @@ void animaLuffy(GLfloat delta) {
 	}
 }
 
+void verificaAtaque() {
+	if (lanzaAtaque) {
+		if (onceAtaque) {
+			audioAtaque->play2D("audio/gomugomunopistol.wav", false);
+			audioAtaque->setSoundVolume(1);
+			onceAtaque = false;
+			lastTimeAtaque = glfwGetTime();
+		}
+		else if (glfwGetTime() - lastTimeAtaque >= 1.5) {
+			ataqueEspecial = true;
+		}
+	}
+}
+
 void animaAtaqueLuffy(GLfloat delta)
 {
 	// Condicional para evitar que la animación comience antes de tiempo
@@ -495,24 +510,23 @@ void animaAtaqueLuffy(GLfloat delta)
 	{
 		if (!golpe) {
 			if (anguloBrazoR > -90.0f) anguloBrazoR -= 6.0 * delta;
-			else if (escalaBrazo <= 40) escalaBrazo += 0.3 * delta;
+			else if (escalaBrazo <= 50) escalaBrazo += 2.5 * delta;
 			else golpe = true;
 		}
 		else {
-			if (escalaBrazo > 1) escalaBrazo -= 0.3 * delta;
+			if (escalaBrazo > 1) escalaBrazo -= 2.5 * delta;
 			else if (anguloBrazoR < 0.0f) {
 				anguloBrazoR += 6.0 * delta;
 				escalaBrazo = 1.0f;
 			}
 			else {
+				lanzaAtaque = false;
 				ataqueEspecial = false;
+				onceAtaque = true;
 				golpe = false;
 			}
 		}
-
-		
-	}
-	
+	}	
 }
 
 void animaLava(GLfloat delta) {

@@ -1,9 +1,67 @@
-﻿  main.cpp
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(254,36): warning C4305: 'argumento': truncamiento de 'double' a 'irrklang::ik_f32'
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(259,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(261,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\main.cpp(850,22): warning C4305: '+=': truncamiento de 'double' a 'float'
-LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-  proyectoDeGrafica.vcxproj -> C:\Users\teckw\Desktop\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe
+﻿  Animaciones.cpp
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(303,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(304,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(308,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(309,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(313,19): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(314,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(345,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(355,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(365,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(411,25): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(419,25): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(498,32): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(512,51): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(513,51): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(517,44): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(519,25): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(536,44): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(548,22): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(551,33): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(552,33): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(553,33): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(558,34): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(559,34): warning C4244: '+=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(561,34): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(562,34): warning C4244: '+=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(564,34): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(565,34): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(568,22): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\proyectoDeGrafica\Animaciones.cpp(569,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+  proyectoDeGrafica.vcxproj -> C:\Users\kevin\Desktop\CG&IH-C\proyectoDeGrafica\proyectoDeGrafica\Debug\proyectoDeGrafica.exe

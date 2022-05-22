@@ -250,8 +250,8 @@ int main()
 	fireworkRed.setPointLight(&pointLights[4]);
 
 	//Audio ambiental
-	audioAmbiental ->play2D("audio/One Piece We Are.wav", true);
-	audioAmbiental->setSoundVolume(0.2);
+	audioAmbiental->play2D("audio/One Piece We Are.wav", true);
+	audioAmbiental->setSoundVolume(0.1);
 
 	while (!mainWindow.getShouldClose())
 	{
@@ -527,6 +527,7 @@ int main()
 		meshList[5]->RenderMesh();
 
 		// Brazo R1 Luffy
+		verificaAtaque();
 		animaAtaqueLuffy(deltaTime);
 		model = cuerpoAux;
 		model = glm::translate(model, glm::vec3(-0.18f, 0.1f, 0.0f));
